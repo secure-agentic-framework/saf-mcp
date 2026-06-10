@@ -4,6 +4,10 @@
 
 SAF-MCP mitigations are security controls designed to protect Model Context Protocol (MCP) implementations from the attack techniques documented in our framework. Each mitigation is categorized by type and effectiveness, with clear mappings to the techniques it addresses.
 
+### Licensing
+
+New contributions to the mitigations are licensed under the [Community Specification License 1.0](LICENSE-CSL-1.0). Mitigation content contributed on or before 2026-06-10 remains under [CC BY 4.0](LICENSE-CC-BY-4.0) until the original contributors sign off on relicensing or the content is rewritten. See [LICENSE](LICENSE) for the full licensing structure.
+
 ### Mitigation Categories
 
 - **Architectural Defense**: Fundamental design patterns that prevent entire classes of attacks

@@ -1,23 +1,40 @@
-SAF-MCP Dual License
+SAF-MCP Licensing
 
-This project uses a dual licensing structure:
+This project uses a multi-license structure based on the type of content:
 
-1. Documentation License
-   All documentation, including but not limited to markdown files, technique descriptions,
-   and written content, is licensed under the Creative Commons Attribution 4.0 International
-   License (CC BY 4.0).
-   
+1. Techniques and General Documentation
+   All technique descriptions (techniques/), and all other documentation and
+   written content not covered by sections 2 or 3 below, are licensed under
+   the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
    Full license text: https://creativecommons.org/licenses/by/4.0/
    License file: LICENSE-CC-BY-4.0
-   
-2. Code License
-   All code, including but not limited to scripts, detection rules, and software implementations,
-   is licensed under the Apache License, Version 2.0.
-   
+
+2. Mitigations
+   New contributions to the mitigations (mitigations/ and MITIGATIONS.md) are
+   licensed under the Community Specification License 1.0 (CSL 1.0).
+
+   Full license text: https://github.com/CommunitySpecification/1.0
+   License file: LICENSE-CSL-1.0
+   Specification scope: mitigations/SCOPE.md
+   Notices (license acceptance, withdrawals, exclusions): mitigations/NOTICES.md
+
+   Transition note: Mitigation content contributed on or before 2026-06-10
+   was contributed under CC BY 4.0 and remains licensed under CC BY 4.0.
+   That existing content will remain CC BY 4.0 until the project obtains
+   relicensing sign-off from the original contributors or the content is
+   rewritten. All mitigation contributions after that date are accepted
+   under CSL 1.0 only.
+
+3. Code License
+   All code, including but not limited to scripts, detection rules, and
+   software implementations, is licensed under the Apache License,
+   Version 2.0.
+
    Full license text: https://www.apache.org/licenses/LICENSE-2.0
    License file: LICENSE-APACHE-2.0
 
 The full text of each license is provided in the respective files within this repository.
 
 By contributing to this project, you agree that your contributions will be licensed under
-the applicable license based on the type of content (documentation or code).
+the applicable license based on the type and location of the content, as described above.

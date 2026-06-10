@@ -8,12 +8,13 @@ This project follows the [CNCF Code of Conduct](CODE_OF_CONDUCT.md). By particip
 
 ## Licensing
 
-This project uses a dual licensing structure:
+This project uses a multi-license structure:
 
-- **Documentation** (including threat descriptions, markdown files, and written content) is licensed under [CC BY 4.0](LICENSE-CC-BY-4.0)
+- **Techniques and general documentation** (including threat descriptions, markdown files, and written content outside `mitigations/`) are licensed under [CC BY 4.0](LICENSE-CC-BY-4.0)
+- **Mitigations** (`mitigations/` and `MITIGATIONS.md`): new contributions are licensed under the [Community Specification License 1.0](LICENSE-CSL-1.0). Mitigation content contributed on or before 2026-06-10 remains under [CC BY 4.0](LICENSE-CC-BY-4.0) until the original contributors sign off on relicensing or the content is rewritten.
 - **Code** (including scripts, detection rules, and software) is licensed under [Apache 2.0](LICENSE-APACHE-2.0)
 
-By contributing, you agree that your contributions will be licensed under the applicable license based on the type of content.
+By contributing, you agree that your contributions will be licensed under the applicable license based on the type and location of the content. In particular, by contributing to the mitigations you agree to the terms of the Community Specification License 1.0.
 
 ## Developer Certificate of Origin (DCO)
 

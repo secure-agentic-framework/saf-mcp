@@ -174,3 +174,13 @@ The SAF-MCP framework defines 14 tactics that align with the MITRE ATT&CK method
 - Map these techniques to your specific MCP deployment for risk assessment
 - Prioritize mitigation based on your threat model and the techniques most relevant to your environment
 - Regular review as new techniques emerge in the rapidly evolving MCP threat landscape
+
+## License
+
+This project uses a multi-license structure based on the type of content:
+
+- **Techniques and general documentation** are licensed under [CC BY 4.0](LICENSE-CC-BY-4.0)
+- **Mitigations** (`mitigations/` and `MITIGATIONS.md`): new contributions are licensed under the [Community Specification License 1.0](LICENSE-CSL-1.0); mitigation content contributed on or before 2026-06-10 remains under [CC BY 4.0](LICENSE-CC-BY-4.0) until the original contributors sign off on relicensing or the content is rewritten
+- **Code** (scripts, detection rules, and software) is licensed under [Apache 2.0](LICENSE-APACHE-2.0)
+
+See [LICENSE](LICENSE) for full details, [mitigations/SCOPE.md](mitigations/SCOPE.md) for the mitigation specification's scope, and [mitigations/NOTICES.md](mitigations/NOTICES.md) for Community Specification License notices.
