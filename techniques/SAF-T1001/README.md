@@ -5,12 +5,14 @@
 **Technique ID**: SAF-T1001  
 **Severity**: Critical  
 **First Observed**: April 2025 (Discovered by Invariant Labs)  
-**Last Updated**: 2025-07-15
+**Last Updated**: 2026-07-01
 
 ## Description
 Tool Poisoning Attack (TPA) is an attack technique where adversaries embed malicious instructions within MCP tool descriptions that are invisible to users but processed by Large Language Models (LLMs). This technique exploits the difference between the displayed tool description and the description processed by the AI model.
 
-MCP tool descriptions are passed directly to LLMs as part of their context. Hidden directives in these descriptions can influence model behavior.
+The mechanism rests on a render-vs-context divergence. When an MCP client registers a server's tools, the full tool description (name, summary, and input schema) is serialized into the model's context window as trusted instruction text. The client UI, however, typically renders only a sanitized or truncated view for the human. An attacker exploits this gap by placing directives where the human's renderer hides them but the model's tokenizer still sees them: inside HTML comments, in zero-width or bidirectional Unicode characters, or in Unicode Tag codepoints (U+E0000–U+E007F) that most fonts do not display. Because the model has no reliable signal distinguishing an adversary-authored tool description from a legitimate system instruction, it treats the hidden text as authoritative and acts on it.
+
+Two properties make the technique effective. First, tokenization: invisible characters and homoglyphs still tokenize to content the model reasons over, so a payload can carry meaning while occupying no visible space. Second, position: tool descriptions are injected once at session start and persist for the whole conversation, so a single poisoned description can steer many downstream turns, including data exfiltration, unauthorized operations, or manipulation of other tools' outputs, all without any further attacker interaction.
 
 ## Attack Vectors
 - **Primary Vector**: Malicious tool description injection through compromised MCP servers
@@ -112,9 +114,9 @@ Run the detector: `python examples/tpa-detector.py [tools.json]`
 
 #### Unicode-Based Injection Methods (2024 Research)
 
-According to research from [Robust Intelligence](https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection) and [ProCheckup](https://www.procheckup.com/blogs/posts/2024/march/invisible-prompt-injection/), attackers have developed sophisticated Unicode-based injection methods:
+According to research from [Robust Intelligence](https://web.archive.org/web/20250907052243/https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection) and [ProCheckup](https://www.procheckup.com/blogs/posts/2024/march/invisible-prompt-injection/), attackers have developed multiple Unicode-based injection methods:
 
-1. **Unicode Tag Characters**: Using characters from the Unicode Tags block (U+E0000-U+E007F) that are invisible in most user interfaces ([Robust Intelligence](https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection), [ProCheckup](https://www.procheckup.com/blogs/posts/2024/march/invisible-prompt-injection/))
+1. **Unicode Tag Characters**: Using characters from the Unicode Tags block (U+E0000-U+E007F) that are invisible in most user interfaces ([Robust Intelligence](https://web.archive.org/web/20250907052243/https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection), [ProCheckup](https://www.procheckup.com/blogs/posts/2024/march/invisible-prompt-injection/))
 2. **Bidirectional Text Attacks**: Leveraging right-to-left override characters similar to the "Trojan Source" vulnerability (CVE-2021-42574) that can disguise malicious code ([Boucher & Anderson, 2023](https://arxiv.org/abs/2111.00169))
 3. **Homoglyphs and Diacritics**: Using visually similar characters from different alphabets to bypass filters and manipulate tokenization, particularly Cyrillic-Latin confusion ([Evading AI-Generated Content Detectors using Homoglyphs](https://arxiv.org/html/2406.11239v1))
 
@@ -213,28 +215,28 @@ title: MCP Tool Description Poisoning Detection
 id: 5894b8fe-29f0-44d8-ad9b-2266a132ec57
 status: experimental
 description: Detects potential tool poisoning through suspicious patterns in descriptions
-author: SAF-MCP Team
+author: Frederick Kautz
 date: 2025-01-02
+modified: 2026-07-01
 references:
-  - https://github.com/saf-mcp/techniques/SAF-T1001
+  - https://github.com/secure-agentic-framework/saf-mcp/tree/main/techniques/SAF-T1001
 logsource:
   product: mcp
   service: tool_registry
 detection:
-  selection:
+  selection_markers:
     tool_description:
       - '*<!-- SYSTEM:*'
       - '*<|system|>*'
       - '*[INST]*'
       - '*### Instruction:*'
-      - '*\u200b*'  # Zero-width space
-      - '*\u200c*'  # Zero-width non-joiner
-      - '*\uE00*'   # Unicode tags (U+E0000-U+E007F) - Source: Robust Intelligence Research
-      - '*\u202A*'  # Left-to-right embedding - Source: Unicode Injection POC
-      - '*\u202B*'  # Right-to-left embedding - Source: Unicode Injection POC
-      - '*\u202D*'  # Left-to-right override - Source: Unicode Injection POC
-      - '*\u202E*'  # Right-to-left override - Source: Unicode Injection POC
-  condition: selection
+  # Invisible/bidirectional characters are matched with a regex over the actual
+  # codepoints. A plain Sigma glob written with a backslash-u escape matches that
+  # escape as literal text, not a real zero-width character, so the |re modifier
+  # with \x{...} codepoint escapes is required to catch genuine payloads.
+  selection_invisible:
+    tool_description|re: '[\x{200b}\x{200c}\x{200d}\x{2060}\x{feff}\x{202a}\x{202b}\x{202c}\x{202d}\x{202e}\x{2066}\x{2067}\x{2068}\x{2069}]|[\x{e0000}-\x{e007f}]'
+  condition: selection_markers or selection_invisible
 falsepositives:
   - Legitimate HTML comments in tool descriptions
   - Legitimate bidirectional text for internationalization
@@ -244,6 +246,8 @@ tags:
   - attack.t1195
   - safe.t1001
 ```
+
+> **Note on invisible-character matching**: Earlier revisions of this rule listed patterns such as `'*\u200b*'` in a plain Sigma value. Sigma treats such a value as the literal six-character string `\u200b`, so it never matches a real zero-width space, which is the exact payload TPA relies on. The `|re` modifier above evaluates the actual codepoints (including the Unicode Tag range U+E0000–U+E007F) as a real backend would. See `test_detection_rule.py` for a harness that validates this against descriptions containing genuine invisible characters.
 
 ### Behavioral Indicators
 - LLM consistently performs unexpected operations before executing requested tasks
@@ -325,14 +329,14 @@ fi
 ## Real-World Incidents (April-July 2025)
 
 ### WhatsApp MCP Data Exfiltration (April 2025)
-[Invariant Labs disclosed](https://invariantlabs.ai/blog/whatsapp-mcp-exploited) a sophisticated attack where:
+[Invariant Labs disclosed](https://invariantlabs.ai/blog/whatsapp-mcp-exploited) an attack where:
 - **Attack Vector**: Malicious MCP server shadowed legitimate WhatsApp MCP operations
 - **Impact**: Complete WhatsApp chat history exfiltration without user awareness
 - **Technique**: Tool description manipulation causing the agent to misuse legitimate WhatsApp tools
 - **Key Insight**: No direct interaction with malicious server required - poisoning occurred through tool descriptions alone
 
 ### GitHub MCP Private Repository Breach (May 2025)
-[Critical vulnerability](https://invariantlabs.ai/blog/mcp-github-vulnerability) in GitHub MCP integration (14k stars):
+[Vulnerability disclosure](https://invariantlabs.ai/blog/mcp-github-vulnerability) in GitHub MCP integration (14k stars):
 - **Attack Vector**: Malicious GitHub issue with embedded prompt injection
 - **Impact**: Private repository data leaked through autonomous pull requests
 - **Technique**: Agent manipulation via poisoned issue content
@@ -346,11 +350,11 @@ fi
 - **Affected**: All users of the official MCP Inspector tool
 
 ### mcp-remote Command Injection (CVE-2025-6514, July 2025)
-[JFrog research team found](https://thehackernews.com/2025/07/critical-mcp-remote-vulnerability.html) critical vulnerability:
+[JFrog research team found](https://thehackernews.com/2025/07/critical-mcp-remote-vulnerability.html) a vulnerability:
 - **CVSS Score**: 9.6 (Critical)
 - **Downloads**: Affected 437,000+ npm package downloads
 - **Attack Vector**: Untrusted MCP server triggering OS command execution
-- **Fixed**: Version 0.1.16 (July 9, 2025)
+- **Fixed**: Version 0.1.16 (published June 17, 2025, per the npm registry; publicly disclosed by JFrog in July 2025)
 
 ### Gmail Message Exploit in Claude Desktop (July 2025)
 [Discovered and disclosed](https://gbhackers.com/gmail-message-exploit-triggers-code-execution-in-claude/) on July 16, 2025:
@@ -360,11 +364,11 @@ fi
 - **Key Insight**: Demonstrates AI-assisted attack generation and cross-tool poisoning (SAF-T1001.005)
 
 ### Multi-Tool Chain Exploit Pattern
-Observed RADE (Retrieval-Augmented Data Exfiltration) attacks:
-1. Attacker posts document with hidden instructions on public forums
-2. Agent retrieves document into vector database
-3. Hidden instructions trigger search for API keys (OPENAI_API_KEY, HUGGINGFACE tokens)
-4. Sensitive data automatically posted to attacker-controlled Slack channel
+The RADE (Retrieval-Agent Deception) attack, defined in the [MCP Safety Audit study (Radosevich & Halloran, arXiv:2504.03767)](https://arxiv.org/abs/2504.03767), chains retrieval and tool use:
+1. Attacker posts a document with hidden instructions on public forums
+2. Agent retrieves the document into a vector database
+3. Hidden instructions trigger a search for API keys (OPENAI_API_KEY, HUGGINGFACE tokens)
+4. Sensitive data is automatically posted to an attacker-controlled Slack channel
 
 These incidents demonstrate that TPA techniques have moved from theoretical to actively exploited, with real-world impacts on major platforms and thousands of users.
 
@@ -414,7 +418,7 @@ Exploiting interactions between multiple tools:
 - [Poison Everywhere: No Output from Your MCP Server is Safe - CyberArk](https://www.cyberark.com/resources/threat-research-blog/poison-everywhere-no-output-from-your-mcp-server-is-safe)
 - [Invisible Prompt Injection Research](https://www.procheckup.com/blogs/posts/2024/march/invisible-prompt-injection/)
 - [Unicode Injection GitHub POC](https://github.com/0x6f677548/unicode-injection)
-- [Understanding Unicode Tag Prompt Injection](https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection)
+- [Understanding Unicode Tag Prompt Injection](https://web.archive.org/web/20250907052243/https://www.robustintelligence.com/blog-posts/understanding-and-mitigating-unicode-tag-prompt-injection)
 - [The Invisible Threat: Zero-Width Unicode Characters](https://www.promptfoo.dev/blog/invisible-unicode-threats/)
 - [Trojan Source: Invisible Vulnerabilities - Boucher & Anderson, USENIX Security 2023](https://arxiv.org/abs/2111.00169)
 - [Evading AI-Generated Content Detectors using Homoglyphs](https://arxiv.org/html/2406.11239v1)
@@ -430,10 +434,29 @@ Exploiting interactions between multiple tools:
 - [Model Context Protocol has prompt injection security problems - Simon Willison, April 2025](https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/)
 - [Zero-Click AI Vulnerability Exposes Microsoft 365 Copilot Data - The Hacker News, June 2025](https://thehackernews.com/2025/06/zero-click-ai-vulnerability-exposes.html)
 - [EchoLeak (CVE-2025-32711) AI Security Analysis - Checkmarx, June 2025](https://checkmarx.com/zero-post/echoleak-cve-2025-32711-show-us-that-ai-security-is-challenging/)
+- [WhatsApp MCP Exploited - Invariant Labs, April 2025](https://invariantlabs.ai/blog/whatsapp-mcp-exploited)
+- [GitHub MCP Vulnerability - Invariant Labs, May 2025](https://invariantlabs.ai/blog/mcp-github-vulnerability)
+- [Critical RCE Vulnerability in Anthropic MCP Inspector (CVE-2025-49596) - Oligo Security, June 2025](https://www.oligo.security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596)
+- [Critical mcp-remote Vulnerability (CVE-2025-6514) - The Hacker News, July 2025](https://thehackernews.com/2025/07/critical-mcp-remote-vulnerability.html)
+- [Gmail Message Exploit Triggers Code Execution in Claude - GBHackers, July 2025](https://gbhackers.com/gmail-message-exploit-triggers-code-execution-in-claude/)
+- [MCP-Scan: MCP Server Security Scanner - Invariant Labs](https://github.com/invariantlabs-ai/mcp-scan)
+- [MCP Safety Audit: LLMs with the Model Context Protocol Allow Major Security Exploits (RADE attack) - Radosevich & Halloran, arXiv:2504.03767](https://arxiv.org/abs/2504.03767)
 
 ## MITRE ATT&CK Mapping
-- [T1195 - Supply Chain Compromise](https://attack.mitre.org/techniques/T1195/)
-- [T1055 - Process Injection](https://attack.mitre.org/techniques/T1055/) (conceptually similar in AI context)
+
+TPA's primary tactic is **Initial Access**: a poisoned tool description is the delivery vector that first introduces adversary-controlled instructions into the agent's trust boundary. Once loaded, however, the documented behaviors span additional tactics, and the mappings below reflect that range.
+
+**Primary (Initial Access):**
+- [T1195 - Supply Chain Compromise](https://attack.mitre.org/techniques/T1195/): poisoned or mutated tools delivered through registries, packages, or dependency updates
+- [T1195.002 - Compromise Software Supply Chain](https://attack.mitre.org/techniques/T1195/002/): trusted MCP packages altered to carry malicious definitions (MCP Rug Pulls)
+
+**Supporting tactics observed in documented variants:**
+- [T1027 - Obfuscated Files or Information](https://attack.mitre.org/techniques/T1027/) (Defense Evasion): hidden HTML comments, zero-width/bidirectional Unicode, and Unicode Tag codepoints conceal the payload from human review, a closer analogue to TPA than process injection
+- [T1204 - User Execution](https://attack.mitre.org/techniques/T1204/) (Execution): the user installs or enables the poisoned MCP server that carries the hidden instructions
+- [T1041 - Exfiltration Over C2 Channel](https://attack.mitre.org/techniques/T1041/) (Exfiltration): hidden directives drive data egress (e.g., RADE posting secrets to attacker-controlled channels)
+- [TA0004 - Privilege Escalation](https://attack.mitre.org/tactics/TA0004/) and [TA0003 - Persistence](https://attack.mitre.org/tactics/TA0003/): cross-tool escalation and Rug Pulls extend impact beyond the initial access stage
+
+> The earlier [T1055 - Process Injection](https://attack.mitre.org/techniques/T1055/) mapping was self-described as only "conceptually similar" and has been replaced by T1027 (Obfuscated Files or Information), which more accurately captures the hidden-instruction mechanism.
 
 ## Version History
 | Version | Date | Changes | Author |
@@ -443,3 +466,4 @@ Exploiting interactions between multiple tools:
 | 1.2 | 2025-04-15 | Updated with Invariant Labs discovery, first real-world observation | Frederick Kautz |
 | 1.3 | 2025-07-15 | Major comprehensive update: Fixed chronological inconsistencies, added MCP-specific attack evolution (FSP, ATPA, Rug Pulls), integrated MCP-Scan tool, added EchoLeak reference, created PoC examples, documented real-world incidents, introduced sub-techniques taxonomy, enhanced detection rules, added attack flow diagrams | Frederick Kautz |
 | 1.4 | 2025-07-19 | Fixed mcp-remote CVE date (June→July), added Gmail Message Exploit incident, noted pattern-based detection limitations, inlined attack flow diagram, improved diagram contrast, removed poisoned server example | Frederick Kautz |
+| 1.5 | 2026-07-01 | Fixed Sigma invisible-character detection (literal `\uXXXX` globs replaced with a working `\|re` codepoint regex covering U+E0000–U+E007F) and reworked the test harness to reflect real backend semantics with genuine-invisible-character cases; expanded the Description with the technical mechanism; reconciled the ATT&CK mapping (added supporting tactics, replaced T1055 with T1027); added six missing References; corrected the RADE attribution and expansion (Retrieval-Agent Deception, arXiv:2504.03767); removed hype language | Frederick Kautz |
