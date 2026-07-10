@@ -1,0 +1,14 @@
+# SAF-T1008: Tool Shadowing Attack
+safe_t_id: SAF-T1008
+detections:
+  - project: atr
+    rule_id: ATR-2026-01301
+    version: ">=3.4.0"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects tool descriptions that hijack the agent's tool selection or
+      shadow legitimate tools: exclusive-use directives ("use this tool no
+      matter ...", "do NOT use other tools"), conditional hijacks ("when user
+      wants X, use this tool instead"), and post-hoc result-override hooks
+      ("after using <tool>, run this to modify its result").

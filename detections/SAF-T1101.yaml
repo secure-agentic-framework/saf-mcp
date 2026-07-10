@@ -1,0 +1,32 @@
+# SAF-T1101: Command Injection
+safe_t_id: SAF-T1101
+detections:
+  - project: atr
+    rule_id: ATR-2026-00296
+    version: ">=2.0.10"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects shell command-injection payload shapes reaching agent/MCP
+      execution surfaces: $() substitution against sensitive paths, backtick
+      execution, Perl/Ruby system-call interpolation (sourced from NVIDIA
+      garak shell-access payloads).
+  - project: atr
+    rule_id: ATR-2026-00521
+    version: ">=2.2.0"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects benign-looking agent task requests carrying chained shell
+      commands (";"/"&&" into curl/wget/nc/bash) that exfiltrate env vars,
+      .env files, or credentials to attacker-controlled URLs.
+  - project: atr
+    rule_id: ATR-2026-01980
+    version: ">=3.5.5"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects GHSA-vcv2-r9jh-99m5: quote-breakout OS command injection via
+      MCP tool parameters interpolated into execSync() shell strings
+      (agentic-flow <= 2.0.13) — a concrete instance of unsanitized MCP tool
+      input reaching a system shell.

@@ -1,0 +1,22 @@
+# SAF-T1102: Prompt Injection (Multiple Vectors)
+safe_t_id: SAF-T1102
+detections:
+  - project: atr
+    rule_id: ATR-2026-00004
+    version: ">=1.0.1"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects system-prompt override attempts arriving through injection
+      channels: replacement-prompt statements, ChatML/Llama/Mistral special
+      tokens, JSON role injection, and YAML-style "system:" directives.
+  - project: atr
+    rule_id: ATR-2026-00400
+    version: ">=2.0.11"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects instruction-redirect keywords buried inside otherwise-legitimate
+      data ("Ignore the above directions and ...", "Disregard all info except
+      ..."), including the tool-output channel — the latent/indirect injection
+      classes from NVIDIA garak.

@@ -1,0 +1,22 @@
+# SAF-T1503: Env-Var Scraping
+safe_t_id: SAF-T1503
+detections:
+  - project: atr
+    rule_id: ATR-2026-00583
+    version: ">=3.4.0"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects read/fs tool invocations whose path argument targets .env,
+      .env.*, secrets.*, credentials, .npmrc or .netrc — in function-call form
+      (read_file(".env")) and structured JSON tool-input form
+      ({"path": ".env"}).
+  - project: atr
+    rule_id: ATR-2026-00115
+    version: ">=1.0.1"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects bulk environment harvesting (printenv, bare env, whole
+      process.env/os.environ access), .env file reads, and dotenv loading
+      combined with network calls indicating exfiltration.
