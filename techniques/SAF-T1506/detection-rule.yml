@@ -1,0 +1,49 @@
+title: MCP Infrastructure Credential Exposure in Telemetry
+id: 87cb1a6c-14ae-4d86-813c-50eded95de65
+status: experimental
+description: >-
+  Detects MCP, proxy, gateway, or tracing events whose recorded fields appear to
+  contain reusable authorization material. This is a defensive example and must
+  be adapted to local field names and approved redaction markers.
+author: Andrei Mironov
+date: 2026-08-01
+references:
+  - https://modelcontextprotocol.io/specification/draft/basic/security_best_practices
+  - https://www.rfc-editor.org/rfc/rfc6750
+  - https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+logsource:
+  product: mcp
+  service: infrastructure
+detection:
+  sensitive_field:
+    http.request.header.authorization|contains:
+      - 'Bearer '
+      - 'Basic '
+    http.request.url|contains:
+      - 'access_token='
+      - 'api_key='
+      - 'apikey='
+      - 'authorization_code='
+    error.message|contains:
+      - 'Authorization: Bearer '
+      - 'client_secret='
+      - 'refresh_token='
+    trace.attributes|contains:
+      - 'Authorization: Bearer '
+      - 'access_token='
+      - 'api_key='
+  redacted_value:
+    http.request.header.authorization:
+      - '[REDACTED]'
+      - '<redacted>'
+      - 'Bearer [REDACTED]'
+  condition: sensitive_field and not redacted_value
+falsepositives:
+  - Synthetic security tests that use nonfunctional example credentials
+  - Redaction validation jobs whose events are isolated from production telemetry
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1552
+  - attack.t1528
+  - safe.t1506
