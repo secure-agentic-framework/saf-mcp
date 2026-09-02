@@ -6,12 +6,15 @@
 - **Technique ID**: SAF-T1306
 - **Research Packet**: [research/techniques/SAF-T1306](../../research/techniques/SAF-T1306/)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T1306/traceability-ledger.yml)
-- **Documentation Status**: Under Review
+- **Lifecycle Status**: Deprecated. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
+- **Documentation Status**: Deprecated
 - **Evidence Status**: Research-Derived
 - **Severity**: High
 - **Severity Rationale**: A successful flow can disclose a victim-bound authorization code or token, with consequence bounded by scope, audience, lifetime, sender constraint, and downstream authorization. <!-- SAF-TRACE: claims=SAF-T1306-C018,SAF-T1306-C024; sources=SRC-rfc9700,SRC-mcp-sep-2468,SRC-mcp-authorization-2026-07-28 -->
 - **First Observed**: Not observed in an MCP production incident in the authoritative corpus reviewed through 2026-09-01. <!-- SAF-TRACE: claims=SAF-T1306-C009; sources=SRC-mcp-release-2026-07-28,SRC-cisa-kev-2026-09-01,SRC-nvd-cve-2025-10619,SRC-nvd-cve-2025-4143 -->
-- **Last Updated**: 2026-09-01
+- **Last Updated**: 2026-09-02
+
+> **Deprecated compatibility ID:** SAF-T1306 is consolidated into [SAF-T1009: Authorization Server Mix-up](../SAF-T1009/README.md). Both frozen contracts define the same issuer-misbinding and cross-issuer credential-disclosure mechanism. This page and its evidence packet remain available for provenance; use SAF-T1009 for new mappings. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 
 ## Scope
 
@@ -238,3 +241,4 @@ The standalone example analytic is maintained in [detection-rule.yml](detection-
 | Version | Date | Changes | Author |
 | --- | --- | --- | --- |
 | 0.1 | 2026-09-01 | Initial clean-room research draft | Unattributed; project technique author not established from allowed inputs |
+| 0.2 | 2026-09-02 | Deprecated as a compatibility ID after consolidation into SAF-T1009 under SAF-TAX-013; retained the original evidence and attribution record. | The SAF-MCP Authors |

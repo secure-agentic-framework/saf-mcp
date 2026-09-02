@@ -6,8 +6,8 @@ This matrix links active SAF techniques to their native analytics and normalized
 
 ## Summary
 
-- Active techniques with a native analytic: **80 of 80**
-- Native mapping relationships: **0 direct**, **80 partial**, **0 adjacent**
+- Active techniques with a native analytic: **79 of 79**
+- Native mapping relationships: **0 direct**, **79 partial**, **0 adjacent**
 - Validated external mappings: **0**
 - Unrepresented native observation modalities: **`static`**
 
@@ -22,8 +22,8 @@ A mapping may represent more than one modality, so these counts overlap.
 | `runtime` | 70 |
 | `gateway` | 16 |
 | `endpoint` | 14 |
-| `identity` | 20 |
-| `network` | 16 |
+| `identity` | 19 |
+| `network` | 15 |
 | `memory` | 5 |
 | `multimodal` | 1 |
 | `model-lifecycle` | 1 |
@@ -43,7 +43,7 @@ A mapping may represent more than one modality, so these counts overlap.
 | [SAF-T1207](../techniques/SAF-T1207/README.md) — Hijack Update Mechanism | [rule](../techniques/SAF-T1207/detection-rule.yml) | `partial` | `fixture_tested` | `runtime` | — |
 | [SAF-T1008](../techniques/SAF-T1008/README.md) — Cross-Server Tool Shadowing | [rule](../techniques/SAF-T1008/detection-rule.yml) | `partial` | `fixture_tested` | `content`, `runtime` | — |
 | [SAF-T1101](../techniques/SAF-T1101/README.md) — Command Injection | [rule](../techniques/SAF-T1101/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `runtime` | — |
-| [SAF-T1009](../techniques/SAF-T1009/README.md) — Authorization Server Mix-up | [rule](../techniques/SAF-T1009/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `identity`, `network` | — |
+| [SAF-T1009](../techniques/SAF-T1009/README.md) — Authorization Server Mix-up | [rule](../techniques/SAF-T1009/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `identity`, `network`, `runtime` | — |
 | [SAF-T1102](../techniques/SAF-T1102/README.md) — Prompt Injection (Multiple Vectors) | [rule](../techniques/SAF-T1102/detection-rule.yml) | `partial` | `fixture_tested` | `content`, `runtime` | — |
 | [SAF-T1103](../techniques/SAF-T1103/README.md) — Fake Tool Invocation (Function Spoofing) | [rule](../techniques/SAF-T1103/detection-rule.yml) | `partial` | `fixture_tested` | `runtime` | — |
 | [SAF-T1105](../techniques/SAF-T1105/README.md) — Path Traversal via File Tool | [rule](../techniques/SAF-T1105/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `gateway`, `runtime` | — |
@@ -59,7 +59,6 @@ A mapping may represent more than one modality, so these counts overlap.
 | [SAF-T1304](../techniques/SAF-T1304/README.md) — Credential Relay Chain | [rule](../techniques/SAF-T1304/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `identity`, `runtime` | — |
 | [SAF-T1303](../techniques/SAF-T1303/README.md) — Sandbox Escape via Server Exec | [rule](../techniques/SAF-T1303/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `runtime` | — |
 | [SAF-T1305](../techniques/SAF-T1305/README.md) — Host OS Priv-Esc (RCE) | [rule](../techniques/SAF-T1305/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `runtime` | — |
-| [SAF-T1306](../techniques/SAF-T1306/README.md) — Rogue Authorization Server | [rule](../techniques/SAF-T1306/detection-rule.yml) | `partial` | `fixture_tested` | `identity`, `network`, `runtime` | — |
 | [SAF-T1307](../techniques/SAF-T1307/README.md) — Confused Deputy Attack | [rule](../techniques/SAF-T1307/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `identity`, `runtime` | — |
 | [SAF-T1308](../techniques/SAF-T1308/README.md) — Token Scope Substitution | [rule](../techniques/SAF-T1308/detection-rule.yml) | `partial` | `fixture_tested` | `identity`, `runtime` | — |
 | [SAF-T1406](../techniques/SAF-T1406/README.md) — Metadata Manipulation | [rule](../techniques/SAF-T1406/detection-rule.yml) | `partial` | `fixture_tested` | `content`, `runtime` | — |

@@ -198,7 +198,6 @@ The standalone experimental analytic is maintained in [detection-rule.yml](detec
 | Technique | Relationship | Distinction |
 | --- | --- | --- |
 | [SAF-T1009: Authorization Server Mix-up](../SAF-T1009/README.md) | Alternative or co-occurring | Changes the issuer or credential endpoint; this technique weakens PKCE inside the selected flow. <!-- SAF-TRACE: claims=SAF-T1408-C016; sources=SRC-rfc9700 --> |
-| [SAF-T1306: Rogue Authorization Server](../SAF-T1306/README.md) | Prerequisite or alternative | Uses an attacker-controlled authorization server or redirect path; this technique changes the accepted protection method. <!-- SAF-TRACE: claims=SAF-T1408-C016; sources=SRC-mcp-security-2025-11-25 --> |
 
 ## MITRE ATT&CK Mapping
 

@@ -62,7 +62,7 @@ Profiles scope an atomic technique without changing its permanent ID. A techniqu
 | Profile | Active Techniques | Scope |
 | --- | ---: | --- |
 | SAF Core | 32 | Mechanisms that materially depend on model-mediated decisions, delegated action, dynamic context, memory, or agent coordination. |
-| MCP Profile | 78 | Mechanisms expressed through Model Context Protocol hosts, clients, servers, tools, resources, prompts, sampling, authorization, or transports. |
+| MCP Profile | 77 | Mechanisms expressed through Model Context Protocol hosts, clients, servers, tools, resources, prompts, sampling, authorization, or transports. |
 | Code-Agent Profile | 12 | Mechanisms specific to coding assistants, developer workstations, repositories, build systems, shells, and file-oriented agents. |
 | RAG and Memory Profile | 6 | Mechanisms involving retrieval indexes, embeddings, persistent context, shared memory, or retrieval-augmented generation. |
 | Financial-Agent Profile | 2 | Mechanisms involving delegated payment, trading, blockchain, or other financial authority. |
@@ -100,11 +100,11 @@ Techniques are listed under every applicable tactic; counts therefore represent 
 | Persistence | [SAF-T1206](techniques/SAF-T1206/README.md) | Credential Implant in Config | MCP Profile, Code-Agent Profile | This technique covers an adversary writing or replacing a credential, credential reference, or client-registration identity in persistent MCP or agent configuration so later connections authenticate with an attacker-selected identity. |
 | Persistence | [SAF-T1207](techniques/SAF-T1207/README.md) | Hijack Update Mechanism | MCP Profile | SAF-T1207 covers an adversary causing the normal update path of an already trusted MCP or agentic component to accept and activate an attacker-selected replacement, preserving adversary-controlled code across restarts. |
 | Privilege Escalation | [SAF-T1008](techniques/SAF-T1008/README.md) | Cross-Server Tool Shadowing | SAF Core, MCP Profile | Tool shadowing is cross-server descriptor interference: text supplied for an attacker-controlled tool changes how an agent selects, configures, or invokes a distinct tool from a trusted server. |
+| Privilege Escalation | [SAF-T1009](techniques/SAF-T1009/README.md) | Authorization Server Mix-up | MCP Profile | This technique covers an attacker-controlled or compromised authorization server causing a multi-authorization-server MCP client to misattribute a browser-delivered response from an honest issuer and send the resulting code or token to the attacker-controlled server. |
 | Privilege Escalation | [SAF-T1302](techniques/SAF-T1302/README.md) | Agentic Confused Deputy | SAF Core, MCP Profile | Agentic Confused Deputy covers a low-trust requestor or untrusted input causing an agent to exercise a legitimate tool, service identity, or approved process with authority unavailable to that principal because requestor authorization, scope binding, or action-bound approval is absent or ineffective. |
 | Privilege Escalation | [SAF-T1303](techniques/SAF-T1303/README.md) | Sandbox Escape via Server Exec | MCP Profile, Code-Agent Profile | This technique covers attacker-controlled MCP configuration or tool input reaching a server-side process launcher and escaping the caller's intended sandbox or authorization boundary into a more-privileged service, container, or host context. |
 | Privilege Escalation | [SAF-T1304](techniques/SAF-T1304/README.md) | Credential Relay Chain | MCP Profile | Credential Relay Chain covers an MCP or agent intermediary causing a credential to cross a resource, principal, or hop boundary without independent issuance and validation for the current caller and target, so the receiving component authorizes greater access than the caller otherwise has. |
 | Privilege Escalation | [SAF-T1305](techniques/SAF-T1305/README.md) | Host OS Priv-Esc (RCE) | MCP Profile, Code-Agent Profile | This technique covers exploitation of an MCP host-side client, proxy, inspector, or server flaw that changes an attacker's authority from MCP-level or low-privileged interaction to arbitrary host operating-system code execution in the vulnerable process account. |
-| Privilege Escalation | [SAF-T1306](techniques/SAF-T1306/README.md) | Rogue Authorization Server | MCP Profile | This technique covers a multi-authorization-server MCP flow in which a rogue or compromised authorization server causes the client to misassociate an honest server's authorization response and disclose the resulting code or token to the rogue endpoint. |
 | Privilege Escalation | [SAF-T1307](techniques/SAF-T1307/README.md) | Confused Deputy Attack | MCP Profile | This technique covers an attacker causing an MCP or agentic intermediary to use authority, identity, network reach, or execution capability unavailable to the attacker because the intermediary fails to preserve or enforce the initiating principal's identity, resource, authorization intent, or approved delegation. |
 | Privilege Escalation | [SAF-T1308](techniques/SAF-T1308/README.md) | Token Scope Substitution | MCP Profile | Token Scope Substitution is the use of a valid token, authorization code, or refresh grant under an audience, resource, or operation-scope context that was not bound to the original authorization. |
 | Defense Evasion | [SAF-T1401](techniques/SAF-T1401/README.md) | Line Jumping | MCP Profile | Line Jumping covers an attacker causing an MCP tool, prompt, or resource under attacker influence to win a host, proxy, or registry resolution decision ahead of a trusted competing object. |
@@ -168,6 +168,7 @@ Deprecated IDs remain permanent and navigable for provenance. Use their active r
 | [SAF-T1109](techniques/SAF-T1109/README.md) | Debugging Tool Exploitation | [SAF-T1005](techniques/SAF-T1005/README.md) — Exposed Endpoint Exploit<br>[SAF-T1101](techniques/SAF-T1101/README.md) — Command Injection |
 | [SAF-T1205](techniques/SAF-T1205/README.md) | Persistent Tool Redefinition | [SAF-T1201](techniques/SAF-T1201/README.md) — Post-Approval Tool Mutation |
 | [SAF-T1301](techniques/SAF-T1301/README.md) | Cross-Server Tool Shadowing | [SAF-T1008](techniques/SAF-T1008/README.md) — Cross-Server Tool Shadowing |
+| [SAF-T1306](techniques/SAF-T1306/README.md) | Rogue Authorization Server | [SAF-T1009](techniques/SAF-T1009/README.md) — Authorization Server Mix-up |
 | [SAF-T1309](techniques/SAF-T1309/README.md) | Privileged Tool Invocation via Prompt Manipulation | [SAF-T1102](techniques/SAF-T1102/README.md) — Prompt Injection (Multiple Vectors)<br>[SAF-T1302](techniques/SAF-T1302/README.md) — Agentic Confused Deputy |
 | [SAF-T1912](techniques/SAF-T1912/README.md) | Stego Response Exfil | [SAF-T1902](techniques/SAF-T1902/README.md) — Response-Borne Covert Channel |
 
@@ -175,8 +176,8 @@ Deprecated IDs remain permanent and navigable for provenance. Use their active r
 
 - **Tactics**: 14
 - **Registered technique IDs**: 86
-- **Active techniques**: 80
-- **Deprecated compatibility IDs**: 6
+- **Active techniques**: 79
+- **Deprecated compatibility IDs**: 7
 - **Active technique-to-tactic mappings**: 82
 
 | Tactic | Active Technique Mappings |
