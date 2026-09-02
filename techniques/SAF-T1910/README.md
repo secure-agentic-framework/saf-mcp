@@ -211,8 +211,11 @@ The standalone experimental analytic is maintained in [detection-rule.yml](detec
 | Technique | Relationship | Distinction |
 | --- | --- | --- |
 | [SAF-T1102: Prompt Injection (Multiple Vectors)](../SAF-T1102/README.md) | Prerequisite or co-occurring | Covers adversarial instruction delivery or model influence; SAF-T1910 requires selected data to cross through a covert carrier. <!-- SAF-TRACE: claims=SAF-T1910-C003,SAF-T1910-C020; sources=SRC-invariant-tpa-2025-04-01,SRC-invariant-whatsapp-mcp-2025-04-07,SRC-agentdojo-2406.13352v3 --> |
-| [SAF-T1911: Parameter Exfiltration](../SAF-T1911/README.md) | Specialization | Uses a tool or protocol parameter as the carrier; SAF-T1910 also includes application messages, URLs, and downstream service side effects. <!-- SAF-TRACE: claims=SAF-T1910-C002,SAF-T1910-C018; sources=SRC-mcp-tools-2025-06-18,SRC-mitre-attack-t1048-v1.6 --> |
-| [SAF-T1912: Stego Response Exfil](../SAF-T1912/README.md) | Specialization | Conceals data in a response; SAF-T1910 covers covert carriers on either tool input or downstream output paths. <!-- SAF-TRACE: claims=SAF-T1910-C002,SAF-T1910-C018; sources=SRC-mcp-tools-2025-06-18,SRC-mitre-attack-t1048-v1.6 --> |
+| [SAF-T1902: Response-Borne Covert Channel](../SAF-T1902/README.md) | Specialization | Requires the covert carrier to be embedded in a response-processing, rendering, or relay path. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
+| [SAF-T1911: Parameter Exfiltration](../SAF-T1911/README.md) | Specialization | Uses a tool or protocol parameter as the carrier; SAF-T1910 also includes application messages, URLs, and downstream service side effects. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
+| [SAF-T1912: Stego Response Exfil](../SAF-T1912/README.md) | Deprecated compatibility ID | Its frozen response-borne carrier contract is consolidated into SAF-T1902; use SAF-T1902 for new mappings. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
+| [SAF-T1913: HTTP POST Exfil](../SAF-T1913/README.md) | Specialization | Requires an HTTP POST request to carry the data outside the authorized boundary. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
+| [SAF-T1914: Tool-to-Tool Exfil](../SAF-T1914/README.md) | Specialization | Requires one tool's output or accessible context to be relayed through another tool to an unauthorized destination. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
 
 ## MITRE ATT&CK Mapping
 
@@ -242,3 +245,4 @@ The standalone experimental analytic is maintained in [detection-rule.yml](detec
 | Version | Date | Changes | Author |
 | --- | --- | --- | --- |
 | 0.1 | 2026-09-02 | Independent clean-room draft with evidence packet and deterministic detection tests. | OpenAI Codex clean-room agent |
+| 0.2 | 2026-09-02 | Reconciled the active exfiltration specializations and deprecated response-carrier compatibility ID. | OpenAI Codex taxonomy review |

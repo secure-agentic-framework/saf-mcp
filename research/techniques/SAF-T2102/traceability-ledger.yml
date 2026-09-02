@@ -6,6 +6,9 @@ reviewed_on: '2026-09-02'
 publishable_artifact: techniques/SAF-T2102/README.md
 coverage: all_substantive_publishable_content
 repository_sources:
+- id: LOCAL-taxonomy-review
+  path: research/taxonomy-review.yml
+  supports: Framework Model v2 atomicity review, provisional family classification, documentation-status decision, and follow-up research backlog.
 - id: LOCAL-contract
   path: research/techniques/SAF-T2102/technique-contract.yml
   supports: Scope, tactic, neutral name, neighbor distinctions, telemetry, and completion

@@ -7,7 +7,7 @@
 - **Documentation Status**: Under Review
 - **Evidence Status**: observed
 - **Severity**: High, conditional on installation or activation authority
-- **Last Updated**: 2026-09-01
+- **Last Updated**: 2026-09-02
 
 ## Overview
 
@@ -106,7 +106,7 @@ For response, disable the server, preserve configuration and acquisition evidenc
 | SAF-T1203 — Backdoored Server Binary | The neighbor describes malicious artifact state; this technique describes delivery. | <!-- SAF-TRACE: claims=SAF-T1003-C004 ; sources=SRC-mcp-registry-about, SRC-mitre-t1195-002 -->
 | SAF-T1207 — Hijack Update Mechanism | Update-path compromise is defining for the neighbor; this technique does not require mechanism hijack. | <!-- SAF-TRACE: claims=SAF-T1003-C004 ; sources=SRC-mcp-registry-about, SRC-mitre-t1195-002 -->
 
-Neighbor names came only from the permitted catalog ID/name projection and were registered after freeze; SAF-T1207 remains cataloged but awaits its own clean-room technique directory. <!-- SAF-TRACE: claims=SAF-T1003-C004 ; sources=SRC-mcp-registry-about, SRC-mitre-t1195-002 -->
+Neighbor names came only from the permitted catalog ID/name projection and were registered after freeze, as recorded in the [integration notes](../../research/techniques/SAF-T1003/integration/integration-notes.yml).
 
 ## MITRE ATT&CK Mapping
 
@@ -135,3 +135,4 @@ MITRE ATT&CK DET0537 is an adjacent detection strategy correlating atypical deli
 | Version | Date | Changes |
 |---|---|---|
 | 0.1 | 2026-09-01 | Strict clean-room rewrite with source and framework joins complete; final validation awaits cataloged neighbor SAF-T1207. |
+| 0.2 | 2026-09-02 | Reconciled the supply-chain family after SAF-T1207 received its clean-room technique directory. |
