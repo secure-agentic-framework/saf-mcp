@@ -1,0 +1,13 @@
+# SAF-T1105: Path Traversal via File Tool
+safe_t_id: SAF-T1105
+detections:
+  - project: atr
+    rule_id: ATR-2026-00569
+    version: ">=3.1.0"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects file-tool path arguments escaping their intended directory
+      scope: deep ../ chains reaching sensitive targets (/etc/passwd, .ssh,
+      system32) and URL-/double-encoded traversal sequences (%2e%2e, %252e,
+      %c0%af).

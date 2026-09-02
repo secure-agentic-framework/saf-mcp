@@ -1,0 +1,21 @@
+# SAF-T1001: Tool Poisoning Attack (TPA)
+safe_t_id: SAF-T1001
+detections:
+  - project: atr
+    rule_id: ATR-2026-00103
+    version: ">=1.0.1"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects explicit LLM-directed safety-bypass directives embedded in tool
+      descriptions ("NOTE TO AI: disregard/ignore/bypass ... safety/security/
+      previous instructions").
+  - project: atr
+    rule_id: ATR-2026-00105
+    version: ">=1.0.1"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects concealment directives in tool descriptions instructing the
+      model to hide actions from the user ("do not mention/tell/inform the
+      user"), the tell of a tool performing hidden operations.

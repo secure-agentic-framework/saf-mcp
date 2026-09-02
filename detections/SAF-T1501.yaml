@@ -1,0 +1,14 @@
+# SAF-T1501: Full-Schema Poisoning (FSP)
+safe_t_id: SAF-T1501
+detections:
+  - project: atr
+    rule_id: ATR-2026-02025
+    version: ">=3.5.7"
+    maintainer: eeee2345
+    last_validated: 2026-07-10
+    notes: >-
+      Detects FSP directive placements in non-description inputSchema fields:
+      imperative parameter names (content_from_reading_ssh_id_rsa), injected
+      extra/sidenote/instructions fields carrying read-and-exfiltrate
+      directives, and poisoned required/default values ("in order to ... you
+      must ... the content of ~/.ssh/id_rsa").
