@@ -200,7 +200,7 @@ decisions:
   type: profile_reconciliation
   scope: all_active_techniques
   saf_core_count: 32
-  mcp_profile_count: 78
+  mcp_profile_count: 77
   evidence_inputs:
   - research/framework-model.yml
   - research/techniques/*/technique-contract.yml
@@ -210,6 +210,25 @@ decisions:
     agent action. Generic protocol, OAuth, endpoint, package, parser, binary, and
     transport behaviors remain admitted through their explicit domain profiles
     without being mislabeled as core agentic mechanisms.
+  status: implemented
+- id: SAF-TAX-013
+  type: consolidation
+  canonical: SAF-T1009
+  canonical_name: Authorization Server Mix-up
+  deprecated:
+  - SAF-T1306
+  tactics:
+  - ATK-TA0001
+  - ATK-TA0004
+  evidence_inputs:
+  - research/techniques/SAF-T1009/technique-contract.yml
+  - research/techniques/SAF-T1306/technique-contract.yml
+  rationale: >-
+    Both frozen contracts require a multi-authorization-server client to
+    misbind an honest issuer's authorization response and disclose its code or
+    token to an attacker-controlled authorization server. The rogue server is
+    an actor and prerequisite, while Initial Access and Privilege Escalation
+    are tactic mappings for the same mechanism.
   status: implemented
 research_backlog:
 - id: SAF-RESEARCH-RECON-001

@@ -3,12 +3,13 @@ technique_id: SAF-T1009
 name: Authorization Server Mix-up
 status: complete
 created_on: "2026-09-01"
-updated_on: "2026-09-01"
+updated_on: "2026-09-02"
 generation_mode: clean_room
 trace_format: hidden_html_v1
 
 tactics:
   - ATK-TA0001
+  - ATK-TA0004
 
 adversary_objective: >-
   Cause a multi-authorization-server MCP client to disclose an authorization

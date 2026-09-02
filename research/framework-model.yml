@@ -597,11 +597,11 @@ techniques:
   - mcp
   tactics:
   - ATK-TA0001
+  - ATK-TA0004
   summary: This technique covers an attacker-controlled or compromised authorization server causing a multi-authorization-server
     MCP client to misattribute a browser-delivered response from an honest issuer and send the resulting code or
     token to the attacker-controlled server. The crossed boundary is the client's per-request binding among the
-    validated expected issuer, callback, and token endpoint. MCP authorization security considerations OAuth Security
-    BCP
+    validated expected issuer, callback, and token endpoint.
   technique_path: techniques/SAF-T1009/README.md
   research_packet: research/techniques/SAF-T1009
   relationships:
@@ -609,7 +609,13 @@ techniques:
     type: related_to
   - target: SAF-T1007
     type: related_to
+  - target: SAF-T1304
+    type: related_to
   - target: SAF-T1306
+    type: replaces
+  - target: SAF-T1308
+    type: related_to
+  - target: SAF-T1406
     type: related_to
   - target: SAF-T1408
     type: related_to
@@ -1435,6 +1441,8 @@ techniques:
   relationships:
   - target: SAF-T1302
     type: related_to
+  - target: SAF-T1009
+    type: related_to
   - target: SAF-T1306
     type: related_to
   - target: SAF-T1308
@@ -1554,8 +1562,8 @@ techniques:
     validation_level: fixture_tested
 - technique_id: SAF-T1306
   name: Rogue Authorization Server
-  lifecycle_status: active
-  documentation_status: under_review
+  lifecycle_status: deprecated
+  documentation_status: deprecated
   evidence_status: research-derived
   profiles:
   - mcp
@@ -1567,18 +1575,25 @@ techniques:
   technique_path: techniques/SAF-T1306/README.md
   research_packet: research/techniques/SAF-T1306
   relationships:
-  - target: SAF-T1009
-    type: related_to
   - target: SAF-T1304
-    type: related_to
-  - target: SAF-T1308
     type: related_to
   - target: SAF-T1406
     type: related_to
-  - target: SAF-T1408
-    type: related_to
   - target: SAF-T1507
     type: related_to
+  - target: SAF-T1308
+    type: related_to
+  - target: SAF-T1408
+    type: related_to
+  - target: SAF-T1009
+    type: replaced_by
+  replaced_by:
+  - SAF-T1009
+  deprecation:
+    decision: SAF-TAX-013
+    reason: The frozen contracts define the same multi-authorization-server issuer-misbinding mechanism and immediate
+      cross-issuer authorization-code or token disclosure. A rogue server is a prerequisite and actor role, not a
+      separate technique.
   mitigations:
   - SAF-M-12
   - SAF-M-13
@@ -1722,6 +1737,8 @@ techniques:
     type: related_to
   - target: SAF-T1304
     type: related_to
+  - target: SAF-T1009
+    type: related_to
   - target: SAF-T1306
     type: related_to
   - target: SAF-T1706
@@ -1764,6 +1781,8 @@ techniques:
   - target: SAF-T1102
     type: related_to
   - target: SAF-T1205
+    type: related_to
+  - target: SAF-T1009
     type: related_to
   - target: SAF-T1306
     type: related_to

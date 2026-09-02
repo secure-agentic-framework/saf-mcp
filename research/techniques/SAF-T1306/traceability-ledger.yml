@@ -2,10 +2,13 @@ version: 1
 technique_id: SAF-T1306
 policy: source_or_omit
 review_status: passed
-reviewed_on: '2026-09-01'
+reviewed_on: '2026-09-02'
 publishable_artifact: techniques/SAF-T1306/README.md
 coverage: all_substantive_publishable_content
 repository_sources:
+- id: LOCAL-taxonomy-review
+  path: research/taxonomy-review.yml
+  supports: Framework Model v2 duplicate-consolidation decision, replacement ID, and compatibility status.
 - id: LOCAL-contract
   path: research/techniques/SAF-T1306/technique-contract.yml
   supports: Internal scope, name, tactic, canonical neighbor boundaries, and completion

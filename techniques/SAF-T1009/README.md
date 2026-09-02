@@ -2,7 +2,7 @@
 
 ## Overview
 
-- **Tactic**: Initial Access (ATK-TA0001)
+- **Tactic**: Initial Access (ATK-TA0001); Privilege Escalation (ATK-TA0004)
 - **Technique ID**: SAF-T1009
 - **Research Packet**: [research/techniques/SAF-T1009](../../research/techniques/SAF-T1009/)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T1009/traceability-ledger.yml)
@@ -11,7 +11,7 @@
 - **Severity**: High
 - **Severity Rationale**: A successful mix-up can disclose an authorization code or access token for an honest issuer, with confidentiality and integrity impact bounded by the credential's permissions and the downstream resource controls. [RFC 9207](https://www.rfc-editor.org/rfc/rfc9207.html) <!-- SAF-TRACE: claims=SAF-T1009-C005; sources=SRC-rfc9207 -->
 - **First Observed**: Not observed in MCP production in the reviewed corpus; the generic OAuth behavior was demonstrated on concrete clients by Fett, Küsters, and Schmitz in 2016. [Formal OAuth analysis](https://arxiv.org/abs/1601.01229) <!-- SAF-TRACE: claims=SAF-T1009-C012,SAF-T1009-C017; sources=SRC-fett-oauth-analysis,SRC-nvd-oauth-mixup-query -->
-- **Last Updated**: 2026-09-01
+- **Last Updated**: 2026-09-02
 
 ## Scope
 
@@ -221,7 +221,7 @@ The standalone experimental analytic is maintained in [detection-rule.yml](detec
 | --- | --- | --- |
 | [SAF-T1507: Authorization Code Interception](../SAF-T1507/README.md) | Follow-on or adjacent | Obtains an authorization code through interception; SAF-T1009 instead causes cross-issuer response misbinding and can then disclose the code. [RFC 9700 §§4.4-4.5](https://www.rfc-editor.org/rfc/rfc9700.html#section-4.4) <!-- SAF-TRACE: claims=SAF-T1009-C003; sources=SRC-rfc9700 --> |
 | [SAF-T1706: OAuth Token Pivot Replay](../SAF-T1706/README.md) | Alternative boundary failure | Reuses an issued token across contexts; SAF-T1009 occurs earlier at issuer and endpoint binding. [RFC 8707 §3](https://www.rfc-editor.org/rfc/rfc8707.html#section-3) <!-- SAF-TRACE: claims=SAF-T1009-C011; sources=SRC-rfc8707 --> |
-| [SAF-T1306: Rogue Authorization Server](../SAF-T1306/README.md) | Prerequisite or adjacent | Controls or advertises the malicious authorization endpoint; it becomes SAF-T1009 only when an honest issuer's browser response is misbound and its credential is disclosed across issuers. [Malicious Endpoints research](https://arxiv.org/abs/1508.04324) <!-- SAF-TRACE: claims=SAF-T1009-C004,SAF-T1009-C013; sources=SRC-mainka-oidc-endpoints,SRC-fett-oauth-analysis --> |
+| [SAF-T1306: Rogue Authorization Server](../SAF-T1306/README.md) | Deprecated compatibility ID | Its frozen contract describes the same cross-issuer response-misbinding and credential-disclosure mechanism. Use SAF-T1009 for new mappings. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
 
 ## MITRE ATT&CK Mapping
 
@@ -255,3 +255,4 @@ The standalone experimental analytic is maintained in [detection-rule.yml](detec
 | Version | Date | Changes | Author |
 | --- | --- | --- | --- |
 | 0.1 | 2026-09-01 | Independent clean-room research draft and tested analytic. | OpenAI Codex clean-room agent |
+| 0.2 | 2026-09-02 | Consolidated the duplicate SAF-T1306 compatibility ID and reconciled tactics and relationships under SAF-TAX-013. | The SAF-MCP Authors |

@@ -198,7 +198,7 @@ The standalone analytic is maintained in [detection-rule.yml](detection-rule.yml
 | --- | --- | --- |
 | [SAF-T1202: OAuth Token Persistence](../SAF-T1202/README.md) | Prerequisite or alternative | Acquires or reuses a token within its valid context; Token Scope Substitution changes or misinterprets the authorization context. <!-- SAF-TRACE: claims=SAF-T1308-C018; sources=SRC-mitre-t1550-001 --> |
 | [SAF-T1304: Credential Relay Chain](../SAF-T1304/README.md) | Co-occurring | Propagates a credential across a downstream authorization boundary; substitution can occur without forwarding. <!-- SAF-TRACE: claims=SAF-T1308-C018; sources=SRC-mcp-security-2025-11-25 --> |
-| [SAF-T1306: Rogue Authorization Server](../SAF-T1306/README.md) | Overlapping | Uses attacker-controlled authorization infrastructure and issuer misbinding; substitution authorizes a resource or operation outside the binding actually granted. <!-- SAF-TRACE: claims=SAF-T1308-C018; sources=SRC-mcp-security-2025-11-25 --> |
+| [SAF-T1009: Authorization Server Mix-up](../SAF-T1009/README.md) | Overlapping | Uses attacker-controlled authorization infrastructure and issuer misbinding; substitution authorizes a resource or operation outside the binding actually granted. <!-- SAF-TRACE: claims=SAF-T1308-C018; sources=SRC-mcp-security-2025-11-25 --> |
 
 ## MITRE ATT&CK Mapping
 
