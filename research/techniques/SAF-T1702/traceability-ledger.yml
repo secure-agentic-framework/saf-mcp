@@ -6,6 +6,9 @@ reviewed_on: '2026-09-02'
 publishable_artifact: techniques/SAF-T1702/README.md
 coverage: all_substantive_publishable_content
 repository_sources:
+- id: LOCAL-taxonomy-review
+  path: research/taxonomy-review.yml
+  supports: Framework Model v2 memory-family consolidation, replacement ID, and compatibility status.
 - id: LOCAL-contract
   path: research/techniques/SAF-T1702/technique-contract.yml
   supports: Frozen neutral name, scope, tactic, evidence requirements, and telemetry

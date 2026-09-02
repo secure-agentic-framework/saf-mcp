@@ -3,12 +3,13 @@ technique_id: SAF-T1204
 name: Context Memory Implant
 status: complete
 created_on: "2026-09-01"
-updated_on: "2026-09-01"
+updated_on: "2026-09-02"
 generation_mode: clean_room
 trace_format: hidden_html_v1
 
 tactics:
   - ATK-TA0003
+  - ATK-TA0008
 
 adversary_objective: >-
   Establish durable influence over an agent by causing attacker-selected content

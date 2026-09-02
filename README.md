@@ -61,10 +61,10 @@ Profiles scope an atomic technique without changing its permanent ID. A techniqu
 
 | Profile | Active Techniques | Scope |
 | --- | ---: | --- |
-| SAF Core | 32 | Mechanisms that materially depend on model-mediated decisions, delegated action, dynamic context, memory, or agent coordination. |
-| MCP Profile | 77 | Mechanisms expressed through Model Context Protocol hosts, clients, servers, tools, resources, prompts, sampling, authorization, or transports. |
+| SAF Core | 31 | Mechanisms that materially depend on model-mediated decisions, delegated action, dynamic context, memory, or agent coordination. |
+| MCP Profile | 76 | Mechanisms expressed through Model Context Protocol hosts, clients, servers, tools, resources, prompts, sampling, authorization, or transports. |
 | Code-Agent Profile | 12 | Mechanisms specific to coding assistants, developer workstations, repositories, build systems, shells, and file-oriented agents. |
-| RAG and Memory Profile | 6 | Mechanisms involving retrieval indexes, embeddings, persistent context, shared memory, or retrieval-augmented generation. |
+| RAG and Memory Profile | 5 | Mechanisms involving retrieval indexes, embeddings, persistent context, shared memory, or retrieval-augmented generation. |
 | Financial-Agent Profile | 2 | Mechanisms involving delegated payment, trading, blockchain, or other financial authority. |
 | Model-Lifecycle Profile | 1 | Mechanisms involving training, adaptation, evaluation, registration, promotion, or deployment of model artifacts. |
 
@@ -128,8 +128,8 @@ Techniques are listed under every applicable tactic; counts therefore represent 
 | Discovery | [SAF-T1604](techniques/SAF-T1604/README.md) | Server Version Enumeration | MCP Profile | SAF-T1604 covers a client collecting implementation or supported-protocol versions from a reached MCP server or its HTTP serving layer. |
 | Discovery | [SAF-T1605](techniques/SAF-T1605/README.md) | Capability Mapping | MCP Profile | Capability Mapping covers an adversary using its current MCP request identity to enumerate advertised server features and correlate the returned metadata into a map for follow-on selection. |
 | Discovery | [SAF-T1606](techniques/SAF-T1606/README.md) | Directory Listing via File Tool | MCP Profile, Code-Agent Profile | SAF-T1606 covers a model, client, or actor invoking a file-capable MCP tool to obtain names, entry types, sizes, counts, matching paths, or directory structure from the filesystem namespace available to the server. |
+| Lateral Movement | [SAF-T1204](techniques/SAF-T1204/README.md) | Context Memory Implant | SAF Core, MCP Profile, RAG and Memory Profile | This technique covers an adversary causing selected content to be written into an agent's persistent context memory so that retrieval in a later session influences reasoning, a response, planning, or a tool decision. |
 | Lateral Movement | [SAF-T1701](techniques/SAF-T1701/README.md) | Cross-Tool Contamination | SAF Core, MCP Profile | This technique requires a source-tool result influenced by an adversary, a later call to a distinct tool or server in the same execution context, and a causal link between the untrusted result and that later call. |
-| Lateral Movement | [SAF-T1702](techniques/SAF-T1702/README.md) | Shared-Memory Poisoning | SAF Core, MCP Profile, RAG and Memory Profile | This technique covers poisoning of stored or retrievable agent memory, summaries, embeddings, or retrieval records when the affected record crosses a session, principal, tenant, or agent boundary and changes a later consumer's behavior. |
 | Lateral Movement | [SAF-T1703](techniques/SAF-T1703/README.md) | Tool-Chaining Pivot | SAF Core, MCP Profile | In scope, an upstream tool description, result, retrieved object, or server-supplied instruction influences a later call to a distinct tool, server, connector, application, or security domain; the later call is unsupported by user intent and uses authority already available to the agent. |
 | Lateral Movement | [SAF-T1704](techniques/SAF-T1704/README.md) | Compromised-Server Pivot | SAF Core, MCP Profile | This technique begins after the adversary controls the behavior or responses of an MCP server and ends when that influence causes the connected host to cross into a different trust domain with host-held authority. |
 | Lateral Movement | [SAF-T1705](techniques/SAF-T1705/README.md) | Cross-Agent Instruction Injection | SAF Core, MCP Profile | Cross-Agent Instruction Injection is the transfer of attacker-authored instructions from an attacker-influenced agent context into a distinct receiving agent, where the receiver treats the peer's output as task content, evidence, or authority and changes behavior or invokes a capability. |
@@ -170,14 +170,15 @@ Deprecated IDs remain permanent and navigable for provenance. Use their active r
 | [SAF-T1301](techniques/SAF-T1301/README.md) | Cross-Server Tool Shadowing | [SAF-T1008](techniques/SAF-T1008/README.md) — Cross-Server Tool Shadowing |
 | [SAF-T1306](techniques/SAF-T1306/README.md) | Rogue Authorization Server | [SAF-T1009](techniques/SAF-T1009/README.md) — Authorization Server Mix-up |
 | [SAF-T1309](techniques/SAF-T1309/README.md) | Privileged Tool Invocation via Prompt Manipulation | [SAF-T1102](techniques/SAF-T1102/README.md) — Prompt Injection (Multiple Vectors)<br>[SAF-T1302](techniques/SAF-T1302/README.md) — Agentic Confused Deputy |
+| [SAF-T1702](techniques/SAF-T1702/README.md) | Shared-Memory Poisoning | [SAF-T1204](techniques/SAF-T1204/README.md) — Context Memory Implant |
 | [SAF-T1912](techniques/SAF-T1912/README.md) | Stego Response Exfil | [SAF-T1902](techniques/SAF-T1902/README.md) — Response-Borne Covert Channel |
 
 ## Catalog Statistics
 
 - **Tactics**: 14
 - **Registered technique IDs**: 86
-- **Active techniques**: 79
-- **Deprecated compatibility IDs**: 7
+- **Active techniques**: 78
+- **Deprecated compatibility IDs**: 8
 - **Active technique-to-tactic mappings**: 82
 
 | Tactic | Active Technique Mappings |

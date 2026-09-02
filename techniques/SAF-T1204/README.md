@@ -2,7 +2,7 @@
 
 ## Overview
 
-- **Tactic**: Persistence (ATK-TA0003)
+- **Tactic**: Persistence (ATK-TA0003); Lateral Movement (ATK-TA0008)
 - **Technique ID**: SAF-T1204
 - **Research Packet**: [research/techniques/SAF-T1204](../../research/techniques/SAF-T1204/)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T1204/traceability-ledger.yml)
@@ -11,7 +11,7 @@
 - **Severity**: High
 - **Severity Rationale**: A successful implant can influence later reasoning or tool decisions; consequence depends on retrieval, memory scope, and the authority available to the consuming agent. [Microsoft memory-context guidance](https://learn.microsoft.com/en-us/security/zero-trust/catalog-ai-attack-techniques/ai-memory-context-poisoning) <!-- SAF-TRACE: claims=SAF-T1204-C013; sources=SRC-ms-zero-trust-memory-2026,SRC-neurips-minja-2025 -->
 - **First Observed**: In-the-wild implantation attempts were reported on 2026-02-10, but successful persistence varied; the complete behavior is established by controlled demonstrations rather than a confirmed public production breach. [Microsoft Defender research](https://www.microsoft.com/en-us/security/blog/2026/02/10/ai-recommendation-poisoning/) <!-- SAF-TRACE: claims=SAF-T1204-C007,SAF-T1204-C016; sources=SRC-ms-recommendation-poisoning-2026,SRC-ms-guarding-ai-memory-2026,SRC-nvd-cve-2026-44999,SRC-ghsa-openclaw-57r2 -->
-- **Last Updated**: 2026-09-01
+- **Last Updated**: 2026-09-02
 
 ## Scope
 
@@ -210,6 +210,7 @@ The standalone analytic is maintained in [detection-rule.yml](detection-rule.yml
 | Technique | Relationship | Distinction |
 | --- | --- | --- |
 | [SAF-T1102: Prompt Injection (Multiple Vectors)](../SAF-T1102/README.md) | Prerequisite or alternative | It influences the current context; SAF-T1204 additionally requires a durable write and later retrieval. <!-- SAF-TRACE: claims=SAF-T1204-C004; sources=SRC-neurips-minja-2025,SRC-ms-zero-trust-memory-2026 --> |
+| [SAF-T1702: Shared-Memory Poisoning](../SAF-T1702/README.md) | Deprecated compatibility ID | Its frozen contract describes the same persistent-memory write, later retrieval, and behavior-influence mechanism. Use SAF-T1204 for new mappings. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
 | [SAF-T2106: Context Memory Poisoning via Vector Store Contamination](../SAF-T2106/README.md) | Overlapping | It changes an external retrieval corpus; SAF-T1204 changes agent-owned persistent context through a memory-write path. <!-- SAF-TRACE: claims=SAF-T1204-C006,SAF-T1204-C019; sources=SRC-neurips-agentpoison-2024,SRC-mcp-tools-2025-06-18,SRC-mcp-resources-2025-06-18,SRC-langchain-long-term-memory --> |
 
 Agent configuration modification is an alternative persistence boundary, but no exact SAF catalog neighbor currently represents it. <!-- SAF-TRACE: claims=SAF-T1204-C019; sources=SRC-mcp-tools-2025-06-18,SRC-mcp-resources-2025-06-18,SRC-langchain-long-term-memory -->
@@ -248,3 +249,4 @@ Agent configuration modification is an alternative persistence boundary, but no 
 | Version | Date | Changes | Author |
 | --- | --- | --- | --- |
 | 1.0 | 2026-09-01 | Clean-room initial technique, evidence packet, and tested detection | OpenAI Codex clean-room author |
+| 1.1 | 2026-09-02 | Consolidated SAF-T1702 as a compatibility ID and added the Lateral Movement tactic under SAF-TAX-014. | The SAF-MCP Authors |

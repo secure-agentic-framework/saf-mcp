@@ -6,6 +6,9 @@ reviewed_on: '2026-09-02'
 publishable_artifact: techniques/SAF-T1705/README.md
 coverage: all_substantive_publishable_content
 repository_sources:
+- id: LOCAL-taxonomy-review
+  path: research/taxonomy-review.yml
+  supports: Framework Model v2 canonical memory-technique relationship after compatibility-ID consolidation.
 - id: LOCAL-contract
   path: research/techniques/SAF-T1705/technique-contract.yml
   supports: Scope contract and clean-room generation mode.

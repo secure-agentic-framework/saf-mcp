@@ -199,8 +199,8 @@ decisions:
 - id: SAF-TAX-012
   type: profile_reconciliation
   scope: all_active_techniques
-  saf_core_count: 32
-  mcp_profile_count: 77
+  saf_core_count: 31
+  mcp_profile_count: 76
   evidence_inputs:
   - research/framework-model.yml
   - research/techniques/*/technique-contract.yml
@@ -229,6 +229,35 @@ decisions:
     token to an attacker-controlled authorization server. The rogue server is
     an actor and prerequisite, while Initial Access and Privilege Escalation
     are tactic mappings for the same mechanism.
+  status: implemented
+- id: SAF-TAX-014
+  type: consolidation_and_family
+  canonical: SAF-T1204
+  canonical_name: Context Memory Implant
+  deprecated:
+  - SAF-T1702
+  retained_boundary: SAF-T2106
+  specialization: SAF-T3001
+  tactics:
+  - ATK-TA0003
+  - ATK-TA0008
+  evidence_inputs:
+  - research/techniques/SAF-T1204/technique-contract.yml
+  - research/techniques/SAF-T1702/technique-contract.yml
+  - research/techniques/SAF-T2106/technique-contract.yml
+  - research/techniques/SAF-T3001/technique-contract.yml
+  - techniques/SAF-T1204/detection-rule.yml
+  - techniques/SAF-T1702/detection-rule.yml
+  - techniques/SAF-T2106/detection-rule.yml
+  - techniques/SAF-T3001/detection-rule.yml
+  rationale: >-
+    SAF-T1204 and SAF-T1702 require the same attacker-influenced persistent
+    memory write, later cross-session or cross-consumer retrieval, and behavior
+    influence. Shared scope and Lateral Movement do not create a second atomic
+    mechanism. SAF-T2106 remains distinct at the vector collection write and
+    retrieval boundary. SAF-T3001 is its narrower specialization requiring
+    trigger-conditioned corpus retrieval and an attacker-selected generated
+    response while ordinary queries remain substantially unaffected.
   status: implemented
 research_backlog:
 - id: SAF-RESEARCH-RECON-001

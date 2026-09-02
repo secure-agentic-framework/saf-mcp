@@ -90,6 +90,7 @@ This signal cannot detect a malicious but intact passage admitted through an app
 
 - A transient indirect-instruction injection differs because it influences one assembled context without first establishing trigger-conditioned retrieval from durable corpus state. <!-- SAF-TRACE: claims=SAF-T3001-C006; sources=SRC-nist-aml -->
 - Memory poisoning differs when an instruction is written to assistant memory directly rather than selected through a document retriever. <!-- SAF-TRACE: claims=SAF-T3001-C012; sources=SRC-ms-recommendation-poisoning-2026 -->
+- [SAF-T2106: Context Memory Poisoning via Vector Store Contamination](../SAF-T2106/README.md) is the parent vector-store write-and-retrieval behavior; SAF-T3001 adds trigger-conditioned retrieval and an attacker-selected generated response. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 
 ## MITRE ATT&CK Mapping
 
@@ -112,3 +113,4 @@ This technique maps to **Impact (ATK-TA0040)** because the immediate objective i
 | Version | Date | Changes |
 |---|---|---|
 | 1.0 | 2026-09-02 | Clean-room authored technique with research packet and tested candidate analytic. |
+| 1.1 | 2026-09-02 | Classified as the trigger-conditioned specialization of SAF-T2106 under SAF-TAX-014. |
