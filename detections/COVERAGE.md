@@ -6,8 +6,8 @@ This matrix links active SAF techniques to their native analytics and normalized
 
 ## Summary
 
-- Active techniques with a native analytic: **79 of 79**
-- Native mapping relationships: **0 direct**, **79 partial**, **0 adjacent**
+- Active techniques with a native analytic: **78 of 78**
+- Native mapping relationships: **0 direct**, **78 partial**, **0 adjacent**
 - Validated external mappings: **0**
 - Unrepresented native observation modalities: **`static`**
 
@@ -19,12 +19,12 @@ A mapping may represent more than one modality, so these counts overlap.
 | --- | ---: |
 | `content` | 20 |
 | `static` | 0 |
-| `runtime` | 70 |
+| `runtime` | 69 |
 | `gateway` | 16 |
 | `endpoint` | 14 |
 | `identity` | 19 |
 | `network` | 15 |
-| `memory` | 5 |
+| `memory` | 4 |
 | `multimodal` | 1 |
 | `model-lifecycle` | 1 |
 | `on-chain` | 1 |
@@ -83,7 +83,6 @@ A mapping may represent more than one modality, so these counts overlap.
 | [SAF-T1605](../techniques/SAF-T1605/README.md) — Capability Mapping | [rule](../techniques/SAF-T1605/detection-rule.yml) | `partial` | `fixture_tested` | `runtime` | — |
 | [SAF-T1606](../techniques/SAF-T1606/README.md) — Directory Listing via File Tool | [rule](../techniques/SAF-T1606/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `runtime` | — |
 | [SAF-T1701](../techniques/SAF-T1701/README.md) — Cross-Tool Contamination | [rule](../techniques/SAF-T1701/detection-rule.yml) | `partial` | `fixture_tested` | `content`, `runtime` | — |
-| [SAF-T1702](../techniques/SAF-T1702/README.md) — Shared-Memory Poisoning | [rule](../techniques/SAF-T1702/detection-rule.yml) | `partial` | `fixture_tested` | `memory`, `runtime` | — |
 | [SAF-T1703](../techniques/SAF-T1703/README.md) — Tool-Chaining Pivot | [rule](../techniques/SAF-T1703/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `runtime` | — |
 | [SAF-T1704](../techniques/SAF-T1704/README.md) — Compromised-Server Pivot | [rule](../techniques/SAF-T1704/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `network`, `runtime` | — |
 | [SAF-T1706](../techniques/SAF-T1706/README.md) — OAuth Token Pivot Replay | [rule](../techniques/SAF-T1706/detection-rule.yml) | `partial` | `fixture_tested` | `identity`, `network`, `runtime` | — |

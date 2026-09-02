@@ -1,8 +1,9 @@
 # SAF-T1702: Shared-Memory Poisoning
 
 - **Technique ID**: SAF-T1702
+- **Lifecycle Status**: Deprecated. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 - **Tactic**: ATK-TA0008 (Lateral Movement)
-- **Documentation Status**: Stable
+- **Documentation Status**: Deprecated
 - **Evidence Status**: Demonstrated
 - **Severity**: High
 - **Severity Rationale**: A poisoned record can persist across sessions or principals and influence a later high-risk action, but the consequence depends on a shared retrieval path, write opportunity, retrieval, and downstream authority. <!-- SAF-TRACE: claims=SAF-T1702-C007, SAF-T1702-C011; sources=SRC-owasp-agentic-top10-2026, SRC-minja-2026 -->
@@ -10,6 +11,8 @@
 - **Research Packet**: [research/techniques/SAF-T1702/](../../research/techniques/SAF-T1702/)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T1702/traceability-ledger.yml)
 - **Last Updated**: 2026-09-02
+
+> **Deprecated compatibility ID:** SAF-T1702 is consolidated into [SAF-T1204: Context Memory Implant](../SAF-T1204/README.md). Both frozen contracts define the same persistent-memory write, later cross-session retrieval, and behavior-influence mechanism. This page and its evidence packet remain available for provenance; use SAF-T1204 for new mappings. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 
 ## Overview
 
@@ -139,3 +142,4 @@ Expected false positives include approved shared-memory curation, multi-session 
 | Version | Date | Author/Team | Changes |
 |---|---|---|---|
 | 1.0 | 2026-09-02 | OpenAI Codex clean-room generator `/root/cleanroom_saf_t1702` | Independent source-or-omit authoring, behavioral detector, isolated strict validation, and publication-rights review. |
+| 1.1 | 2026-09-02 | The SAF-MCP Authors | Deprecated as a compatibility ID after consolidation into SAF-T1204 under SAF-TAX-014; retained the evidence and attribution record. |

@@ -2,10 +2,13 @@ version: 1
 technique_id: SAF-T1204
 policy: source_or_omit
 review_status: passed
-reviewed_on: '2026-09-01'
+reviewed_on: '2026-09-02'
 publishable_artifact: techniques/SAF-T1204/README.md
 coverage: all_substantive_publishable_content
 repository_sources:
+- id: LOCAL-taxonomy-review
+  path: research/taxonomy-review.yml
+  supports: Framework Model v2 memory-family consolidation, canonical ID, tactic reconciliation, and compatibility relationship.
 - id: LOCAL-contract
   path: research/techniques/SAF-T1204/technique-contract.yml
   supports: Internal scope, neutral name, tactic, generation mode, and completion

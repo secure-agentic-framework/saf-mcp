@@ -104,8 +104,6 @@ techniques:
     modalities: [endpoint, runtime]
   SAF-T1701:
     modalities: [content, runtime]
-  SAF-T1702:
-    modalities: [memory, runtime]
   SAF-T1703:
     modalities: [gateway, runtime]
   SAF-T1704:

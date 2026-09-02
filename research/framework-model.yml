@@ -1196,13 +1196,17 @@ techniques:
   - rag-memory
   tactics:
   - ATK-TA0003
+  - ATK-TA0008
   summary: This technique covers an adversary causing selected content to be written into an agent's persistent
     context memory so that retrieval in a later session influences reasoning, a response, planning, or a tool decision.
-    MINJA paper
   technique_path: techniques/SAF-T1204/README.md
   research_packet: research/techniques/SAF-T1204
   relationships:
   - target: SAF-T1102
+    type: related_to
+  - target: SAF-T1702
+    type: replaces
+  - target: SAF-T1705
     type: related_to
   - target: SAF-T1805
     type: related_to
@@ -2702,8 +2706,8 @@ techniques:
     type: analogous
 - technique_id: SAF-T1702
   name: Shared-Memory Poisoning
-  lifecycle_status: active
-  documentation_status: stable
+  lifecycle_status: deprecated
+  documentation_status: deprecated
   evidence_status: demonstrated
   profiles:
   - core
@@ -2719,8 +2723,15 @@ techniques:
   relationships:
   - target: SAF-T1102
     type: related_to
+  - target: SAF-T1204
+    type: replaced_by
   - target: SAF-T1705
     type: related_to
+  replaced_by:
+  - SAF-T1204
+  deprecation:
+    decision: SAF-TAX-014
+    reason: The frozen contracts define the same persistent-memory write, later cross-session retrieval, and behavior-influence mechanism. Shared scope and Lateral Movement are deployment and tactic mappings rather than a separate atomic behavior.
   mitigations:
   - SAF-M-12
   - SAF-M-21
@@ -2941,6 +2952,8 @@ techniques:
   - target: SAF-T1701
     type: related_to
   - target: SAF-T1702
+    type: related_to
+  - target: SAF-T1204
     type: related_to
   mitigations:
   - SAF-M-1
@@ -3662,7 +3675,7 @@ techniques:
   - target: SAF-T2107
     type: related_to
   - target: SAF-T3001
-    type: related_to
+    type: has_specialization
   mitigations:
   - SAF-M-12
   - SAF-M-22
@@ -3704,7 +3717,7 @@ techniques:
   - target: SAF-T1102
     type: related_to
   - target: SAF-T2106
-    type: related_to
+    type: specialization_of
   - target: SAF-T2107
     type: related_to
   mitigations:

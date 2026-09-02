@@ -101,6 +101,7 @@ See the repository [detection rule](detection-rule.yml), [test cases](../../test
 - **[SAF-T1102: Prompt Injection (Multiple Vectors)](../SAF-T1102/README.md):** changes the current model context without requiring a persistent vector-store write and later retrieval. <!-- SAF-TRACE: claims=SAF-T2106-C008; sources=SRC-neurips-agentpoison-2024 -->
 - **[SAF-T2107: AI Model Poisoning via MCP Tool Training Data Contamination](../SAF-T2107/README.md):** changes learned model behavior through training; this technique changes external persistent retrieval state without retraining. <!-- SAF-TRACE: claims=SAF-T2106-C008; sources=SRC-nist-aml,SRC-neurips-agentpoison-2024 -->
 - **[SAF-T2105: Disinformation Output](../SAF-T2105/README.md):** requires a false or materially misleading informational result; this technique requires persistent vector-memory contamination and later retrieval regardless of the downstream response or action type. <!-- SAF-TRACE: claims=SAF-T2106-C008; sources=SRC-nist-aml,SRC-neurips-agentpoison-2024 -->
+- **[SAF-T3001: RAG Backdoor Attack](../SAF-T3001/README.md):** is the trigger-conditioned specialization that requires an attacker-selected generated response while ordinary queries remain substantially unaffected. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 - **MITRE ATT&CK T1565.001 — Stored Data Manipulation:** provides an enterprise integrity analogue for stored-data changes, but does not establish the AI retrieval mechanism. <!-- SAF-TRACE: claims=SAF-T2106-C014; sources=SRC-mitre-t1565.001 -->
 
 ## MITRE ATT&CK Mapping
@@ -136,3 +137,4 @@ The complete claim inventory, source locators, exclusion ledger, rights review, 
 | Version | Date | Changes |
 |---|---|---|
 | 1.0 | 2026-09-02 | Clean-room research draft frozen for canonical integration. |
+| 1.1 | 2026-09-02 | Classified SAF-T3001 as a trigger-conditioned specialization under SAF-TAX-014. |
