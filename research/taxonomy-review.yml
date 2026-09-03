@@ -259,6 +259,44 @@ decisions:
     trigger-conditioned corpus retrieval and an attacker-selected generated
     response while ordinary queries remain substantially unaffected.
   status: implemented
+- id: SAF-TAX-015
+  type: admission_and_atomicity_review
+  retained:
+  - SAF-T1802
+  - SAF-T1803
+  - SAF-T2101
+  - SAF-T2105
+  hierarchy:
+    parent: SAF-T1801
+    specializations:
+    - SAF-T1803
+    - SAF-T1804
+  provisional_family: SAF-T2102
+  evidence_inputs:
+  - research/techniques/SAF-T1801/technique-contract.yml
+  - research/techniques/SAF-T1802/technique-contract.yml
+  - research/techniques/SAF-T1803/technique-contract.yml
+  - research/techniques/SAF-T1804/technique-contract.yml
+  - research/techniques/SAF-T2101/technique-contract.yml
+  - research/techniques/SAF-T2102/technique-contract.yml
+  - research/techniques/SAF-T2105/technique-contract.yml
+  - techniques/SAF-T1802/detection-rule.yml
+  - techniques/SAF-T1803/detection-rule.yml
+  - techniques/SAF-T2101/detection-rule.yml
+  - techniques/SAF-T2102/detection-rule.yml
+  - techniques/SAF-T2105/detection-rule.yml
+  rationale: >-
+    File Collection can complete with one successful file-content read across a
+    path or authorization boundary, while Database Dump requires dump-equivalent
+    database breadth; they are not duplicates. Database Dump and API Data
+    Harvest are source-specific specializations of Automated Data Harvesting.
+    Data Destruction remains atomic at the destructive external side effect.
+    Disinformation Output remains model-native at deliberate deceptive
+    generation. Service Disruption is retained provisionally but returned to
+    Under Review because its current contract groups crash, cross-owner task
+    cancellation, and resource-pressure mechanisms by shared availability
+    outcome.
+  status: implemented
 research_backlog:
 - id: SAF-RESEARCH-RECON-001
   topic: External discovery of public agent or MCP endpoints, registries, capability metadata, and trust relationships.
@@ -266,4 +304,13 @@ research_backlog:
 - id: SAF-RESEARCH-RESOURCE-001
   topic: Development of rogue servers, authorization infrastructure, staged poison content, and agent-specific control infrastructure.
   required_action: Run separate clean-room admission reviews and reject candidates that duplicate Initial Access or Command and Control.
+- id: SAF-RESEARCH-AVAILABILITY-CRASH-001
+  topic: Fault-triggered termination of an MCP or agent service through an attacker-controlled request.
+  required_action: Run a separate clean-room admission review and prove an atomic mechanism and non-duplication before assigning an opaque technique ID.
+- id: SAF-RESEARCH-AVAILABILITY-CANCEL-001
+  topic: Cross-principal cancellation of another principal's in-flight MCP or agent task.
+  required_action: Run a separate clean-room admission review and prove an atomic mechanism and non-duplication before assigning an opaque technique ID.
+- id: SAF-RESEARCH-AVAILABILITY-PRESSURE-001
+  topic: Tool-mediated resource amplification that materially degrades shared agent-service capacity.
+  required_action: Run a separate clean-room admission review and prove an atomic mechanism and non-duplication before assigning an opaque technique ID.
 unresolved: []

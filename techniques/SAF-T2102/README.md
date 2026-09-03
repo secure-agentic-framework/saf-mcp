@@ -4,7 +4,7 @@
 - **Technique ID**: SAF-T2102
 - **Research Packet**: [research/techniques/SAF-T2102/](../../research/techniques/SAF-T2102/)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T2102/traceability-ledger.yml)
-- **Documentation Status**: Stable
+- **Documentation Status**: Under Review
 - **Evidence Status**: Demonstrated
 - **Severity**: High
 - **Severity Rationale**: A single attacker-controlled request can terminate a service process, cancel another principal's work, or amplify agent-resource use enough to reduce service capacity. <!-- SAF-TRACE: claims=SAF-T2102-C001; sources=SRC-ghsa-j975-95f5-7wqh,SRC-ghsa-python-hvrp,SRC-arxiv-resource-amplification-2026 -->
@@ -20,6 +20,8 @@ Service Disruption is the deliberate use of MCP or agentic-system requests, task
 The defining boundary is crossed when attacker-controlled activity at an MCP or agent interface causes measurable loss of availability, capacity, or task continuity beyond the attacker's own work. <!-- SAF-TRACE: claims=SAF-T2102-C001; sources=SRC-ghsa-j975-95f5-7wqh,SRC-ghsa-python-hvrp,SRC-arxiv-resource-amplification-2026 -->
 
 This technique excludes ordinary provider failures, volumetric network denial outside the MCP interface, downstream data destruction without an availability outcome, and high resource cost that has not produced measurable degradation. <!-- SAF-TRACE: claims=SAF-T2102-C010; sources=SRC-github-availability-2026-07,SRC-arxiv-aegis-2026,SRC-nist-sp800-228-upd1 -->
+
+> **Classification note:** This technique is retained provisionally as an availability family. Its current contract spans fault-triggered termination, cross-principal task cancellation, and resource pressure; those mechanisms must not be treated as interchangeable, and each now requires a separate clean-room admission review before any narrower technique ID is assigned. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml)
 
 ## Description
 
@@ -125,3 +127,4 @@ The analytic is deterministic but not exhaustive: distributed low-rate activity,
 | Version | Date | Changes |
 |---|---|---|
 | 1.0 | 2026-09-02 | Clean-room research draft with tested detection and frozen evidence packet. |
+| 1.1 | 2026-09-02 | Returned the technique to Under Review and recorded its provisional availability-family classification pending three atomic admission reviews. |

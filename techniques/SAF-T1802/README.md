@@ -220,6 +220,8 @@ The standalone example analytic is maintained in [detection-rule.yml](detection-
 | Technique | Relationship | Distinction |
 | --- | --- | --- |
 | [SAF-T1606: Directory Listing via File Tool](../SAF-T1606/README.md) | Prerequisite or co-occurring | Enumeration returns names or metadata; File Collection requires returned file content. <!-- SAF-TRACE: claims=SAF-T1802-C014; sources=SRC-attack-t1083,SRC-attack-t1005 --> |
+| [SAF-T1801: Automated Data Harvesting](../SAF-T1801/README.md) | Related broader behavior | Automated Data Harvesting requires systematic breadth across repeated retrievals; File Collection can complete with one successful file-content read. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
+| [SAF-T1803: Database Dump](../SAF-T1803/README.md) | Adjacent collection behavior | Database Dump requires dump-equivalent database breadth; File Collection is bounded by retrieval of file content and does not require broad database export. [Framework Model v2 taxonomy review](../../research/taxonomy-review.yml) |
 | [SAF-T1913: HTTP POST Exfil](../SAF-T1913/README.md) | Follow-on | Transfer moves already collected content; File Collection's immediate objective is obtaining the content. <!-- SAF-TRACE: claims=SAF-T1802-C001,SAF-T1802-C019; sources=SRC-attack-t1005,SRC-cve-2026-46555 --> |
 
 The isolated placeholders were replaced with canonical neighbors after the clean-room freeze was verified, as recorded in the [integration notes](../../research/techniques/SAF-T1802/integration/integration-notes.yml).
@@ -262,3 +264,4 @@ The isolated placeholders were replaced with canonical neighbors after the clean
 | Version | Date | Changes | Author |
 | --- | --- | --- | --- |
 | 0.1 | 2026-09-02 | Independent clean-room draft, evidence packet, detector, tests, and synthetic strict-validation handoff. | OpenAI Codex clean-room agent |
+| 0.2 | 2026-09-02 | Added the reviewed distinction from automated harvesting and database dumping. | OpenAI Codex taxonomy review |

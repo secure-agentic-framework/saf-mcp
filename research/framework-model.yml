@@ -2997,10 +2997,12 @@ techniques:
   relationships:
   - target: SAF-T1102
     type: related_to
+  - target: SAF-T1802
+    type: related_to
   - target: SAF-T1803
-    type: related_to
+    type: has_specialization
   - target: SAF-T1804
-    type: related_to
+    type: has_specialization
   - target: SAF-T1910
     type: related_to
   - target: SAF-T1911
@@ -3044,6 +3046,8 @@ techniques:
   research_packet: research/techniques/SAF-T1803
   relationships:
   - target: SAF-T1801
+    type: specialization_of
+  - target: SAF-T1802
     type: related_to
   - target: SAF-T1804
     type: related_to
@@ -3132,7 +3136,7 @@ techniques:
   - target: SAF-T1504
     type: related_to
   - target: SAF-T1801
-    type: related_to
+    type: specialization_of
   - target: SAF-T1803
     type: related_to
   mitigations:
@@ -3486,7 +3490,7 @@ techniques:
 - technique_id: SAF-T2102
   name: Service Disruption
   lifecycle_status: active
-  documentation_status: stable
+  documentation_status: under_review
   evidence_status: demonstrated
   profiles:
   - mcp
@@ -3898,6 +3902,10 @@ techniques:
   research_packet: research/techniques/SAF-T1802
   relationships:
   - target: SAF-T1606
+    type: related_to
+  - target: SAF-T1801
+    type: related_to
+  - target: SAF-T1803
     type: related_to
   - target: SAF-T1913
     type: related_to
