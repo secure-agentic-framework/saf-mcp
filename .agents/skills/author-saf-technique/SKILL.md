@@ -45,7 +45,8 @@ Treat these repository files as canonical:
 - `techniques/TEMPLATE.md` for publishable structure;
 - `research/README.md` for repository joins and evidence states;
 - `research/templates/technique/` for the research packet schema;
-- `traceability-ledger.yml` for the source-or-omit audit and excluded leads;
+- `research/techniques/SAF-TXXXX/traceability-ledger.yml` for the source-or-omit
+  audit and excluded leads;
 - `research/source-manifest.yml` for source acquisition records;
 - `research/framework-model.yml` and `research/alignment-ledger.yml` for
   framework reconciliation; and

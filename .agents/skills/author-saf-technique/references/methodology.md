@@ -209,7 +209,9 @@ omitted lead in the ledger.
 
 Name required telemetry and fields. Explain the analytic goal, logic,
 correlation window, false positives, blind spots, evasion opportunities, and
-tuning assumptions. Keep the executable analytic in `detection-rule.yml`.
+tuning assumptions. Keep the executable analytic in
+`techniques/SAF-TXXXX/detection-rule.yml`, beside the technique README rather
+than inside the research packet.
 
 When feasible, add deterministic tests covering true positives, true
 negatives, threshold or sequence boundaries, malformed or missing fields,

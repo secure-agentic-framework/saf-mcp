@@ -51,12 +51,12 @@ before inspecting its substantive content.
 Do not use GitHub search or GitHub-scoped discovery in clean-room mode: domain
 filters and negative terms can still return the prohibited SAF repository and
 expose prior target prose in a result snippet. Open an exact GitHub advisory,
-release, or code URL only after its identifier and canonical URL were obtained
-from a directly reviewed, non-GitHub authoritative source such as NVD, CVE,
-CISA, a vendor bulletin, or a paper. Record that provenance in the source
-manifest. When a target is especially prone to search-result collisions,
-prefer direct authoritative URLs and first-party catalog endpoints over a
-general search operation.
+release, code, or maintainer security-page URL only after its identifier and
+canonical URL were obtained from a directly reviewed, non-GitHub authoritative
+source such as NVD, CVE, CISA, a vendor bulletin, or a paper. Record that
+provenance in the source manifest. When a target is especially prone to
+search-result collisions, prefer direct authoritative URLs and first-party
+catalog endpoints over a general search operation.
 
 ## Fresh-agent procedure
 
@@ -101,12 +101,29 @@ Create `research/techniques/SAF-TXXXX/clean-room-attestation.yml`. Record:
 - integration constraints; and
 - unresolved integrity concerns.
 
+`scripts/validate-technique-research.py` requires `prohibited_inputs` to
+contain each of the following strings verbatim, with the target ID
+substituted (matched case-insensitively as substrings); entries phrased only in
+this reference's descriptive wording fail validation:
+
+- `techniques/SAF-TXXXX/README.md`
+- `research/techniques/SAF-TXXXX/`
+- `techniques/SAF-TXXXX/detection-rule.yml`
+- `git history`
+- `pull request`
+- `previous conversation`
+
+The blank `research/templates/technique/clean-room-attestation.yml` carries
+these entries as a commented block; uncomment them, replacing the standard-mode
+placeholder, when setting `generation_mode: clean_room`.
+
 The attestation may pass only when prior-artifact access is `false`, its details
 are empty, the independent searches and reviewed source set are nonempty, the
 draft was frozen before integration, and there are no unresolved concerns.
 
 Before calculating freeze hashes, copy the independently generated bundle into
-an isolated mock repository and run the canonical research validator there. The
+an isolated mock repository and run the canonical research validator there in
+its default mode (without `--draft`). The
 mock may use newly created minimal framework, source-manifest, and repository-
 history records solely to exercise validation; it must not copy or open the real
 target or shared registries. A clean-room bundle is not freeze-ready if it uses
@@ -119,15 +136,30 @@ bundle-owned fields or files.
 
 ### Canonical clean-room handoff layout
 
-Every fresh-agent run must freeze the same merge-ready layout at
-`/private/tmp/saf-all-cleanroom/SAF-TXXXX/bundle/`:
+Every fresh-agent run must freeze the same merge-ready layout under a scratch
+root. The root is `$SAF_CLEANROOM_ROOT` when that variable is set and
+`${TMPDIR:-/tmp}/saf-all-cleanroom` otherwise, which resolves to
+`/tmp/saf-all-cleanroom` on Linux CI. Do not hardcode a platform-specific path
+such as `/private/tmp`. The resolved root must be an absolute path outside the
+repository checkout and outside every prohibited-input tree; if it is not,
+stop and set `$SAF_CLEANROOM_ROOT` explicitly. A first run freezes at
+`<root>/SAF-TXXXX/bundle/`. A retry or a no-research normalization re-freeze
+uses `<root>/SAF-TXXXX-rN/bundle/`, with `N` starting at 2 and incrementing
+per attempt. Create the root with `mkdir -p`, then create the attempt
+directory with a plain `mkdir` (no `-p`) so that it fails if the directory
+already exists; on collision take the next `N` rather than reusing, emptying,
+or writing into an existing directory, so a stale attempt or a concurrent run
+can never mix artifacts under one `FREEZE.sha256`. Record the resolved root,
+the attempt directory, and the reason for any re-freeze in
+`integration-notes.yml`, which is bundle-owned and already enumerates path
+joins. Use no other suffix for a freeze directory:
 
 ```text
 bundle/
   techniques/SAF-TXXXX/
   research/techniques/SAF-TXXXX/
   tests/SAF-TXXXX/                 # when tests are not technique-local
-  validation/                      # compact test and strict-validator proofs only
+  validation/                      # test and default-mode validator proofs
   source-manifest-fragment.yml
   framework-fragment.yml
   alignment-fragment.yml
@@ -140,14 +172,16 @@ bundle/
 `alignment-fragment.yml` must use the canonical alignment-ledger schema.
 `integration-notes.yml` must enumerate every synthetic tactic, neighbor,
 mitigation, source-ID, history-SHA, and path join that remains mechanical after
-freeze. Do not put a copied mock repository, source-acquisition corpus, cache,
-or validator dependency tree inside `bundle/`; retain those outside the bundle
-and record their hashes separately when needed.
+freeze, plus the freeze provenance: resolved scratch root, attempt directory,
+and the reason for any re-freeze. Do not put a copied mock repository, source-
+acquisition corpus, cache, or validator dependency tree inside `bundle/`;
+retain those outside the bundle and record their hashes separately when needed.
 
 `FREEZE.sha256` must contain one sorted `sha256  relative/path` line for every
 bundle-owned file except `FREEZE.sha256` itself. Verify it from the bundle root
 before handoff. Report the SHA-256 of `FREEZE.sha256`, the number of listed
-files, the detection result, and the strict isolated-validator result. A
+files, the detection result, and the isolated-validator result in default
+(non-`--draft`) mode. A
 different handoff layout is not canonical and must be normalized and re-frozen
 by a separate no-research agent before repository integration.
 
