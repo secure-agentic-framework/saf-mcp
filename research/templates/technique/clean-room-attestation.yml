@@ -16,6 +16,20 @@ allowed_inputs:
   - Clean-room generation was not requested for this scaffold.
 prohibited_inputs:
   - Clean-room generation was not requested for this scaffold.
+  # When converting this packet to generation_mode: clean_room, replace the
+  # entry above with the six entries below (uncomment them; the indented
+  # continuation lines stay valid YAML). scripts/validate-technique-research.py
+  # requires each of them to appear verbatim in this list in clean_room mode.
+  # - techniques/__TECHNIQUE_ID__/README.md, current or historical.
+  # - research/techniques/__TECHNIQUE_ID__/ packet files, ledgers, or source
+  #   lists.
+  # - techniques/__TECHNIQUE_ID__/detection-rule.yml, its tests, and test logs.
+  # - Git history, diffs, blame, stashes, commits, branches, or review comments
+  #   exposing prior target content.
+  # - Any pull request, issue, cached page, summary, or agent context
+  #   containing prior target content.
+  # - Any previous conversation or inherited context containing prior
+  #   technique content.
 
 independent_research:
   searches: []

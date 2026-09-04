@@ -1526,7 +1526,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--draft",
         action="store_true",
-        help="Check structure without enforcing completion statuses",
+        help=(
+            "Relax strict-only completion and release checks: completion "
+            "statuses, hidden-trace coverage, untraced publishable prose, "
+            "saturation, publication permissions, and high-severity alignment "
+            "issues; the placeholder zero repository-history SHA is accepted. "
+            "Schema, cross-file joins, and core clean-room assertions are still "
+            "enforced. A draft PASS is not release validation."
+        ),
     )
     return parser.parse_args()
 
