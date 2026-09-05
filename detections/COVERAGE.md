@@ -118,4 +118,5 @@ Provider sources under reconciliation remain visible here but do not count as va
 
 | Provider | Repository | Candidate mapping | Intake status | Reviewed |
 | --- | --- | --- | --- | --- |
+| AgentAvow | [repository](https://github.com/AgentAvow/AgentAvow) | — | `—` | — |
 | Agent Threat Rules | [repository](https://github.com/Agent-Threat-Rule/agent-threat-rules) | [source](https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/main/docs/SAFE-MCP-MAPPING.md) | `pending_reconciliation` | 2026-09-02 |
