@@ -1,0 +1,8 @@
+version: 1
+provider_id: agentavow
+name: AgentAvow
+repository: https://github.com/AgentAvow/AgentAvow
+maintainer: AgentAvow
+license:
+  spdx: MIT
+  url: https://github.com/AgentAvow/AgentAvow/blob/main/LICENSE
