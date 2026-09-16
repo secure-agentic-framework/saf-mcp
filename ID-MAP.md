@@ -136,3 +136,11 @@ The **Secure Agentic Framework (SAF)** uses the `SAF-` prefix for all framework 
 | SAF-M-71 |
 | SAF-M-72 |
 | SAF-M-73 |
+| SAF-M-75 |
+| SAF-M-76 |
+| SAF-M-77 |
+| SAF-M-78 |
+| SAF-M-79 |
+| SAF-M-80 |
+| SAF-M-81 |
+| SAF-M-82 |

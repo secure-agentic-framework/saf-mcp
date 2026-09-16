@@ -8,6 +8,8 @@ on:
       - "mitigations/**"
       - "MITIGATIONS.md"
       - "research/**"
+      - "profiles/agent-containment/**"
+      - "scripts/*containment*.py"
       - "scripts/*detection*.py"
       - "scripts/*mitigation*.py"
       - "scripts/*technique*.py"
@@ -24,6 +26,8 @@ on:
       - "mitigations/**"
       - "MITIGATIONS.md"
       - "research/**"
+      - "profiles/agent-containment/**"
+      - "scripts/*containment*.py"
       - "scripts/*detection*.py"
       - "scripts/*mitigation*.py"
       - "scripts/*technique*.py"
@@ -52,3 +56,5 @@ jobs:
       - run: python3 scripts/validate-detection-registry.py
       - run: python3 scripts/generate-detection-coverage.py --check
       - run: python3 scripts/generate-mitigation-catalog.py --check
+      - run: python3 scripts/validate-containment-profile.py
+      - run: python3 scripts/generate-containment-profile.py --check
