@@ -1,0 +1,11 @@
+SAF-T1703 telemetry replay validation
+status=PASS
+mcp_sdk_version=2.2.0
+python_version=3.13.14
+transport=stdio_subprocess
+normalized_events=16
+server_execution_events=16
+harmless_sink_writes=6
+alerts=p1-target-call,p2-target-call
+nonalerts=n1-target-call,n2-target-call,n3-target-call,n4-target-call,n5-target-call,n6-target-call
+scope=real MCP subprocess execution replay validating causality, cross-server boundary, trust, user-intent, approval and action-class dimensions; production effectiveness is not claimed

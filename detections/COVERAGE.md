@@ -83,7 +83,7 @@ A mapping may represent more than one modality, so these counts overlap.
 | [SAF-T1605](../techniques/SAF-T1605/README.md) — Capability Mapping | [rule](../techniques/SAF-T1605/detection-rule.yml) | `partial` | `fixture_tested` | `runtime` | — |
 | [SAF-T1606](../techniques/SAF-T1606/README.md) — Directory Listing via File Tool | [rule](../techniques/SAF-T1606/detection-rule.yml) | `partial` | `fixture_tested` | `endpoint`, `runtime` | — |
 | [SAF-T1701](../techniques/SAF-T1701/README.md) — Cross-Tool Contamination | [rule](../techniques/SAF-T1701/detection-rule.yml) | `partial` | `fixture_tested` | `content`, `runtime` | — |
-| [SAF-T1703](../techniques/SAF-T1703/README.md) — Tool-Chaining Pivot | [rule](../techniques/SAF-T1703/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `runtime` | — |
+| [SAF-T1703](../techniques/SAF-T1703/README.md) — Tool-Chaining Pivot | [rule](../techniques/SAF-T1703/detection-rule.yml) | `partial` | `telemetry_replay_tested` | `gateway`, `runtime` | — |
 | [SAF-T1704](../techniques/SAF-T1704/README.md) — Compromised-Server Pivot | [rule](../techniques/SAF-T1704/detection-rule.yml) | `partial` | `fixture_tested` | `gateway`, `network`, `runtime` | — |
 | [SAF-T1706](../techniques/SAF-T1706/README.md) — OAuth Token Pivot Replay | [rule](../techniques/SAF-T1706/detection-rule.yml) | `partial` | `fixture_tested` | `identity`, `network`, `runtime` | — |
 | [SAF-T1112](../techniques/SAF-T1112/README.md) — Sampling Request Abuse | [rule](../techniques/SAF-T1112/detection-rule.yml) | `partial` | `fixture_tested` | `runtime` | — |

@@ -2795,7 +2795,12 @@ techniques:
     - tests/SAF-T1703/test-logs.json
     - research/techniques/SAF-T1703/validation/detection-test.txt
     - research/techniques/SAF-T1703/validation/strict-validator.txt
-    validation_level: fixture_tested
+    - research/techniques/SAF-T1703/validation/telemetry-replay/capture-metadata.json
+    - research/techniques/SAF-T1703/validation/telemetry-replay/normalized-telemetry.json
+    - research/techniques/SAF-T1703/validation/telemetry-replay/server-audit.jsonl
+    - research/techniques/SAF-T1703/validation/telemetry-replay/replay-results.txt
+    - research/techniques/SAF-T1703/validation/telemetry-replay/verify_replay.py
+    validation_level: telemetry_replay_tested
   attack_mappings:
   - id: T1072
     type: analogous

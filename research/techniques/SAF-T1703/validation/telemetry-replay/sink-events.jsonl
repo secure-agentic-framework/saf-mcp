@@ -1,0 +1,6 @@
+{"marker": "P1-SAFE-WRITE", "timestamp": "2026-09-26T21:00:36.686057Z", "trace_id": "p1", "writer_server": "target-actions"}
+{"marker": "N1-APPROVED-WRITE", "timestamp": "2026-09-26T21:00:36.717260Z", "trace_id": "n1", "writer_server": "target-actions"}
+{"marker": "N2-USER-INTENT-WRITE", "timestamp": "2026-09-26T21:00:36.732410Z", "trace_id": "n2", "writer_server": "target-actions"}
+{"marker": "N3-SAME-SERVER-WRITE", "timestamp": "2026-09-26T21:00:36.746489Z", "trace_id": "n3", "writer_server": "source-docs"}
+{"marker": "N4-TRUSTED-SOURCE-WRITE", "timestamp": "2026-09-26T21:00:36.761028Z", "trace_id": "n4", "writer_server": "target-actions"}
+{"marker": "N5-NO-CAUSAL-LINK", "timestamp": "2026-09-26T21:00:36.777201Z", "trace_id": "n5", "writer_server": "target-actions"}

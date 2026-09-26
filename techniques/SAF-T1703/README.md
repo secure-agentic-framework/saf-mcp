@@ -7,7 +7,7 @@
 - **Documentation Status**: Stable
 - **Evidence Status**: Demonstrated
 - **Severity**: High
-- **Last Updated**: 2026-09-02
+- **Last Updated**: 2026-09-26
 - **Research Packet**: [research/techniques/SAF-T1703](../../research/techniques/SAF-T1703/technique-contract.yml)
 - **Traceability Ledger**: [traceability-ledger.yml](../../research/techniques/SAF-T1703/traceability-ledger.yml)
 
@@ -111,6 +111,10 @@ No durable technique-specific indicator is expected across implementations; sequ
 - The detector implementation is in [test_detection_rule.py](../../tests/SAF-T1703/test_detection_rule.py).
 - The inert fixture set is in [test-logs.json](../../tests/SAF-T1703/test-logs.json).
 - The captured passing result is in [detection-test.txt](../../research/techniques/SAF-T1703/validation/detection-test.txt).
+- A reproducible MCP runtime replay is documented in [telemetry-replay/README.md](../../research/techniques/SAF-T1703/validation/telemetry-replay/README.md).
+- The replay executes real MCP 2.2.0 stdio subprocesses and records server-side execution evidence in [server-audit.jsonl](../../research/techniques/SAF-T1703/validation/telemetry-replay/server-audit.jsonl).
+- The normalized replay events are in [normalized-telemetry.json](../../research/techniques/SAF-T1703/validation/telemetry-replay/normalized-telemetry.json), with the deterministic detector result in [replay-results.txt](../../research/techniques/SAF-T1703/validation/telemetry-replay/replay-results.txt).
+- Detection validation maturity is `telemetry_replay_tested` based on the [captured replay result](../../research/techniques/SAF-T1703/validation/telemetry-replay/replay-results.txt); this laboratory validation does not claim production effectiveness or field evaluation.
 
 ### False Positives and Limits
 
@@ -158,3 +162,4 @@ The analytic cannot establish semantic causation when telemetry omits result tru
 | Version | Date | Author / Team | Changes |
 |---|---|---|---|
 | 1.0 | 2026-09-02 | OpenAI Codex fresh-agent clean-room research | Initial clean-room technique, evidence packet, tested detector, and integration fragments. |
+| 1.1 | 2026-09-26 | Michael Adedeji | Added reproducible MCP 2.2.0 subprocess telemetry replay validation and advanced detection maturity to `telemetry_replay_tested`; production effectiveness is not claimed. |

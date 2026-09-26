@@ -30,7 +30,7 @@ gates:
     notes: Eleven candidates were classified and the four highest-impact direct examples selected; production-incident uncertainty is explicit.
   detection_quality:
     status: passed
-    notes: Behavioral correlation uses provenance, causality, identity, intent, approval, action, and an explicitly tunable window; two positives and six negatives pass.
+    notes: Behavioral correlation uses provenance, causality, identity, intent, approval, action, and an explicitly tunable window; two synthetic positives and six synthetic negatives pass, and an MCP 2.2.0 stdio subprocess telemetry replay passes two positive and six negative runtime scenarios without claiming production effectiveness.
   mitigation_quality:
     status: passed
     notes: Controls address upstream content, target authority, approvals, policy, data flow, provenance, and supply-chain change.
@@ -52,6 +52,12 @@ validation:
     command: python3 tests/SAF-T1703/test_detection_rule.py tests/SAF-T1703/test-logs.json
     result: "PASS SAF-T1703: 2 alerts, 6 non-alerts"
     waiver: null
+  telemetry_replay:
+    status: passed
+    command: python3 research/techniques/SAF-T1703/validation/telemetry-replay/verify_replay.py
+    result: "PASS: 2 alerts, 6 non-alerts across 16 normalized runtime events and 16 server execution events"
+    proof: research/techniques/SAF-T1703/validation/telemetry-replay/replay-results.txt
+    scope: Laboratory MCP subprocess telemetry replay; production effectiveness and field evaluation are not claimed.
   canonical_repository:
     detection_proof: research/techniques/SAF-T1703/validation/detection-test.txt
     strict_proof: research/techniques/SAF-T1703/validation/strict-validator.txt

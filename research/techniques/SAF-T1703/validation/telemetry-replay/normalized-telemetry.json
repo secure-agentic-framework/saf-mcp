@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "technique_id": "SAF-T1703",
+  "validation_type": "telemetry_replay",
+  "capture_metadata": {
+    "technique_id": "SAF-T1703",
+    "capture_type": "runtime_telemetry_replay",
+    "transport": "stdio_subprocess",
+    "mcp_sdk_version": "2.2.0",
+    "python_version": "3.13.14",
+    "scenario_count": 8,
+    "captured_at": "2026-09-26T21:00:33.047130Z"
+  },
+  "events": [
+    {
+      "trace_id": "p1",
+      "event_id": "p1-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.652884Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "p1",
+      "event_id": "p1-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.654780Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "absent",
+      "action_class": "external_write",
+      "caused_by_event_id": "p1-source-result"
+    },
+    {
+      "trace_id": "p2",
+      "event_id": "p2-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.702245Z",
+      "trust_label": "unknown",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "p2",
+      "event_id": "p2-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.703149Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "bypassed",
+      "action_class": "privileged_read",
+      "caused_by_event_id": "p2-source-result"
+    },
+    {
+      "trace_id": "n1",
+      "event_id": "n1-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.714178Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n1",
+      "event_id": "n1-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.714763Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "granted",
+      "action_class": "external_write",
+      "caused_by_event_id": "n1-source-result"
+    },
+    {
+      "trace_id": "n2",
+      "event_id": "n2-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.728792Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n2",
+      "event_id": "n2-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.729495Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": true,
+      "approval_state": "absent",
+      "action_class": "external_write",
+      "caused_by_event_id": "n2-source-result"
+    },
+    {
+      "trace_id": "n3",
+      "event_id": "n3-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.743009Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n3",
+      "event_id": "n3-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.743634Z",
+      "target_server_id": "source-docs",
+      "user_intent_supported": false,
+      "approval_state": "absent",
+      "action_class": "external_write",
+      "caused_by_event_id": "n3-source-result"
+    },
+    {
+      "trace_id": "n4",
+      "event_id": "n4-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.757123Z",
+      "trust_label": "trusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n4",
+      "event_id": "n4-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.757804Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "absent",
+      "action_class": "external_write",
+      "caused_by_event_id": "n4-source-result"
+    },
+    {
+      "trace_id": "n5",
+      "event_id": "n5-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.772749Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n5",
+      "event_id": "n5-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.773572Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "absent",
+      "action_class": "external_write"
+    },
+    {
+      "trace_id": "n6",
+      "event_id": "n6-source-result",
+      "event_type": "tool_result",
+      "timestamp": "2026-09-26T21:00:36.786837Z",
+      "trust_label": "untrusted",
+      "source_server_id": "source-docs"
+    },
+    {
+      "trace_id": "n6",
+      "event_id": "n6-target-call",
+      "event_type": "tool_call",
+      "timestamp": "2026-09-26T21:00:36.787774Z",
+      "target_server_id": "target-actions",
+      "user_intent_supported": false,
+      "approval_state": "absent",
+      "action_class": "routine_read",
+      "caused_by_event_id": "n6-source-result"
+    }
+  ],
+  "expected_alert_event_ids": [
+    "p1-target-call",
+    "p2-target-call"
+  ],
+  "expected_nonalert_event_ids": [
+    "n1-target-call",
+    "n2-target-call",
+    "n3-target-call",
+    "n4-target-call",
+    "n5-target-call",
+    "n6-target-call"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "technique_id": "SAF-T1703",
+  "capture_type": "runtime_telemetry_replay",
+  "transport": "stdio_subprocess",
+  "mcp_sdk_version": "2.2.0",
+  "python_version": "3.13.14",
+  "scenario_count": 8,
+  "captured_at": "2026-09-26T21:00:33.047130Z"
+}

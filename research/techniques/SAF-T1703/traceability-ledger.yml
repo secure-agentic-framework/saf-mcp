@@ -30,6 +30,24 @@ repository_sources:
 - id: LOCAL-strict-result
   path: research/techniques/SAF-T1703/validation/strict-validator.txt
   supports: Captured isolated and canonical strict-validator output.
+- id: LOCAL-telemetry-replay-method
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/README.md
+  supports: Reproducible MCP subprocess telemetry replay methodology, validation boundary, and scenario definitions.
+- id: LOCAL-telemetry-replay-events
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/normalized-telemetry.json
+  supports: Normalized runtime replay events used to evaluate the existing SAF-T1703 analytic.
+- id: LOCAL-telemetry-replay-audit
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/server-audit.jsonl
+  supports: Server-side evidence that the source and target MCP tool executions occurred during the replay.
+- id: LOCAL-telemetry-replay-result
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/replay-results.txt
+  supports: Captured passing telemetry replay detector result.
+- id: LOCAL-telemetry-replay-metadata
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/capture-metadata.json
+  supports: Runtime environment, MCP SDK version, transport, scenario count, and capture timestamp for the replay.
+- id: LOCAL-telemetry-replay-verifier
+  path: research/techniques/SAF-T1703/validation/telemetry-replay/verify_replay.py
+  supports: Deterministic verification harness that evaluates normalized replay telemetry against the existing SAF-T1703 detector and confirms server execution evidence.
 repository_history:
 - commit: 26c39823e0b55144bc7891f6345e6030646c16a0
   supports: Repository baseline used for post-freeze source, framework, and path reconciliation.
