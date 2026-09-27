@@ -69,6 +69,7 @@ This generated inventory lists the mitigation documents that exist in the reposi
 | [SAF-M-36](mitigations/SAF-M-36/README.md) | Model Behavior Monitoring |
 | [SAF-M-37](mitigations/SAF-M-37/README.md) | Token Rotation and Invalidation |
 | [SAF-M-38](mitigations/SAF-M-38/README.md) | PKCE Enforcement |
+| [SAF-M-44](mitigations/SAF-M-44/README.md) | Tool Definition Integrity Monitoring |
 | [SAF-M-45](mitigations/SAF-M-45/README.md) | Tool Manifest Signing & Server Attestation |
 | [SAF-M-46](mitigations/SAF-M-46/README.md) | Bridge Risk Management |
 | [SAF-M-47](mitigations/SAF-M-47/README.md) | Cross-Chain Transaction Graph Analysis |
@@ -87,7 +88,7 @@ This generated inventory lists the mitigation documents that exist in the reposi
 | [SAF-M-73](mitigations/SAF-M-73/README.md) | Sampling Budget and Iteration Caps |
 | [SAF-M-74](mitigations/SAF-M-74/README.md) | Per-Invocation Capability Brokering |
 
-**Total mitigation documents:** 51
+**Total mitigation documents:** 52
 <!-- END GENERATED SAF MITIGATION CATALOG -->
 
 ## Implementation Guidance
