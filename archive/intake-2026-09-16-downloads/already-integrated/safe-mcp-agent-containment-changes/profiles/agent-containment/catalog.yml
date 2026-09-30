@@ -1,0 +1,1745 @@
+schema_version: 1
+profile_id: ACP
+title: Agent Containment and Owner Authorization
+status: proposal
+reviewed_on: '2026-09-16'
+base_commit: d3d40297c478d2680d315399b6aaf317e5aa15b8
+scope: Deployment requirements and inert assessment procedures spanning existing SAF profiles; not a new
+  canonical technique namespace or an implementation of a secure runtime.
+validation_scope: Repository consistency only. Deployment acceptance tests are planned and have not been
+  executed against a runtime.
+groups:
+- id: isolation
+  name: Runtime isolation and complete mediation
+  mitigation: SAF-M-75
+  category: Isolation and Containment
+  control_name: Broker-Only Egress and Descendant Containment
+  description: Place the model runtime, tools, interpreters, browser processes, and descendants inside
+    an enforcement boundary they cannot administer. Only the external broker may initiate approved external
+    effects.
+  distinction: SAF-M-74 constrains individual invocations. This control additionally removes ambient communication
+    from the whole agent execution tree and separates the broker from that tree.
+  limitations: Host or hypervisor compromise can defeat the boundary. A disconnected virtual network does
+    not account for inherited sockets, shared folders, peripherals, or a remote inference provider.
+- id: broker
+  name: Broker requests and information release
+  mitigation: SAF-M-79
+  category: Data Security
+  control_name: Disclosure-Bounded Tool Brokering
+  description: Represent requests as constrained operations on registered resources. The broker resolves
+    destinations, retains service credentials, and separately authorizes every information release.
+  distinction: SAF-M-72 inspects outputs for data loss. This control constrains input selection, request
+    destinations, arguments, response recipients, and permitted disclosure before relying on content inspection.
+  limitations: Arbitrary agent-controlled output to an outside recipient remains a communication channel.
+    Content classification alone cannot establish zero leakage.
+- id: owner-approval
+  name: Owner identity and protected approval
+  mitigation: SAF-M-76
+  category: UI Security
+  control_name: Protected Owner Approval Path
+  description: Accept owner approval only from a protected interaction that the agent cannot render, observe,
+    automate, or alter. Bind the displayed decision to the action ultimately dispatched.
+  distinction: SAF-M-69 establishes out-of-band privileged authorization. This control specifies the independent
+    input/display boundary and exclusive owner attribution needed against an agent that can control its
+    ordinary workspace.
+  limitations: A compromised approval device or a person knowingly approving a harmful action remains
+    outside the guarantee. Recognition of enrolled authority does not independently establish civil identity.
+- id: one-use
+  name: One-use approval and authenticated results
+  mitigation: SAF-M-77
+  category: Cryptographic Control
+  control_name: Durable Single-Use Action Authorization
+  description: Bind every protected approval to one immutable request context, consume its attempt atomically,
+    authenticate any remote verdict, and prevent duplicate external effects across retries and crashes.
+  distinction: SAF-M-31 provides proof-of-possession token guidance and SAF-M-69 binds privileged approvals.
+    This control adds durable attempt consumption and a separate execution receipt across multiple enforcement
+    instances.
+  limitations: Single-use verification does not automatically imply single execution. An external service
+    without idempotency or reconciliation may leave an uncertain outcome after a crash; do not blindly
+    retry.
+- id: lifecycle
+  name: Policy, enrollment, and recovery lifecycle
+  mitigation: SAF-M-78
+  category: Preventive Control
+  control_name: Enrollment and Policy Lifecycle Integrity
+  description: Bind the owner, agent, verifier, enrollment, policy, and running enforcement version. Permit
+    version replacement, recovery, and ownership changes only through the authorized administrative path.
+  distinction: SAF-M-45 covers tool manifests and attestation. This control governs the owner-to-enrollment
+    relationship and every route capable of changing the policy or verifier, including recovery and rollback.
+  limitations: A published hash identifies bytes, not the behavior of a running machine. An append-only
+    ledger does not establish honest execution, safe policy, or immediate consensus.
+- id: delegation
+  name: Agent identity and bounded delegation
+  mitigation: SAF-M-80
+  category: Architectural Control
+  control_name: Owner-Separated Agent Delegation
+  description: Give the agent a distinct identity and a revocable, audience-bound delegation. Downstream
+    services retain the initiating principal and task boundary; delegation never includes the ability
+    to approve expansion of its own authority.
+  distinction: SAF-M-16 limits token scopes. This control also preserves the difference between an owner
+    and a delegated agent throughout subdelegation, logging, and policy changes.
+  limitations: A correctly authorized delegation may still permit harmful conduct within its scope. A
+    copied bearer credential remains usable unless the recipient enforces its binding and revocation conditions.
+- id: operations
+  name: Independent audit, shutdown, and recovery
+  mitigation: SAF-M-81
+  category: Architectural Control
+  control_name: Fail-Closed Containment Operations
+  description: Maintain an independent shutdown path, protected audit records, resource budgets, and conservative
+    recovery. Security service interruption must not grant new external access.
+  distinction: SAF-M-12 supplies audit logging and SAF-M-73 caps sampling. This control ties audit, availability,
+    attempt exhaustion, and operator recovery to the containment boundary.
+  limitations: Availability can be reduced by conservative denial. Essential workflows need a human fallback
+    that preserves authorization rather than a general bypass.
+- id: proof-privacy
+  name: Approval secrets and observation boundaries
+  mitigation: SAF-M-82
+  category: Cryptographic Control
+  control_name: Protected Approval Secret Handling
+  description: Keep private approval inputs, decoding references, and any secret randomization outside
+    the agent observation boundary. State the exact privacy property and the resources on which it depends.
+  distinction: SAF-M-69 addresses authorization. This control separately addresses what observing the
+    approval exchange reveals, without equating transcript privacy with authorization or machine isolation.
+  limitations: No privacy theorem repairs a secret captured before protection. Fresh secret randomness,
+    where required, must actually be provisioned; public nonces and deterministic seed expansion do not
+    supply unlimited independent secret entropy.
+sources:
+- id: ACP-S001
+  title: MCP Tools
+  authors:
+  - Model Context Protocol contributors
+  url: https://modelcontextprotocol.io/specification/2025-11-25/server/tools
+  version: '2025-11-25'
+  locator: Security Considerations
+  use: Baseline for validating tool requests and presenting sensitive operations. The stronger profile
+    requirements are proposed design choices.
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S002
+  title: MCP Authorization
+  authors:
+  - Model Context Protocol contributors
+  url: https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization
+  version: '2025-11-25'
+  locator: 'Security Considerations: Token Audience Binding and Validation; Token Theft; Authorization
+    Code Protection'
+  use: Existing MCP audience and token-handling baseline; not a new ENI6MA transport specification.
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S003
+  title: MCP Security Best Practices
+  authors:
+  - Model Context Protocol contributors
+  url: https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices
+  version: 2025-11-25 path, mutable guidance
+  locator: Token Passthrough; Server-Side Request Forgery; Local MCP Server Compromise
+  use: Related broker, destination, and local-runtime boundaries. Do not interpret the profile as a change
+    to MCP.
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S004
+  title: 'RFC 9449: OAuth 2.0 Demonstrating Proof of Possession (DPoP)'
+  authors:
+  - D. Fett
+  - B. Campbell
+  - J. Bradley
+  - T. Lodderstedt
+  - M. Jones
+  - D. Waite
+  url: https://www.rfc-editor.org/rfc/rfc9449.html
+  version: September 2023
+  locator: Sections 4.3, 11.1, 11.4, and 11.7
+  use: Related proof binding and replay considerations. DPoP alone is not exact transaction authorization
+    or ENI6MA.
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S005
+  title: Escape to Host
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1611/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1611
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S006
+  title: 'Input Capture: Keylogging'
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1056/001/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1056.001
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S007
+  title: 'Input Capture: GUI Input Capture'
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1056/002/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1056.002
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S008
+  title: Disable or Modify System Firewall
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1686/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1686
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S009
+  title: 'Use Alternate Authentication Material: Application Access Token'
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1550/001/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1550.001
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+- id: ACP-S010
+  title: Exfiltration Over Web Service
+  authors:
+  - MITRE ATT&CK team
+  url: https://attack.mitre.org/techniques/T1567/
+  version: Live page reviewed 2026-09-16
+  locator: Description and technique identifier
+  use: Analogous conventional behavior only; no endorsement or observed agentic incident is inferred.
+  attack_id: T1567
+  reviewed_on: '2026-09-16'
+  archive_status: remote_reviewed_not_archived
+  publication_use: Original paraphrase and links; no copied source code, diagrams, or incident claims.
+requirements:
+- id: ACP-R001
+  group: isolation
+  title: Independent enforcement
+  requirement: The deployment MUST enforce isolation outside the agent-controlled runtime; the agent MUST
+    NOT administer the host, broker, hypervisor, or their credentials.
+  mitigations:
+  - SAF-M-75
+  test_id: ACP-V001
+  validation:
+    status: planned
+    procedure: Attempt a denied host-management operation from the runtime and a tool process.
+    expected: The operation is denied; independent host evidence identifies the caller and unchanged control
+      state.
+- id: ACP-R002
+  group: isolation
+  title: Broker-only external effects
+  requirement: All agent-caused network, file-sharing, messaging, and service effects MUST pass through
+    the broker. Direct outbound connections MUST be denied.
+  mitigations:
+  - SAF-M-75
+  test_id: ACP-V002
+  validation:
+    status: planned
+    procedure: Try direct outbound access and then the same registered operation through the broker.
+    expected: Direct access is blocked; the authorized broker operation alone produces an external receipt.
+- id: ACP-R003
+  group: isolation
+  title: Descendant inheritance
+  requirement: Child processes, nested runtimes, delegated workers, and subsidiary agents MUST inherit
+    an equal or narrower ceiling and MUST NOT acquire ambient host capabilities.
+  mitigations:
+  - SAF-M-75
+  test_id: ACP-V003
+  validation:
+    status: planned
+    procedure: Spawn a harmless child and delegated worker, then request a capability absent from the
+      parent.
+    expected: The child and worker are denied; parent-child identities and effective scopes are recorded.
+- id: ACP-R004
+  group: isolation
+  title: Complete channel inventory
+  requirement: The boundary inventory MUST include DNS, inherited sockets, IPC, mounts, clipboard, display,
+    devices, telemetry, updates, crash reports, and remote model inference.
+  mitigations:
+  - SAF-M-75
+  test_id: ACP-V004
+  validation:
+    status: planned
+    procedure: Exercise each inventoried channel with an inert marker and inspect independent egress and
+      host records.
+    expected: Only explicitly authorized channels carry the marker; unknown channels block deployment
+      acceptance.
+- id: ACP-R005
+  group: broker
+  title: Typed requests
+  requirement: The broker MUST accept schema-validated operations on registered resources; agent text
+    MUST NOT become arbitrary broker code, shell commands, or open-ended forwarding instructions.
+  mitigations:
+  - SAF-M-79
+  test_id: ACP-V005
+  validation:
+    status: planned
+    procedure: Submit an unknown operation, extra executable fields, and a valid registered read.
+    expected: Malformed and unregistered requests are denied; the registered read succeeds within scope.
+- id: ACP-R006
+  group: broker
+  title: Broker-owned service credentials
+  requirement: External service credentials MUST remain outside the runtime, prompts, tool results, environment
+    variables, shared files, and diagnostic output.
+  mitigations:
+  - SAF-M-79
+  test_id: ACP-V006
+  validation:
+    status: planned
+    procedure: Inspect runtime-visible state using synthetic credentials provisioned only to the broker.
+    expected: No synthetic credential appears; the broker can still complete the authorized service request.
+- id: ACP-R007
+  group: broker
+  title: Destination and operation binding
+  requirement: The broker MUST bind service, resource, method, recipient, and resolved destination; redirects,
+    address changes, and metadata or loopback access require explicit authorization.
+  mitigations:
+  - SAF-M-79
+  test_id: ACP-V007
+  validation:
+    status: planned
+    procedure: Resolve a registered test resource, then change its recipient or redirect it to an unapproved
+      local sink.
+    expected: The changed destination is denied before sending request contents; a legitimate unchanged
+      destination remains usable.
+- id: ACP-R008
+  group: broker
+  title: Explicit disclosure boundary
+  requirement: Every outgoing argument, generated file, report, browser render, and message MUST have
+    an authorized recipient, permitted content scope, and release decision. Arbitrary output MUST NOT
+    be described as zero leakage.
+  mitigations:
+  - SAF-M-79
+  test_id: ACP-V008
+  validation:
+    status: planned
+    procedure: Place an inert confidential marker in a report, tool argument, and image request targeting
+      an unapproved test recipient.
+    expected: No unauthorized recipient receives the marker; the approved report records exactly what
+      was released.
+- id: ACP-R009
+  group: broker
+  title: Minimum input access
+  requirement: The broker MUST minimize records, fields, and task context supplied to the agent and MUST
+    treat remote inference as a disclosure to the model provider.
+  mitigations:
+  - SAF-M-79
+  test_id: ACP-V009
+  validation:
+    status: planned
+    procedure: Request a full dataset and an outside inference call for a task requiring one local record.
+    expected: Only the permitted record is supplied; external inference requires its own permitted destination
+      and disclosure decision.
+- id: ACP-R010
+  group: owner-approval
+  title: Binding enrollment
+  requirement: Enrollment MUST bind an established owner identity to the agent, protected approval mechanism,
+    verifier identity, credential reference, and current policy version.
+  mitigations:
+  - SAF-M-76
+  test_id: ACP-V010
+  validation:
+    status: planned
+    procedure: Substitute another enrollment or verifier while retaining the displayed owner name.
+    expected: The binding check fails and the protected operation remains unexecuted.
+- id: ACP-R011
+  group: owner-approval
+  title: Protected display and input
+  requirement: The owner interaction MUST use a path the agent cannot render over, read, keylog, screen-capture,
+    or control through accessibility or automation interfaces.
+  mitigations:
+  - SAF-M-76
+  test_id: ACP-V011
+  validation:
+    status: planned
+    procedure: Run an inert fake approval form and attempt synthetic-input capture from the confined runtime.
+    expected: The fake form grants no authority; the genuine private input and display data are absent
+      from agent-visible channels.
+- id: ACP-R012
+  group: owner-approval
+  title: Exact-action approval
+  requirement: The protected display MUST show the relying service, operation, resource, material parameters,
+    recipient, session, expiry, and policy change, and approval MUST bind those immutable values.
+  mitigations:
+  - SAF-M-76
+  test_id: ACP-V012
+  validation:
+    status: planned
+    procedure: Approve a benign request, then change one bound field before dispatch.
+    expected: Each changed request is rejected; the unchanged approved request remains eligible exactly
+      once.
+- id: ACP-R013
+  group: owner-approval
+  title: Exclusive approval attribution
+  requirement: Only the designated protected mechanism MAY produce owner-attributable approval. Agent-authored
+    flags, simulated clicks, model text, and ordinary tool responses MUST NOT substitute for it.
+  mitigations:
+  - SAF-M-76
+  test_id: ACP-V013
+  validation:
+    status: planned
+    procedure: Supply an agent-authored approved=true flag or a forged completion message.
+    expected: No authorization is created; an actual protected owner approval is separately attributable.
+- id: ACP-R014
+  group: one-use
+  title: Event allocation
+  requirement: Each approval attempt MUST have a unique full event identifier bound to its tenant, enrollment,
+    agent, verifier, request, session, policy, expiry, and private resource allocation.
+  mitigations:
+  - SAF-M-77
+  test_id: ACP-V014
+  validation:
+    status: planned
+    procedure: Allocate parallel events with colliding short display labels and attempt cross-tenant substitution.
+    expected: Full identifiers remain distinct; tenant and context mismatches are denied.
+- id: ACP-R015
+  group: one-use
+  title: Atomic attempt consumption
+  requirement: After transport authentication and event-routing checks, the verifier MUST atomically claim
+    one eligible attempt before substantive witness validation; accept, reject, or abort MUST NOT reopen
+    that attempt.
+  mitigations:
+  - SAF-M-77
+  test_id: ACP-V015
+  validation:
+    status: planned
+    procedure: Send concurrent submissions for one eligible event to separate verifier instances.
+    expected: At most one submission enters substantive verification; invalid proof also consumes that
+      claimed attempt.
+- id: ACP-R016
+  group: one-use
+  title: Conservative crash recovery
+  requirement: Expiry, abort, and uncertain recovery MUST retire the event and any allocated private masks.
+    Replica restoration MUST NOT make a consumed allocation available again.
+  mitigations:
+  - SAF-M-77
+  test_id: ACP-V016
+  validation:
+    status: planned
+    procedure: Interrupt processing around allocation, claim, and result recording, then restore a replica.
+    expected: Uncertain or consumed events stay ineligible; a fresh event uses a distinct resource allocation.
+- id: ACP-R017
+  group: one-use
+  title: Authenticated verifier result
+  requirement: The controller MUST authenticate the verifier result and its complete context, including
+    issuer, audience, agent, enrollment, policy, event, request, result, and expiry. A public success
+    bit MUST NOT authorize an action.
+  mitigations:
+  - SAF-M-77
+  test_id: ACP-V017
+  validation:
+    status: planned
+    procedure: Alter the issuer, audience, action context, expiry, or result of an inert verifier message.
+    expected: Every alteration is denied before dispatch; valid current context is accepted only by its
+      intended controller.
+- id: ACP-R018
+  group: one-use
+  title: Single execution
+  requirement: The controller MUST maintain durable execution state distinct from verification state and
+    use downstream idempotency or reconciliation before retrying an uncertain external action.
+  mitigations:
+  - SAF-M-77
+  test_id: ACP-V018
+  validation:
+    status: planned
+    procedure: Deliver an accepted verdict twice and interrupt the controller after the first external
+      effect.
+    expected: The effect occurs at most once, or remains blocked pending reconciliation; a retry never
+      guesses that execution failed.
+- id: ACP-R019
+  group: lifecycle
+  title: Protected policy changes
+  requirement: A policy version MUST be immutable once approved. Replacing it MUST require a new owner-authorized
+    event bound to the old and proposed versions; the agent may propose but not install changes.
+  mitigations:
+  - SAF-M-78
+  test_id: ACP-V019
+  validation:
+    status: planned
+    procedure: Use a tool, direct file write, and broker request to expand egress permission.
+    expected: Each path is denied without the protected version-specific approval; a properly approved
+      successor is auditable.
+- id: ACP-R020
+  group: lifecycle
+  title: Revocation and rollback resistance
+  requirement: The controller MUST reject revoked owners, agents, delegations, enrollments, and superseded
+    policy versions, including after restart and replica recovery.
+  mitigations:
+  - SAF-M-78
+  test_id: ACP-V020
+  validation:
+    status: planned
+    procedure: Replay a valid historical grant after revocation and restore an old policy snapshot.
+    expected: Historical authority remains invalid; independent state identifies the current accepted
+      epoch.
+- id: ACP-R021
+  group: lifecycle
+  title: Updates and recovery
+  requirement: Updates, administrative recovery, emergency access, and verifier replacement MUST preserve
+    owner approval and containment; a software digest alone MUST NOT count as execution attestation.
+  mitigations:
+  - SAF-M-78
+  test_id: ACP-V021
+  validation:
+    status: planned
+    procedure: Attempt recovery or a downgraded update using runtime-held credentials and an unapproved
+      binary with a published digest.
+    expected: Neither creates authority; approved maintenance preserves the running policy binding and
+      leaves a reviewable record.
+- id: ACP-R022
+  group: operations
+  title: Independent stop
+  requirement: Authorized operators MUST be able to pause execution and revoke external authority through
+    a path unavailable to the agent.
+  mitigations:
+  - SAF-M-81
+  test_id: ACP-V022
+  validation:
+    status: planned
+    procedure: Suspend an agent that continues submitting requests from active children.
+    expected: New external effects stop across the execution tree while audit and recovery access remain
+      available to operators.
+- id: ACP-R023
+  group: delegation
+  title: Distinct machine identity
+  requirement: Agent actions MUST identify the agent and its delegating owner separately; routine machine
+    requests MUST NOT be recorded as fresh personal owner approvals.
+  mitigations:
+  - SAF-M-80
+  test_id: ACP-V023
+  validation:
+    status: planned
+    procedure: Perform the same allowed action by the owner directly and by an authorized agent.
+    expected: Service and broker records distinguish both principals and identify the delegation used.
+- id: ACP-R024
+  group: delegation
+  title: Scoped and expiring delegation
+  requirement: Delegations MUST bind the owner, agent, audience, permitted operation and resources, policy
+    version, expiry, and revocation state; they MUST exclude owner-policy-change authority.
+  mitigations:
+  - SAF-M-80
+  test_id: ACP-V024
+  validation:
+    status: planned
+    procedure: Reuse an ordinary task delegation to alter policy or access another service after expiry.
+    expected: Both attempts are denied; a current in-scope task remains allowed.
+- id: ACP-R025
+  group: delegation
+  title: Receiver-enforced binding
+  requirement: Every downstream hop MUST validate the initiating principal, resource, and delegated scope;
+    forwarding an accepted proof or credential MUST NOT transfer owner authority to another session or
+    audience.
+  mitigations:
+  - SAF-M-80
+  test_id: ACP-V025
+  validation:
+    status: planned
+    procedure: Forward a current request or proof through an unapproved proxy or to another relying service.
+    expected: The new hop or context cannot authorize the substituted action, even when the credential
+      remains secret.
+- id: ACP-R026
+  group: delegation
+  title: Subdelegation ceiling
+  requirement: An agent-created worker MUST receive an equal or smaller authority set, never the owner
+    approval capability; its lineage and revocation dependency MUST be recorded.
+  mitigations:
+  - SAF-M-80
+  test_id: ACP-V026
+  validation:
+    status: planned
+    procedure: Request a child delegation with one extra resource and revoke the parent during a child
+      task.
+    expected: Expansion is rejected and the child loses external authority when the parent delegation
+      is revoked.
+- id: ACP-R027
+  group: operations
+  title: Independent audit
+  requirement: The audit service MUST record allocation, claim, validation, authorization, execution,
+    denial, revocation, and policy changes outside agent control while excluding secrets and unnecessary
+    personal data.
+  mitigations:
+  - SAF-M-81
+  test_id: ACP-V027
+  validation:
+    status: planned
+    procedure: Try to erase or forge an audit event from the runtime and inspect logs for synthetic private
+      material.
+    expected: Forgery or deletion is rejected or independently detectable; secret values are absent from
+      retained records.
+- id: ACP-R028
+  group: operations
+  title: Budgets and fail-closed behavior
+  requirement: Attempts, concurrency, compute, sampling, output, and retries MUST have enforceable budgets.
+    Failure of approval, ledger, clock policy, or audit dependencies MUST NOT create new external permission.
+  mitigations:
+  - SAF-M-81
+  test_id: ACP-V028
+  validation:
+    status: planned
+    procedure: Exhaust attempt capacity and interrupt a controller dependency while requesting a new external
+      action.
+    expected: The action is denied or safely deferred; bounded fresh recovery is possible without reopening
+      consumed events.
+- id: ACP-R029
+  group: operations
+  title: Side-channel scope
+  requirement: The threat model MUST inventory relevant timing, length, error, feedback, shared-resource,
+    sensor, and physical channels; it MUST distinguish evaluated channels from unmeasured ones.
+  mitigations:
+  - SAF-M-81
+  test_id: ACP-V029
+  validation:
+    status: planned
+    procedure: Measure the complete declared observer trace for synthetic credential classes and review
+      unmeasured physical access.
+    expected: The evidence states measured coverage and residual channels; missing evidence cannot be
+      reported as universal noninterference.
+- id: ACP-R030
+  group: lifecycle
+  title: Governed ownership and recovery
+  requirement: Ownership transfer and recovery MUST require designated organizational authority, revoke
+    replaced bindings, and support a documented human fallback without general agent bypass.
+  mitigations:
+  - SAF-M-78
+  test_id: ACP-V030
+  validation:
+    status: planned
+    procedure: Replace a departed administrator and attempt access with the former enrollment and an emergency
+      agent flag.
+    expected: Old authority and agent-authored emergency flags are rejected; the approved successor remains
+      identifiable.
+- id: ACP-R031
+  group: proof-privacy
+  title: Fresh private masking resources
+  requirement: An implementation claiming the supplied ENI6MA ideal transcript property MUST use the specified
+    fresh independent secret masks without reusing allocations; a public nonce is not a secret mask.
+  mitigations:
+  - SAF-M-82
+  test_id: ACP-V031
+  validation:
+    status: planned
+    procedure: Audit allocation across successful, rejected, aborted, and restored events using synthetic
+      mask identifiers.
+    expected: Every required position has a fresh allocation and retired allocations cannot return; this
+      inventory alone is not proof of randomness quality.
+- id: ACP-R032
+  group: proof-privacy
+  title: Complete observation declaration
+  requirement: The privacy claim MUST name all information visible to the agent, including challenges,
+    responses, timing, errors, acceptance feedback, recovery, and correlated sensors.
+  mitigations:
+  - SAF-M-82
+  test_id: ACP-V032
+  validation:
+    status: planned
+    procedure: Compare the implemented logging and sensor inventory against the declared privacy experiment.
+    expected: Any additional observable requires analysis or exclusion from the claim; honest-session
+      privacy cannot silently cover an active guessing oracle.
+- id: ACP-R033
+  group: proof-privacy
+  title: Protected verification state
+  requirement: Private naming maps, legends, raw inputs, masks, enrolled references, and reconstructed
+    credentials MUST remain outside agent-controlled memory, tools, logs, and interfaces.
+  mitigations:
+  - SAF-M-82
+  test_id: ACP-V033
+  validation:
+    status: planned
+    procedure: Attempt synthetic secret reads from each runtime-visible storage and debug surface.
+    expected: No private verifier or approval value becomes visible; the intended verifier retains only
+      its authorized processing access.
+- id: ACP-R034
+  group: proof-privacy
+  title: Separate security properties
+  requirement: Deployment claims MUST distinguish transcript privacy, knowledge verification, enrolled
+    identity attribution, action authorization, result authenticity, replay resistance, and runtime confinement.
+  mitigations:
+  - SAF-M-82
+  test_id: ACP-V034
+  validation:
+    status: planned
+    procedure: Review the claim-to-evidence matrix and attempt a live relay without recovering any credential.
+    expected: Privacy is not treated as a relay or isolation proof; each required property has its own
+      conditions and evaluation record.
+attack_items:
+- id: ACP-A001
+  group: isolation
+  title: Unbrokered server control channel
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1903
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0011
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R001
+  - ACP-R002
+  - ACP-R003
+  - ACP-R004
+  mitigations:
+  - SAF-M-75
+  preconditions: A malicious local MCP server or child has an ambient network path.
+  procedure: The server opens a separate operator channel that receives inert commands and returns test
+    status without broker approval.
+  observables: Runtime process lineage plus an external connection with no matching broker execution receipt.
+  false_positives: A registered broker health check can resemble a callback; correlate the originating
+    process and permission.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V001
+  - ACP-V002
+  - ACP-V003
+  - ACP-V004
+  mitre_attack: []
+- id: ACP-A002
+  group: isolation
+  title: Inherited host-management channel
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1303
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  - code-agent
+  requirements:
+  - ACP-R001
+  - ACP-R003
+  - ACP-R004
+  mitigations:
+  - SAF-M-75
+  preconditions: A tool process inherits a host-management socket or privileged mount.
+  procedure: An inert server-exec request reaches a host-side capability beyond the intended sandbox.
+  observables: Inherited descriptor or mount inventory; process execution outside the approved isolation
+    identity.
+  false_positives: An authorized maintenance process is not an escape; distinguish the agent execution
+    tree.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V001
+  - ACP-V003
+  - ACP-V004
+  mitre_attack:
+  - id: T1611
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A003
+  group: isolation
+  title: Delegate with a larger capability ceiling
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R003
+  - ACP-R024
+  - ACP-R026
+  mitigations:
+  - SAF-M-75
+  - SAF-M-80
+  preconditions: A worker launcher can issue authority beyond the initiating task.
+  procedure: The agent asks a deputy to create a worker with a resource permission absent from its own
+    delegation.
+  observables: Parent and child delegation scopes, issuer, owner approval, and worker launch event.
+  false_positives: A separately approved administrator-created worker may legitimately have a different
+    scope.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V003
+  - ACP-V024
+  - ACP-V026
+  mitre_attack: []
+- id: ACP-A004
+  group: isolation
+  title: Background diagnostic disclosure
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1910
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0010
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R002
+  - ACP-R004
+  - ACP-R008
+  - ACP-R027
+  mitigations:
+  - SAF-M-75
+  - SAF-M-79
+  - SAF-M-81
+  preconditions: Crash reporting or telemetry can read agent context and send outside the broker.
+  procedure: An inert confidential marker is carried in a diagnostic request to an unapproved local test
+    sink.
+  observables: Diagnostic upload destination, data classification, runtime origin, and missing release
+    decision.
+  false_positives: A minimal approved crash report may be legitimate; field content and recipient determine
+    the distinction.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V002
+  - ACP-V004
+  - ACP-V008
+  - ACP-V027
+  mitre_attack:
+  - id: T1567
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A005
+  group: broker
+  title: Broker destination substitution
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1307
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R005
+  - ACP-R007
+  - ACP-R012
+  mitigations:
+  - SAF-M-76
+  - SAF-M-79
+  preconditions: The broker accepts agent-selected URLs, redirect destinations, or resource aliases.
+  procedure: A permitted resource request is redirected to a different local test service that the initiating
+    agent cannot access.
+  observables: Requested resource, resolved addresses, redirect chain, effective service identity, and
+    authorization decision.
+  false_positives: Routine address changes are not automatically malicious; approval must cover the actual
+    resolved service.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V005
+  - ACP-V007
+  - ACP-V012
+  mitre_attack: []
+- id: ACP-A006
+  group: broker
+  title: Secret carried in a permitted tool argument
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1911
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0010
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R005
+  - ACP-R007
+  - ACP-R008
+  - ACP-R009
+  mitigations:
+  - SAF-M-79
+  preconditions: The agent knows protected data and can choose outbound argument values.
+  procedure: A synthetic secret marker is placed in an otherwise valid tool argument sent to an unauthorized
+    test recipient.
+  observables: Argument classification, intended recipient, actual recipient, request approval, and sink
+    receipt.
+  false_positives: The same field may legitimately contain public text; test data classification and authorized
+    purpose.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V005
+  - ACP-V007
+  - ACP-V008
+  - ACP-V009
+  mitre_attack:
+  - id: T1567
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A007
+  group: broker
+  title: Context forwarded to an outside model
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1914
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0010
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R004
+  - ACP-R008
+  - ACP-R009
+  mitigations:
+  - SAF-M-75
+  - SAF-M-79
+  preconditions: A source tool returns confidential records and a distinct remote inference tool can transmit
+    them.
+  procedure: The agent forwards source-tool context to the outside model without an authorized disclosure
+    for that recipient.
+  observables: Source record IDs, downstream model destination, request lineage, and disclosure authorization.
+  false_positives: An explicitly approved remote inference workload is a permitted disclosure, not evidence
+    of theft.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V004
+  - ACP-V008
+  - ACP-V009
+  mitre_attack:
+  - id: T1567
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A008
+  group: broker
+  title: Covert content in an approved report
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1902
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0010
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R008
+  - ACP-R009
+  - ACP-R029
+  mitigations:
+  - SAF-M-79
+  - SAF-M-81
+  preconditions: An agent may return arbitrary text or rendered content to a recipient who should not
+    receive its private context.
+  procedure: An inert marker is encoded in a report or rendering callback that reaches an unapproved local
+    receiver.
+  observables: Output recipient, render-initiated requests, content scope, output size, and release receipt.
+  false_positives: Legitimate formatting and encoded public data are lookalikes; semantic filters alone
+    cannot establish absence.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V008
+  - ACP-V009
+  - ACP-V029
+  mitre_attack:
+  - id: T1567
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A009
+  group: owner-approval
+  title: Counterfeit owner approval interface
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: related_context
+    rationale: Counterfeit GUI capture is a conventional input-capture behavior; SAF-T1302 covers the
+      adjacent misuse of the resulting owner authority.
+  tactics:
+  - ATK-TA0006
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R010
+  - ACP-R011
+  - ACP-R013
+  mitigations:
+  - SAF-M-76
+  preconditions: The agent can display a form resembling the protected approval interface.
+  procedure: A mock form collects synthetic owner input or claims that its local button is authoritative.
+  observables: UI origin and protected-path provenance; owner-authenticator events; absence of a genuine
+    approval receipt.
+  false_positives: A non-authoritative preview is legitimate only if it cannot collect secrets or produce
+    authority.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V010
+  - ACP-V011
+  - ACP-V013
+  mitre_attack:
+  - id: T1056.002
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A010
+  group: owner-approval
+  title: Owner input captured before protection
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1505
+    relationship: related_context
+    rationale: Keylogging is distinct from the live-state extraction contract of SAF-T1505; this join
+      supplies credential-boundary context only.
+  tactics:
+  - ATK-TA0006
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R006
+  - ACP-R011
+  - ACP-R033
+  mitigations:
+  - SAF-M-76
+  - SAF-M-79
+  - SAF-M-82
+  preconditions: The approval keyboard, screen, accessibility path, or input buffer is visible to the
+    runtime.
+  procedure: An inert capture probe obtains synthetic private input before it is transformed into a released
+    response.
+  observables: Input-device permissions, screen-capture access, process memory access, and synthetic canary
+    exposure.
+  false_positives: Approved accessibility support belongs inside the protected boundary; ordinary agent
+    automation does not.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V006
+  - ACP-V011
+  - ACP-V033
+  mitre_attack:
+  - id: T1056.001
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A011
+  group: owner-approval
+  title: Agent-authored approval assertion
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R010
+  - ACP-R012
+  - ACP-R013
+  mitigations:
+  - SAF-M-76
+  preconditions: A privileged deputy accepts model text or caller-supplied approval fields.
+  procedure: An inert request asserts that the owner approved a policy change although no protected approval
+    occurred.
+  observables: Approval issuer, protected ceremony receipt, request context, and attempted privileged
+    dispatch.
+  false_positives: An agent may relay an authentic receipt; authenticity must be independently established.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V010
+  - ACP-V012
+  - ACP-V013
+  mitre_attack: []
+- id: ACP-A012
+  group: owner-approval
+  title: Approved action replaced before dispatch
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R012
+  - ACP-R014
+  - ACP-R017
+  - ACP-R018
+  mitigations:
+  - SAF-M-76
+  - SAF-M-77
+  preconditions: The approved display and executed request are not bound to the same immutable values.
+  procedure: After a benign local approval, the recipient or operation is changed before broker dispatch.
+  observables: Approved context digest, dispatched context digest, approver identity, and external action
+    receipt.
+  false_positives: A change requested by the owner is legitimate only with a fresh matching approval.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V012
+  - ACP-V014
+  - ACP-V017
+  - ACP-V018
+  mitre_attack: []
+- id: ACP-A013
+  group: one-use
+  title: Recorded success reused for another request
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1404
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0005
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R014
+  - ACP-R017
+  - ACP-R018
+  - ACP-R025
+  mitigations:
+  - SAF-M-77
+  - SAF-M-80
+  preconditions: A prior verifier result can be substituted into a new request context.
+  procedure: The agent replays an inert success result under a different event, session, resource, or
+    relying service.
+  observables: Verdict provenance, event-to-context binding, consumer identity, expiry, and execution
+    history.
+  false_positives: Read-only retrieval of a prior result is not new authorization and must not execute
+    an action.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V014
+  - ACP-V017
+  - ACP-V018
+  - ACP-V025
+  mitre_attack: []
+- id: ACP-A014
+  group: one-use
+  title: Concurrent verification of one approval
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1706
+    relationship: related_context
+    rationale: SAF-T1706 is OAuth bearer replay. Concurrent one-use proof consumption is a different mechanism;
+      this is related context, not an OAuth claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R014
+  - ACP-R015
+  - ACP-R018
+  mitigations:
+  - SAF-M-77
+  preconditions: Multiple verifier or controller instances do not share atomic consumption state.
+  procedure: Two simultaneous inert submissions use the same event and attempt to produce two authorized
+    effects.
+  observables: One event identifier with multiple successful claim transitions or separate execution receipts.
+  false_positives: Duplicate delivery is common; it becomes a control failure only if eligibility or effects
+    are duplicated.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V014
+  - ACP-V015
+  - ACP-V018
+  mitre_attack:
+  - id: T1550.001
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A015
+  group: one-use
+  title: Consumed approval restored after a crash
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1706
+    relationship: related_context
+    rationale: SAF-T1706 is OAuth-specific. Restored approval state is an assessment scenario, not a newly
+      observed instance of that technique.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R016
+  - ACP-R018
+  - ACP-R020
+  - ACP-R031
+  mitigations:
+  - SAF-M-77
+  - SAF-M-78
+  - SAF-M-82
+  preconditions: Recovery can restore event eligibility or private allocations from a stale snapshot.
+  procedure: An already consumed inert approval is accepted after restoring a verifier or execution store.
+  observables: Recovery epoch, durable claim record, allocation identifier, and repeated execution receipt.
+  false_positives: Legitimate disaster recovery must preserve consumed state or deny uncertain events.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V016
+  - ACP-V018
+  - ACP-V020
+  - ACP-V031
+  mitre_attack: []
+- id: ACP-A016
+  group: one-use
+  title: Forged remote verifier acceptance
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1404
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0005
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R010
+  - ACP-R013
+  - ACP-R017
+  mitigations:
+  - SAF-M-76
+  - SAF-M-77
+  preconditions: The controller accepts an unsigned or misbound remote success message.
+  procedure: An inert substituted response claims acceptance from the wrong verifier or for the wrong
+    audience.
+  observables: Authenticated issuer and audience, complete bound context, result integrity check, and
+    dispatch decision.
+  false_positives: A transport retry from the same authenticated verifier still requires the original
+    binding and consumption checks.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V010
+  - ACP-V013
+  - ACP-V017
+  mitre_attack: []
+- id: ACP-A017
+  group: lifecycle
+  title: Self-modified containment policy
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T2103
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0040
+  domain_profiles:
+  - core
+  - mcp
+  - code-agent
+  requirements:
+  - ACP-R001
+  - ACP-R019
+  - ACP-R021
+  - ACP-R027
+  mitigations:
+  - SAF-M-75
+  - SAF-M-78
+  - SAF-M-81
+  preconditions: The coding or file agent can write configuration used by its enforcement boundary.
+  procedure: A harmless local policy fixture is edited to broaden its own egress or administrative permissions.
+  observables: Policy file change, parent version, approver event, executing policy fingerprint, and authoring
+    process.
+  false_positives: Authorized policy development may edit a proposal; activation is the privileged boundary.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V001
+  - ACP-V019
+  - ACP-V021
+  - ACP-V027
+  mitre_attack:
+  - id: T1686
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A018
+  group: lifecycle
+  title: Owner reference substituted in configuration
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1206
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0003
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R010
+  - ACP-R020
+  - ACP-R030
+  - ACP-R033
+  mitigations:
+  - SAF-M-76
+  - SAF-M-78
+  - SAF-M-82
+  preconditions: The agent can replace a persistent enrollment or credential reference consumed by the
+    controller.
+  procedure: An inert configuration substitutes an attacker-owned reference while preserving the visible
+    owner label.
+  observables: Enrollment identity, credential-reference change, owner transfer receipt, and current revocation
+    epoch.
+  false_positives: A legitimate ownership transfer requires independent approval and retirement of the
+    old binding.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V010
+  - ACP-V020
+  - ACP-V030
+  - ACP-V033
+  mitre_attack: []
+- id: ACP-A019
+  group: lifecycle
+  title: Update activates an older permissive controller
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1207
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0003
+  domain_profiles:
+  - core
+  - mcp
+  - code-agent
+  requirements:
+  - ACP-R019
+  - ACP-R020
+  - ACP-R021
+  mitigations:
+  - SAF-M-78
+  preconditions: The normal updater accepts an unapproved or obsolete enforcement version.
+  procedure: An inert update fixture retains an approved name while replacing the active controller with
+    an older policy interpretation.
+  observables: Update provenance, version floor, binary identity, running attestation, and policy migration
+    approval.
+  false_positives: An authorized rollback may be safe only if current security policy and revocation requirements
+    still hold.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V019
+  - ACP-V020
+  - ACP-V021
+  mitre_attack: []
+- id: ACP-A020
+  group: lifecycle
+  title: Recovery used as an owner-approval bypass
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R013
+  - ACP-R021
+  - ACP-R022
+  - ACP-R030
+  mitigations:
+  - SAF-M-76
+  - SAF-M-78
+  - SAF-M-81
+  preconditions: A recovery deputy trusts agent-reachable credentials or caller-declared emergencies.
+  procedure: An inert emergency request attempts to reset the owner binding and widen firewall access
+    without designated approvers.
+  observables: Recovery actor, designated approver set, scope change, revocation updates, and external
+    effects.
+  false_positives: An approved human fallback remains legitimate when it preserves the same authority
+    boundary.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V013
+  - ACP-V021
+  - ACP-V022
+  - ACP-V030
+  mitre_attack:
+  - id: T1686
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A021
+  group: delegation
+  title: Agent authority presented as personal owner approval
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1302
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R013
+  - ACP-R023
+  - ACP-R024
+  - ACP-R027
+  mitigations:
+  - SAF-M-76
+  - SAF-M-80
+  - SAF-M-81
+  preconditions: A downstream service equates routine agent credentials with unrestricted owner authority.
+  procedure: A task-scoped machine request is accepted as the owner personally approving a policy or payment
+    change.
+  observables: Owner and agent principals, delegation ID, operation, approval origin, and receiving service
+    decision.
+  false_positives: An agent may legitimately perform a delegated task; personal approval must remain separately
+    recorded.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V013
+  - ACP-V023
+  - ACP-V024
+  - ACP-V027
+  mitre_attack: []
+- id: ACP-A022
+  group: delegation
+  title: Delegation widened at the next service
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1308
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0004
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R024
+  - ACP-R025
+  - ACP-R026
+  mitigations:
+  - SAF-M-80
+  preconditions: A grant is not bound to its intended resource or operation at the next authorization
+    hop.
+  procedure: A benign task token is accepted for a different service or a broader permission set.
+  observables: Original grant audience and scope, exchanged claims, receiver validation, and requested
+    operation.
+  false_positives: Intentional reauthorization is legitimate only when issued by an authorized principal
+    for the new context.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V024
+  - ACP-V025
+  - ACP-V026
+  mitre_attack:
+  - id: T1550.001
+    relationship: analogous
+    scope: Conventional behavior or enabling context; not a claim of equivalence, observed exploitation,
+      or MITRE endorsement.
+- id: ACP-A023
+  group: delegation
+  title: Live approval relayed through the wrong endpoint
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1407
+    relationship: related_context
+    rationale: A live owner-proof relay is not necessarily an MCP proxy masquerade. Endpoint and authority
+      confusion are the related boundary.
+  tactics:
+  - ATK-TA0005
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R011
+  - ACP-R012
+  - ACP-R017
+  - ACP-R025
+  - ACP-R034
+  mitigations:
+  - SAF-M-76
+  - SAF-M-77
+  - SAF-M-80
+  - SAF-M-82
+  preconditions: A proxy can forward current owner responses without the protected UI binding the real
+    recipient and action.
+  procedure: The local relay forwards a fresh inert approval to an unintended relying service without
+    recovering the secret.
+  observables: Displayed relying service, authenticated verifier, session origin, relay endpoint, and
+    result audience.
+  false_positives: Authorized proxies require explicit hop binding; secret non-disclosure alone does not
+    distinguish them.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V011
+  - ACP-V012
+  - ACP-V017
+  - ACP-V025
+  - ACP-V034
+  mitre_attack: []
+- id: ACP-A024
+  group: operations
+  title: Approval pressure through repeated requests
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1403
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0005
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R012
+  - ACP-R013
+  - ACP-R022
+  - ACP-R028
+  mitigations:
+  - SAF-M-76
+  - SAF-M-81
+  preconditions: The agent can repeatedly request substantially equivalent owner approvals.
+  procedure: A synthetic request sequence pressures an operator to accept a broadened permission to stop
+    the interruptions.
+  observables: Equivalent-context request counts, deny history, cooldowns, actual approvals, and independent
+    stop availability.
+  false_positives: Legitimate retries must be distinguished from escalation or consent pressure using
+    context and budget.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V012
+  - ACP-V013
+  - ACP-V022
+  - ACP-V028
+  mitre_attack: []
+- id: ACP-A025
+  group: operations
+  title: One-use attempts exhausted to force fail-open recovery
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T2102
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0040
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R014
+  - ACP-R015
+  - ACP-R016
+  - ACP-R022
+  - ACP-R028
+  mitigations:
+  - SAF-M-77
+  - SAF-M-81
+  preconditions: An attacker can flood allocation or consume another party's event attempts.
+  procedure: A bounded local test exhausts attempt capacity and then requests a fallback that bypasses
+    owner verification.
+  observables: Authenticated allocator, tenant quotas, claim denial reasons, recovery policy, and any
+    effects during outage.
+  false_positives: Ordinary load and network retransmissions can exhaust capacity; containment must hold
+    regardless of intent.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V014
+  - ACP-V015
+  - ACP-V016
+  - ACP-V022
+  - ACP-V028
+  mitre_attack: []
+- id: ACP-A026
+  group: operations
+  title: Agent removes containment audit configuration
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T2103
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0040
+  domain_profiles:
+  - core
+  - mcp
+  - code-agent
+  requirements:
+  - ACP-R001
+  - ACP-R019
+  - ACP-R027
+  - ACP-R028
+  mitigations:
+  - SAF-M-75
+  - SAF-M-78
+  - SAF-M-81
+  preconditions: Agent-visible configuration controls the only audit or enforcement record.
+  procedure: An inert code change disables the audit sink before a protected-operation request.
+  observables: Audit configuration mutation, independent heartbeat, policy activation record, and unexplained
+    event gaps.
+  false_positives: A planned maintenance window requires independent approval and a protected alternate
+    audit path.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V001
+  - ACP-V019
+  - ACP-V027
+  - ACP-V028
+  mitre_attack: []
+- id: ACP-A027
+  group: proof-privacy
+  title: Retired mask allocation returned to service
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1207
+    relationship: related_context
+    rationale: SAF-T1207 concerns a hijacked normal update path; private-mask allocation rollback is a
+      separate design scenario with a related lifecycle boundary.
+  tactics:
+  - ATK-TA0006
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R016
+  - ACP-R020
+  - ACP-R031
+  - ACP-R032
+  mitigations:
+  - SAF-M-77
+  - SAF-M-78
+  - SAF-M-82
+  preconditions: A protected approval implementation uses one-use secret masks but provisioning or recovery
+    can replay their allocation state.
+  procedure: A local provisioning rollback fixture makes a retired allocation eligible for another credential-dependent
+    exchange.
+  observables: Allocation identifiers, claim history, restored epoch, and duplicate resource assignment
+    across events.
+  false_positives: Repeated numeric mask values from independent samples are not reuse; allocation identity
+    and joint distribution matter.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V016
+  - ACP-V020
+  - ACP-V031
+  - ACP-V032
+  mitre_attack: []
+- id: ACP-A028
+  group: proof-privacy
+  title: Private approval legend or decoding state exposed
+  evidence_status: design_scenario
+  saf_mappings:
+  - technique_id: SAF-T1505
+    relationship: procedure_example
+    rationale: A bounded deployment example of the registered mechanism; no new incident or evidence-status
+      claim.
+  tactics:
+  - ATK-TA0006
+  domain_profiles:
+  - core
+  - mcp
+  requirements:
+  - ACP-R006
+  - ACP-R011
+  - ACP-R029
+  - ACP-R032
+  - ACP-R033
+  - ACP-R034
+  mitigations:
+  - SAF-M-76
+  - SAF-M-79
+  - SAF-M-81
+  - SAF-M-82
+  preconditions: The runtime can inspect verifier memory, private legends, debugging output, or correlated
+    observation channels.
+  procedure: An inert probe reads synthetic private decoding material even though released authentication
+    responses remain masked.
+  observables: Secret-state access, logger configuration, protected display provenance, and canary exposure.
+  false_positives: The authorized verifier intentionally processes private state; the discriminator is
+    access by an unauthorized observer.
+  detection_maturity: proposed
+  test_status: planned
+  acceptance_tests:
+  - ACP-V006
+  - ACP-V011
+  - ACP-V029
+  - ACP-V032
+  - ACP-V033
+  - ACP-V034
+  mitre_attack: []

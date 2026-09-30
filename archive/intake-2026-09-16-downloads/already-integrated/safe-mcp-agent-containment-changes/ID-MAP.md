@@ -1,0 +1,146 @@
+# SAF Identifier Map
+
+The **Secure Agentic Framework (SAF)** uses the `SAF-` prefix for all framework identifiers.
+
+**Rules:** Technique IDs use `SAF-T<id>`, and mitigation IDs use `SAF-M-<id>`.
+
+## Techniques
+
+| Technique ID |
+| ------------ |
+| SAF-T1001 |
+| SAF-T1002 |
+| SAF-T1003 |
+| SAF-T1004 |
+| SAF-T1005 |
+| SAF-T1006 |
+| SAF-T1007 |
+| SAF-T1008 |
+| SAF-T1009 |
+| SAF-T1101 |
+| SAF-T1102 |
+| SAF-T1103 |
+| SAF-T1104 |
+| SAF-T1105 |
+| SAF-T1106 |
+| SAF-T1109 |
+| SAF-T1110 |
+| SAF-T1111 |
+| SAF-T1112 |
+| SAF-T1201 |
+| SAF-T1202 |
+| SAF-T1203 |
+| SAF-T1204 |
+| SAF-T1205 |
+| SAF-T1301 |
+| SAF-T1302 |
+| SAF-T1303 |
+| SAF-T1304 |
+| SAF-T1305 |
+| SAF-T1306 |
+| SAF-T1307 |
+| SAF-T1308 |
+| SAF-T1309 |
+| SAF-T1401 |
+| SAF-T1402 |
+| SAF-T1403 |
+| SAF-T1404 |
+| SAF-T1407 |
+| SAF-T1408 |
+| SAF-T1501 |
+| SAF-T1502 |
+| SAF-T1503 |
+| SAF-T1504 |
+| SAF-T1505 |
+| SAF-T1507 |
+| SAF-T1601 |
+| SAF-T1602 |
+| SAF-T1603 |
+| SAF-T1604 |
+| SAF-T1605 |
+| SAF-T1606 |
+| SAF-T1701 |
+| SAF-T1702 |
+| SAF-T1703 |
+| SAF-T1704 |
+| SAF-T1705 |
+| SAF-T1706 |
+| SAF-T1707 |
+| SAF-T1801 |
+| SAF-T1803 |
+| SAF-T1804 |
+| SAF-T1904 |
+| SAF-T1910 |
+| SAF-T1911 |
+| SAF-T1912 |
+| SAF-T1915 |
+| SAF-T2101 |
+| SAF-T2102 |
+| SAF-T2103 |
+| SAF-T2105 |
+| SAF-T2106 |
+| SAF-T2107 |
+| SAF-T3001 |
+
+## Mitigations
+
+| Mitigation ID |
+| ------------- |
+| SAF-M-1 |
+| SAF-M-2 |
+| SAF-M-3 |
+| SAF-M-4 |
+| SAF-M-5 |
+| SAF-M-6 |
+| SAF-M-7 |
+| SAF-M-8 |
+| SAF-M-9 |
+| SAF-M-10 |
+| SAF-M-11 |
+| SAF-M-12 |
+| SAF-M-13 |
+| SAF-M-14 |
+| SAF-M-15 |
+| SAF-M-16 |
+| SAF-M-17 |
+| SAF-M-18 |
+| SAF-M-19 |
+| SAF-M-20 |
+| SAF-M-21 |
+| SAF-M-22 |
+| SAF-M-23 |
+| SAF-M-24 |
+| SAF-M-29 |
+| SAF-M-30 |
+| SAF-M-31 |
+| SAF-M-32 |
+| SAF-M-33 |
+| SAF-M-34 |
+| SAF-M-35 |
+| SAF-M-36 |
+| SAF-M-37 |
+| SAF-M-38 |
+| SAF-M-45 |
+| SAF-M-46 |
+| SAF-M-47 |
+| SAF-M-48 |
+| SAF-M-49 |
+| SAF-M-50 |
+| SAF-M-51 |
+| SAF-M-52 |
+| SAF-M-53 |
+| SAF-M-54 |
+| SAF-M-63 |
+| SAF-M-69 |
+| SAF-M-70 |
+| SAF-M-71 |
+| SAF-M-72 |
+| SAF-M-73 |
+| SAF-M-75 |
+| SAF-M-76 |
+| SAF-M-77 |
+| SAF-M-78 |
+| SAF-M-79 |
+| SAF-M-80 |
+| SAF-M-81 |
+| SAF-M-82 |
