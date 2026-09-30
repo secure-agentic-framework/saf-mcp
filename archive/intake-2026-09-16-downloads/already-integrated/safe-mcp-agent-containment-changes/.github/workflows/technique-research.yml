@@ -1,0 +1,60 @@
+name: Validate technique research
+
+on:
+  pull_request:
+    paths:
+      - "techniques/**"
+      - "detections/**"
+      - "mitigations/**"
+      - "MITIGATIONS.md"
+      - "research/**"
+      - "profiles/agent-containment/**"
+      - "scripts/*containment*.py"
+      - "scripts/*detection*.py"
+      - "scripts/*mitigation*.py"
+      - "scripts/*technique*.py"
+      - "scripts/*framework*.py"
+      - "scripts/generate-technique-catalog.py"
+      - ".agents/skills/author-saf-technique/**"
+      - "requirements-dev.txt"
+      - ".github/workflows/technique-research.yml"
+  push:
+    branches: [main]
+    paths:
+      - "techniques/**"
+      - "detections/**"
+      - "mitigations/**"
+      - "MITIGATIONS.md"
+      - "research/**"
+      - "profiles/agent-containment/**"
+      - "scripts/*containment*.py"
+      - "scripts/*detection*.py"
+      - "scripts/*mitigation*.py"
+      - "scripts/*technique*.py"
+      - "scripts/*framework*.py"
+      - "scripts/generate-technique-catalog.py"
+      - ".agents/skills/author-saf-technique/**"
+      - "requirements-dev.txt"
+      - ".github/workflows/technique-research.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python3 -m pip install -r requirements-dev.txt
+      - run: python3 -m unittest discover -s scripts -p "test_*.py"
+      - run: python3 scripts/validate-technique-research.py --all
+      - run: python3 scripts/validate-framework-model.py
+      - run: python3 scripts/generate-technique-catalog.py --check
+      - run: python3 scripts/validate-detection-registry.py
+      - run: python3 scripts/generate-detection-coverage.py --check
+      - run: python3 scripts/generate-mitigation-catalog.py --check
+      - run: python3 scripts/validate-containment-profile.py
+      - run: python3 scripts/generate-containment-profile.py --check

@@ -29,6 +29,14 @@ The Secure Agentic Framework (SAF) documents adversary behavior in agentic syste
 3. **Compliance Officers**: Map SAF-MCP techniques to your existing security controls via MITRE ATT&CK linkages
 4. **Red Teams**: Reference attack techniques for security testing of MCP deployments
 
+## Deployment Requirement Profiles
+
+The [Agent Containment and Owner Authorization profile](profiles/agent-containment/README.md)
+adds 28 contextual attack-assessment items, 34 traceable requirements, eight proposed
+mitigations, and a deployment acceptance plan. It maps to existing SAF techniques
+and domain profiles without introducing duplicate technique IDs. Repository checks
+validate the package; runtime tests and production effectiveness remain unevaluated.
+
 ## TTP Reference Table
 
 The generated catalog below is the public projection of the canonical Framework Model v2 registry.

@@ -86,9 +86,21 @@ This generated inventory lists the mitigation documents that exist in the reposi
 | [SAF-M-72](mitigations/SAF-M-72/README.md) | Data Security - Data Loss Prevention on Tool Outputs |
 | [SAF-M-73](mitigations/SAF-M-73/README.md) | Sampling Budget and Iteration Caps |
 | [SAF-M-74](mitigations/SAF-M-74/README.md) | Per-Invocation Capability Brokering |
+| [SAF-M-75](mitigations/SAF-M-75/README.md) | Broker-Only Egress and Descendant Containment |
+| [SAF-M-76](mitigations/SAF-M-76/README.md) | Protected Owner Approval Path |
+| [SAF-M-77](mitigations/SAF-M-77/README.md) | Durable Single-Use Action Authorization |
+| [SAF-M-78](mitigations/SAF-M-78/README.md) | Enrollment and Policy Lifecycle Integrity |
+| [SAF-M-79](mitigations/SAF-M-79/README.md) | Disclosure-Bounded Tool Brokering |
+| [SAF-M-80](mitigations/SAF-M-80/README.md) | Owner-Separated Agent Delegation |
+| [SAF-M-81](mitigations/SAF-M-81/README.md) | Fail-Closed Containment Operations |
+| [SAF-M-82](mitigations/SAF-M-82/README.md) | Protected Approval Secret Handling |
 
-**Total mitigation documents:** 51
+**Total mitigation documents:** 59
 <!-- END GENERATED SAF MITIGATION CATALOG -->
+
+## Agent Containment Control Set
+
+The [containment profile](profiles/agent-containment/README.md) groups SAF-M-75 through SAF-M-82 by enforcement boundary and maps them to contextual attack items and planned acceptance tests. These new proposals have no measured effectiveness rating.
 
 ## Implementation Guidance
 

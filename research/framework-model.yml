@@ -483,6 +483,7 @@ techniques:
   - target: SAF-T1203
     type: alternative_to
   mitigations:
+  - SAF-M-78
   - SAF-M-6
   - SAF-M-9
   - SAF-M-12
@@ -1311,6 +1312,9 @@ techniques:
   - target: SAF-T1502
     type: related_to
   mitigations:
+  - SAF-M-76
+  - SAF-M-78
+  - SAF-M-82
   - SAF-M-6
   - SAF-M-12
   - SAF-M-14
@@ -1411,6 +1415,12 @@ techniques:
   - target: SAF-T1309
     type: replaces
   mitigations:
+  - SAF-M-75
+  - SAF-M-76
+  - SAF-M-77
+  - SAF-M-78
+  - SAF-M-80
+  - SAF-M-81
   - SAF-M-12
   - SAF-M-14
   - SAF-M-16
@@ -1505,6 +1515,7 @@ techniques:
   - target: SAF-T1302
     type: related_to
   mitigations:
+  - SAF-M-75
   - SAF-M-1
   - SAF-M-9
   - SAF-M-10
@@ -1644,6 +1655,8 @@ techniques:
   - target: SAF-T1707
     type: related_to
   mitigations:
+  - SAF-M-76
+  - SAF-M-79
   - SAF-M-12
   - SAF-M-13
   - SAF-M-16
@@ -1748,6 +1761,7 @@ techniques:
   - target: SAF-T1706
     type: related_to
   mitigations:
+  - SAF-M-80
   - SAF-M-12
   - SAF-M-13
   - SAF-M-16
@@ -1876,6 +1890,8 @@ techniques:
   - target: SAF-T1307
     type: related_to
   mitigations:
+  - SAF-M-76
+  - SAF-M-81
   - SAF-M-11
   - SAF-M-12
   - SAF-M-13
@@ -1965,6 +1981,9 @@ techniques:
   - target: SAF-T1407
     type: related_to
   mitigations:
+  - SAF-M-76
+  - SAF-M-77
+  - SAF-M-80
   - SAF-M-1
   - SAF-M-2
   - SAF-M-11
@@ -2305,6 +2324,10 @@ techniques:
   - target: SAF-T1911
     type: related_to
   mitigations:
+  - SAF-M-76
+  - SAF-M-79
+  - SAF-M-81
+  - SAF-M-82
   - SAF-M-9
   - SAF-M-12
   - SAF-M-16
@@ -3193,6 +3216,9 @@ techniques:
   - target: SAF-T1914
     type: has_specialization
   mitigations:
+  - SAF-M-75
+  - SAF-M-79
+  - SAF-M-81
   - SAF-M-12
   - SAF-M-16
   - SAF-M-22
@@ -3247,6 +3273,7 @@ techniques:
   - target: SAF-T1913
     type: related_to
   mitigations:
+  - SAF-M-79
   - SAF-M-12
   - SAF-M-14
   - SAF-M-16
@@ -3465,6 +3492,7 @@ techniques:
   - target: SAF-T1904
     type: related_to
   mitigations:
+  - SAF-M-75
   - SAF-M-6
   - SAF-M-9
   - SAF-M-12
@@ -3508,6 +3536,8 @@ techniques:
   - target: SAF-T2101
     type: related_to
   mitigations:
+  - SAF-M-77
+  - SAF-M-81
   - SAF-M-9
   - SAF-M-11
   - SAF-M-12
@@ -3633,6 +3663,9 @@ techniques:
   - target: SAF-T2101
     type: related_to
   mitigations:
+  - SAF-M-75
+  - SAF-M-78
+  - SAF-M-81
   - SAF-M-9
   - SAF-M-11
   - SAF-M-12
@@ -3961,6 +3994,8 @@ techniques:
   - target: SAF-T1913
     type: related_to
   mitigations:
+  - SAF-M-79
+  - SAF-M-81
   - SAF-M-4
   - SAF-M-5
   - SAF-M-7
@@ -4051,6 +4086,8 @@ techniques:
   - target: SAF-T1910
     type: specialization_of
   mitigations:
+  - SAF-M-75
+  - SAF-M-79
   - SAF-M-5
   - SAF-M-12
   - SAF-M-14

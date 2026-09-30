@@ -1,0 +1,30 @@
+version: 1
+author: Franciscus Dylan Rosario
+drafting_assistance: Codex
+date: '2026-09-16'
+narrative:
+  name: The-Machine-Behind-the-Door.md
+  sha256: fc1f023491fc0ff39770556be364614fc5b3e4bea252d648a99c327b08135426
+  role: User-authorized narrative input; transformed into original, implementation-neutral
+    repository requirements.
+construction_inputs:
+- name: The_End_of_Passwords_Rosario_Wang_ENI6MA.md
+  sha256: 4833511a1ccab8b05777b6cab9e2679aad384eab2c508816018b549532e79e3f
+  role: User-provided project manuscript; not independent deployment evidence. Source
+    bytes are not republished in this branch.
+- name: Rosario_Wang_ENI6MA_Compact_Proof_and_Worked_Example.md
+  sha256: 42f137ec1798cca7a2691748a10934c77383d20a399ac13878c628a16a4bc556
+  role: User-provided project manuscript; not independent deployment evidence. Source
+    bytes are not republished in this branch.
+- name: ENI6MA_JOC_Review.pdf
+  sha256: f73f00705dca95724f2de250c221c6bf9d66c598a85c140cbc7a3d30f4c7a1e2
+  role: User-provided project manuscript; not independent deployment evidence. Source
+    bytes are not republished in this branch.
+- name: ENI6MA_IEEE_TIT_Review.pdf
+  sha256: 7c864c89d9710a42ea994a6a8cd12211e122c22312e7d5800745c497d5271aa6
+  role: User-provided project manuscript; not independent deployment evidence. Source
+    bytes are not republished in this branch.
+external_sources: catalog.yml#sources
+publication_scope: Original contribution. General documentation follows CC BY 4.0;
+  new mitigations follow CSL 1.0; scripts follow Apache 2.0, per CONTRIBUTING.md.
+  No third-party source snapshots or manuscript code are included.

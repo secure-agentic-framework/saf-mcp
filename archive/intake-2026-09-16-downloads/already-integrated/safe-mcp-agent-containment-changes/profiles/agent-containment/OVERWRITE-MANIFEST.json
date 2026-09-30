@@ -1,0 +1,215 @@
+{
+  "format_version": 1,
+  "repository": "https://github.com/soltrinox/safe-mcp",
+  "base_commit": "d3d40297c478d2680d315399b6aaf317e5aa15b8",
+  "local_preparation_branch": "feat/agent-containment-owner-authorization",
+  "archive_layout": "Repository-relative paths; extract directly into the existing repository root.",
+  "apply_behavior": "Replace listed existing paths and add listed new paths; no merge or deletion.",
+  "new_files": 28,
+  "replaced_files": 5,
+  "total_files": 33,
+  "files": [
+    {
+      "path": ".github/workflows/technique-research.yml",
+      "operation": "replace",
+      "bytes": 1971,
+      "sha256": "be9f60de94030b8ec3aae3f81db9914139a226df74fa5c42fd96829f44097061",
+      "base_sha256": "6f57f68487e7cf8a6230c5a1fc430fea38d1ddccf1088a7728283ec6b1f77503"
+    },
+    {
+      "path": "ID-MAP.md",
+      "operation": "replace",
+      "bytes": 2065,
+      "sha256": "db7695f38a7a9ce3c7e3ca34756e6af0c420d08b5d1a9ecad08b6a206d3dc7c2",
+      "base_sha256": "fde94e920a24015c7e4e12cb130e1b49d3f7ace1ed55f6c43d4e0513f3aae5a0"
+    },
+    {
+      "path": "MITIGATIONS.md",
+      "operation": "replace",
+      "bytes": 9072,
+      "sha256": "5c9f6e74fa7c2d562212792e048871bde772b167faa286765d6c06fe3e701f13",
+      "base_sha256": "e1ba258105f59a3cdae6efb8a22966040d4681a4306111e54b4be35b5a2db586"
+    },
+    {
+      "path": "README.md",
+      "operation": "replace",
+      "bytes": 39315,
+      "sha256": "f020ee1d1404d8b55ad084d361695fa17adb2a3f32dc8ea05db20b557f6eabe7",
+      "base_sha256": "c6fffa64dd58a8592ef6c3f97a3fac738bbadbd7944cd8930a6c004156cc85e9"
+    },
+    {
+      "path": "mitigations/SAF-M-75/README.md",
+      "operation": "add",
+      "bytes": 7449,
+      "sha256": "f08013938cae37d5d968fa99c50ada0b3a460a2598870f780641bd04d1440c53"
+    },
+    {
+      "path": "mitigations/SAF-M-76/README.md",
+      "operation": "add",
+      "bytes": 7728,
+      "sha256": "d751d0489642de2d3176ff52a94a52ceb207012cd8329908d1010b397954c7c1"
+    },
+    {
+      "path": "mitigations/SAF-M-77/README.md",
+      "operation": "add",
+      "bytes": 7646,
+      "sha256": "efe46cb4df09cf6e7bcbe650334e92f237a37f6e1974651f15bd8308da050275"
+    },
+    {
+      "path": "mitigations/SAF-M-78/README.md",
+      "operation": "add",
+      "bytes": 7319,
+      "sha256": "adbe937e3b00c15f52d8dff104f693b38141144ff95b36f938d8b65e4ddef5a6"
+    },
+    {
+      "path": "mitigations/SAF-M-79/README.md",
+      "operation": "add",
+      "bytes": 7761,
+      "sha256": "5498eb8fa97dde9e384a28ad2b26249663eddb9512892394de763c37aa144777"
+    },
+    {
+      "path": "mitigations/SAF-M-80/README.md",
+      "operation": "add",
+      "bytes": 7117,
+      "sha256": "a6119539454f3b17f5aee9759f967f5e7f219a07752f19ef52aac4531280dca5"
+    },
+    {
+      "path": "mitigations/SAF-M-81/README.md",
+      "operation": "add",
+      "bytes": 7630,
+      "sha256": "c2779814da9a200d4c0ca63c955960f7aad512af009f61fdad1d19ad8c1c538b"
+    },
+    {
+      "path": "mitigations/SAF-M-82/README.md",
+      "operation": "add",
+      "bytes": 7153,
+      "sha256": "862ebf146d176a6bcb7a2bc859527cfcc4efef052eb14b583fcd4744228dac0c"
+    },
+    {
+      "path": "profiles/agent-containment/APPLY.md",
+      "operation": "add",
+      "bytes": 2553,
+      "sha256": "52ceef48f4c2e222bcf39d92adec8bf055634dd3af90f7bfac67c92a6b2e6823"
+    },
+    {
+      "path": "profiles/agent-containment/ENI6MA.md",
+      "operation": "add",
+      "bytes": 6520,
+      "sha256": "dc22a4ff63f0e9f9faf98a7b97b5824ce5a367cde438d20b81213f5aaa8d05ab"
+    },
+    {
+      "path": "profiles/agent-containment/OVERWRITE-MANIFEST.json",
+      "operation": "add",
+      "hash_note": "Manifest intentionally does not contain its own hash or byte count."
+    },
+    {
+      "path": "profiles/agent-containment/README.md",
+      "operation": "add",
+      "bytes": 11165,
+      "sha256": "0ad9b881cdd1e13e56fc84c73008ab849ea137419d2a16e9e4677c1bf9c26d21"
+    },
+    {
+      "path": "profiles/agent-containment/SOURCES.md",
+      "operation": "add",
+      "bytes": 6321,
+      "sha256": "9a7a32f7843f56009fccad630edb6be7bf3aef852d92f21bedc88386db7f93c7"
+    },
+    {
+      "path": "profiles/agent-containment/VALIDATION-RESULTS.md",
+      "operation": "add",
+      "bytes": 2448,
+      "sha256": "a626b1a90b5e29e62b5478cebeeddebb5b12022330ca249ad1cbf9334a1f4d2a"
+    },
+    {
+      "path": "profiles/agent-containment/VALIDATION.md",
+      "operation": "add",
+      "bytes": 18332,
+      "sha256": "1f64cb3f37d469635d81b5c33251f78be47f288a9f060f080eb403da465cee5f"
+    },
+    {
+      "path": "profiles/agent-containment/catalog.yml",
+      "operation": "add",
+      "bytes": 65305,
+      "sha256": "971ad4ff62cf82e4b8a6a6613f7c8e6f6ddaecac603e5503ad00f234d5c32f87"
+    },
+    {
+      "path": "profiles/agent-containment/groups/broker.md",
+      "operation": "add",
+      "bytes": 7276,
+      "sha256": "d0e26fc77e20d0dcd1e722fb0087b501247b912647aaf16d397c49cd3ec4253f"
+    },
+    {
+      "path": "profiles/agent-containment/groups/delegation.md",
+      "operation": "add",
+      "bytes": 5723,
+      "sha256": "56894bc7fa8078b2e717ae2a18b24a371667623587b91dbff9fd487bdb28d4bd"
+    },
+    {
+      "path": "profiles/agent-containment/groups/isolation.md",
+      "operation": "add",
+      "bytes": 6653,
+      "sha256": "3e0105885e77fe55705241cad1c192556f8130d6df452e4bad91496b057dedb4"
+    },
+    {
+      "path": "profiles/agent-containment/groups/lifecycle.md",
+      "operation": "add",
+      "bytes": 7052,
+      "sha256": "79931ef65a8177c2831975cdf53fbb5f2a8f2a5a3511db2e7a32aab0b62dc3d8"
+    },
+    {
+      "path": "profiles/agent-containment/groups/one-use.md",
+      "operation": "add",
+      "bytes": 7035,
+      "sha256": "8b399fa7002edf0581198f62f643a13ee6f16707bacfc653008bc11c0aa73ed3"
+    },
+    {
+      "path": "profiles/agent-containment/groups/operations.md",
+      "operation": "add",
+      "bytes": 5354,
+      "sha256": "1374aa5df355c081ffe419fec99ececc35ee7363b77e95746ea019fd41aa5b15"
+    },
+    {
+      "path": "profiles/agent-containment/groups/owner-approval.md",
+      "operation": "add",
+      "bytes": 6787,
+      "sha256": "1857d422a8b504b7f3036f481953d3e738601272aee3b8290452fb1069ccdfe7"
+    },
+    {
+      "path": "profiles/agent-containment/groups/proof-privacy.md",
+      "operation": "add",
+      "bytes": 4520,
+      "sha256": "759f000186bf5475969ed0310fdd7623db0823e0fde74c4db5445b432e66743a"
+    },
+    {
+      "path": "profiles/agent-containment/provenance.yml",
+      "operation": "add",
+      "bytes": 1635,
+      "sha256": "515134ea3353c6c70f8a76c4e7839866f524c53c668fdc30511c95afac9e8e73"
+    },
+    {
+      "path": "research/framework-model.yml",
+      "operation": "replace",
+      "bytes": 123270,
+      "sha256": "a8e900e6467e80c6d1ca52ef69f4f89ed105e8d5e610fb686a6c67fafdf308dc",
+      "base_sha256": "863de1341ef0fc1d2c896937fd8e6d7f4362d3d5ef1ed06ce7620535d6ea872b"
+    },
+    {
+      "path": "scripts/generate-containment-profile.py",
+      "operation": "add",
+      "bytes": 11585,
+      "sha256": "a98fe7790dcb92bd9bf4cc54c0286d7b0914b0ec6843adabb24205d4898ead01"
+    },
+    {
+      "path": "scripts/test_containment_profile.py",
+      "operation": "add",
+      "bytes": 4307,
+      "sha256": "244b3394ab3a286890303f1a320919305e52614f08c9796c7cfb1c0e6388ba26"
+    },
+    {
+      "path": "scripts/validate-containment-profile.py",
+      "operation": "add",
+      "bytes": 9327,
+      "sha256": "4e9a4aef9c045d63f6edf7e3cd11db830781e99e9590417ded2a6e24c48f5d42"
+    }
+  ]
+}
