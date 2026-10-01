@@ -1,0 +1,19 @@
+version: 1
+provider_id: agentavow
+name: AgentAvow
+repository: https://github.com/AgentAvow/AgentAvow
+maintainer: AgentAvow
+license:
+  spdx: MIT
+  url: https://github.com/AgentAvow/AgentAvow/blob/main/LICENSE
+candidate_source:
+  mapping_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories
+  status: pending_reconciliation
+  reviewed_on: 2026-10-01
+  exclusion_reason: >-
+    The provider authored its rule-to-technique mappings directly against
+    Framework Model v2 and submitted them to external-mappings.yml as
+    candidates. Every rule points at the public scanner module that
+    implements it and at the Safety Model v1 category it belongs to, but
+    no mapping is counted until SAF reconciles each rule ID, target and
+    relationship.

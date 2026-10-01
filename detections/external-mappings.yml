@@ -1,2 +1,679 @@
 version: 1
-mappings: []
+# AgentAvow (provider_id: agentavow) -- static-analysis mappings, all status: candidate.
+#
+# URL scheme (the same for every row):
+#   rule_url      the public scanner module that implements the rule, on the provider
+#                 repository's main branch (https://github.com/AgentAvow/AgentAvow)
+#   evidence_url  the category's row in the Safety Model v1 spec, section 2 "Detection
+#                 categories":
+#                 https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories
+#                 The fragment also carries a text directive (:~:text=) so the link
+#                 lands on the category's row; a browser without text-fragment support
+#                 lands on the section heading. Rules the spec table does not name
+#                 (MCP-native detectors, git autorun) point at the module whose
+#                 docstring defines them; the tool-definition-drift rows point at the
+#                 signed digest vectors.
+#   rule_version  safety-model-v1: the spec version the rule set is published under
+#                 (section 10 of the spec).
+#
+# Relationship: partial unless the rule only fires on a composed multi-step pattern
+# (toxic_flow, lethal_trifecta), which is adjacent. Nothing is claimed direct: a static
+# rule flags the code, config or declared-schema pattern that enables a technique;
+# runtime confirms exploitation.
+mappings:
+- mapping_id: agentavow:prompt_injection:SAF-T1102
+  technique_id: SAF-T1102
+  provider_id: agentavow
+  rule_id: agentavow.prompt_injection
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Prompt%20injection
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:prompt_injection:SAF-T1401
+  technique_id: SAF-T1401
+  provider_id: agentavow
+  rule_id: agentavow.prompt_injection
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Prompt%20injection
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:prompt_injection:SAF-T1001
+  technique_id: SAF-T1001
+  provider_id: agentavow
+  rule_id: agentavow.prompt_injection
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Prompt%20injection
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:annotation_lie:SAF-T1001
+  technique_id: SAF-T1001
+  provider_id: agentavow
+  rule_id: agentavow.annotation_lie
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:annotation_lie:SAF-T1406
+  technique_id: SAF-T1406
+  provider_id: agentavow
+  rule_id: agentavow.annotation_lie
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:annotation_lie:SAF-T1405
+  technique_id: SAF-T1405
+  provider_id: agentavow
+  rule_id: agentavow.annotation_lie
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:schema_risk:SAF-T1501
+  technique_id: SAF-T1501
+  provider_id: agentavow
+  rule_id: agentavow.schema_risk
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:schema_risk:SAF-T1001
+  technique_id: SAF-T1001
+  provider_id: agentavow
+  rule_id: agentavow.schema_risk
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:hidden_unicode:SAF-T1402
+  technique_id: SAF-T1402
+  provider_id: agentavow
+  rule_id: agentavow.hidden_unicode
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Hidden%20unicode
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:hidden_unicode:SAF-T1401
+  technique_id: SAF-T1401
+  provider_id: agentavow
+  rule_id: agentavow.hidden_unicode
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Hidden%20unicode
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:obfuscation:SAF-T1405
+  technique_id: SAF-T1405
+  provider_id: agentavow
+  rule_id: agentavow.obfuscation
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Obfuscation
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:obfuscation:SAF-T1402
+  technique_id: SAF-T1402
+  provider_id: agentavow
+  rule_id: agentavow.obfuscation
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Obfuscation
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:unsafe_exec:SAF-T1101
+  technique_id: SAF-T1101
+  provider_id: agentavow
+  rule_id: agentavow.unsafe_exec
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Code%20safety%20%28unsafe%20exec%29
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:unsafe_exec:SAF-T1305
+  technique_id: SAF-T1305
+  provider_id: agentavow
+  rule_id: agentavow.unsafe_exec
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Code%20safety%20%28unsafe%20exec%29
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:unsafe_exec:SAF-T1303
+  technique_id: SAF-T1303
+  provider_id: agentavow
+  rule_id: agentavow.unsafe_exec
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Code%20safety%20%28unsafe%20exec%29
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:unsafe_exec:SAF-T1111
+  technique_id: SAF-T1111
+  provider_id: agentavow
+  rule_id: agentavow.unsafe_exec
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Code%20safety%20%28unsafe%20exec%29
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:insecure_deserialization:SAF-T1101
+  technique_id: SAF-T1101
+  provider_id: agentavow
+  rule_id: agentavow.insecure_deserialization
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Insecure%20deserialization
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:insecure_deserialization:SAF-T1305
+  technique_id: SAF-T1305
+  provider_id: agentavow
+  rule_id: agentavow.insecure_deserialization
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Insecure%20deserialization
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:fs_access:SAF-T1105
+  technique_id: SAF-T1105
+  provider_id: agentavow
+  rule_id: agentavow.fs_access
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Filesystem%20access
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:fs_access:SAF-T1606
+  technique_id: SAF-T1606
+  provider_id: agentavow
+  rule_id: agentavow.fs_access
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Filesystem%20access
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:fs_access:SAF-T1802
+  technique_id: SAF-T1802
+  provider_id: agentavow
+  rule_id: agentavow.fs_access
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Filesystem%20access
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:secret:SAF-T1206
+  technique_id: SAF-T1206
+  provider_id: agentavow
+  rule_id: agentavow.secret
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Secret%20hygiene
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:secret:SAF-T1502
+  technique_id: SAF-T1502
+  provider_id: agentavow
+  rule_id: agentavow.secret
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Secret%20hygiene
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:secret:SAF-T1503
+  technique_id: SAF-T1503
+  provider_id: agentavow
+  rule_id: agentavow.secret
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Secret%20hygiene
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:exfiltration:SAF-T1910
+  technique_id: SAF-T1910
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:exfiltration:SAF-T1911
+  technique_id: SAF-T1911
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:exfiltration:SAF-T1913
+  technique_id: SAF-T1913
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:exfiltration:SAF-T1901
+  technique_id: SAF-T1901
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:exfiltration:SAF-T1801
+  technique_id: SAF-T1801
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:dynamic_remote_load:SAF-T1207
+  technique_id: SAF-T1207
+  provider_id: agentavow
+  rule_id: agentavow.dynamic_remote_load
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Dynamic%20%2F%20remote%20load
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:dynamic_remote_load:SAF-T1002
+  technique_id: SAF-T1002
+  provider_id: agentavow
+  rule_id: agentavow.dynamic_remote_load
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Dynamic%20%2F%20remote%20load
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:dynamic_remote_load:SAF-T1003
+  technique_id: SAF-T1003
+  provider_id: agentavow
+  rule_id: agentavow.dynamic_remote_load
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Dynamic%20%2F%20remote%20load
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:install_hook:SAF-T1002
+  technique_id: SAF-T1002
+  provider_id: agentavow
+  rule_id: agentavow.install_hook
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=install%20hooks
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:install_hook:SAF-T1006
+  technique_id: SAF-T1006
+  provider_id: agentavow
+  rule_id: agentavow.install_hook
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=install%20hooks
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:install_hook:SAF-T1207
+  technique_id: SAF-T1207
+  provider_id: agentavow
+  rule_id: agentavow.install_hook
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=install%20hooks
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:dependency:SAF-T1002
+  technique_id: SAF-T1002
+  provider_id: agentavow
+  rule_id: agentavow.dependency
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Dependency%20health
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:artifact_drift:SAF-T1201
+  technique_id: SAF-T1201
+  provider_id: agentavow
+  rule_id: agentavow.artifact_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/artifact_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Artifact%20drift
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:artifact_drift:SAF-T1004
+  technique_id: SAF-T1004
+  provider_id: agentavow
+  rule_id: agentavow.artifact_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/artifact_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Artifact%20drift
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:artifact_drift:SAF-T1207
+  technique_id: SAF-T1207
+  provider_id: agentavow
+  rule_id: agentavow.artifact_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/artifact_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Artifact%20drift
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:artifact_drift:SAF-T1002
+  technique_id: SAF-T1002
+  provider_id: agentavow
+  rule_id: agentavow.artifact_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/artifact_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Artifact%20drift
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:toxic_flow:SAF-T1701
+  technique_id: SAF-T1701
+  provider_id: agentavow
+  rule_id: agentavow.toxic_flow
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Toxic%20flow
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:toxic_flow:SAF-T1703
+  technique_id: SAF-T1703
+  provider_id: agentavow
+  rule_id: agentavow.toxic_flow
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Toxic%20flow
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:toxic_flow:SAF-T1914
+  technique_id: SAF-T1914
+  provider_id: agentavow
+  rule_id: agentavow.toxic_flow
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Toxic%20flow
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:lethal_trifecta:SAF-T1910
+  technique_id: SAF-T1910
+  provider_id: agentavow
+  rule_id: agentavow.lethal_trifecta
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:lethal_trifecta:SAF-T1102
+  technique_id: SAF-T1102
+  provider_id: agentavow
+  rule_id: agentavow.lethal_trifecta
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:lethal_trifecta:SAF-T1801
+  technique_id: SAF-T1801
+  provider_id: agentavow
+  rule_id: agentavow.lethal_trifecta
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+# git_autorun: a committed .git/config or .gitconfig that sets core.fsmonitor, core.hooksPath
+# or core.sshCommand (or a !-shell alias) to a command, or a committed active
+# .git/hooks/<hook> script. Either turns a routine clone/checkout/merge into code execution on
+# the host with no opt-in. Static: the file is in the artifact.
+- mapping_id: agentavow:git_autorun:SAF-T1002
+  technique_id: SAF-T1002
+  provider_id: agentavow
+  rule_id: agentavow.git_autorun
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:git_autorun:SAF-T1006
+  technique_id: SAF-T1006
+  provider_id: agentavow
+  rule_id: agentavow.git_autorun
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+- mapping_id: agentavow:git_autorun:SAF-T1207
+  technique_id: SAF-T1207
+  provider_id: agentavow
+  rule_id: agentavow.git_autorun
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/scan.py
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+# tool_definition_drift: the scan signs one SHA-256 per served tool over the RFC 8785
+# canonical bytes of {name, title, description, inputSchema, outputSchema, annotations}
+# (scan.toolDigests, keyed tool:<name>) plus scan.toolManifestDigest folded over them. A
+# watched target is re-scanned and a changed digest under the same server identity raises a
+# 'signed definition changed' alert. Definition-only: an unchanged descriptor over altered
+# backend code produces no mismatch. Evidence: the v1 vectors (one named tool) at
+# https://github.com/AgentAvow/AgentAvow/tree/main/docs/standards/tool-manifest-digest-vectors-v1
+# and the v0 vectors (whole-server manifest digest) at
+# https://github.com/AgentAvow/AgentAvow/tree/main/docs/standards/tool-manifest-digest-vectors-v0
+# (both: node verify.mjs, zero dependencies, nothing fetched)
+- mapping_id: agentavow:tool_definition_drift:SAF-T1201
+  technique_id: SAF-T1201
+  provider_id: agentavow
+  rule_id: agentavow.tool_definition_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/tree/main/docs/standards/tool-manifest-digest-vectors-v1
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+# annotations is inside the digest field set, so a post-approval flip of e.g. destructiveHint
+# with every other field unchanged is a mismatch.
+- mapping_id: agentavow:tool_definition_drift:SAF-T1406
+  technique_id: SAF-T1406
+  provider_id: agentavow
+  rule_id: agentavow.tool_definition_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/tree/main/docs/standards/tool-manifest-digest-vectors-v1
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+# artifact_drift: the published package bytes (npm tarball / PyPI dist) are diffed against the
+# repository at the same version; injected or modified files are flagged.
+- mapping_id: agentavow:artifact_drift:SAF-T1203
+  technique_id: SAF-T1203
+  provider_id: agentavow
+  rule_id: agentavow.artifact_drift
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/artifact_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Artifact%20drift
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+# schema_risk: a freeform string parameter named cmd/command/exec/script/code/eval/shell with
+# no enum, format or pattern is the declared injection sink.
+- mapping_id: agentavow:schema_risk:SAF-T1101
+  technique_id: SAF-T1101
+  provider_id: agentavow
+  rule_id: agentavow.schema_risk
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+# Same rule for path/file/filepath/filename/dir/directory parameters.
+- mapping_id: agentavow:schema_risk:SAF-T1105
+  technique_id: SAF-T1105
+  provider_id: agentavow
+  rule_id: agentavow.schema_risk
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/mcp_scan.py
+  relationship: partial
+  modalities: [static, content]
+  status: candidate
+  reviewed_on: 2026-10-01
+# The MCP-manifest patterns (mcp.json / server.json command that pipes a remote fetch to a
+# shell, runs an inline interpreter eval, or launches an unpinned npx/uvx package): a mutable
+# reference the client re-resolves after approval (CVE-2025-54136 class).
+- mapping_id: agentavow:dynamic_remote_load:SAF-T1201
+  technique_id: SAF-T1201
+  provider_id: agentavow
+  rule_id: agentavow.dynamic_remote_load
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Dynamic%20%2F%20remote%20load
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+# Only the environment-dump pattern (the whole os.environ / process.env mapping passed to an
+# outbound send); a single os.environ.get() is not flagged.
+- mapping_id: agentavow:exfiltration:SAF-T1503
+  technique_id: SAF-T1503
+  provider_id: agentavow
+  rule_id: agentavow.exfiltration
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Data%20handling%20%2F%20exfiltration
+  relationship: partial
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
+# The private-data leg of the chain matches reads of .ssh/, .aws/credentials, .netrc, id_rsa,
+# .env, .pem and keychain APIs; the rule fires only when an outbound send is also present in
+# the same unit, so it is supporting context for T1502, not the technique itself.
+- mapping_id: agentavow:toxic_flow:SAF-T1502
+  technique_id: SAF-T1502
+  provider_id: agentavow
+  rule_id: agentavow.toxic_flow
+  rule_version: safety-model-v1
+  rule_url: https://github.com/AgentAvow/AgentAvow/blob/main/src/scanner/patterns.py
+  evidence_url: https://github.com/AgentAvow/AgentAvow/blob/main/docs/standards/agentavow-safety-model-v1.md#2-detection-categories:~:text=Toxic%20flow
+  relationship: adjacent
+  modalities: [static]
+  status: candidate
+  reviewed_on: 2026-10-01
