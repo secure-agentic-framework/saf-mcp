@@ -1,2 +1,112 @@
 version: 1
-mappings: []
+mappings:
+  - mapping_id: atr-2026-02025-to-saf-t1001
+    technique_id: SAF-T1001
+    provider_id: atr
+    rule_id: ATR-2026-02025
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/tool-poisoning/ATR-2026-02025-mcp-full-schema-poisoning-nondescription-field.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1001--tool-poisoning-attack
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-00434-to-saf-t1101
+    technique_id: SAF-T1101
+    provider_id: atr
+    rule_id: ATR-2026-00434
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/tool-poisoning/ATR-2026-00434-mcp-remote-authorization-endpoint-command-injection.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1101--command-injection
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-01616-to-saf-t1105
+    technique_id: SAF-T1105
+    provider_id: atr
+    rule_id: ATR-2026-01616
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/privilege-escalation/ATR-2026-01616-path-traversal-agent-file-access.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1105--path-traversal-via-file-tool
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-02021-to-saf-t1305
+    technique_id: SAF-T1305
+    provider_id: atr
+    rule_id: ATR-2026-02021
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/tool-poisoning/ATR-2026-02021-mcp-inspector-unauthenticated-proxy-rce.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1305--host-os-priv-esc-rce
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-00583-to-saf-t1502
+    technique_id: SAF-T1502
+    provider_id: atr
+    rule_id: ATR-2026-00583
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/context-exfiltration/ATR-2026-00583-mcp-env-secret-file-read-without-consent.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1502--file-based-credential-harvest
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-01605-to-saf-t1506
+    technique_id: SAF-T1506
+    provider_id: atr
+    rule_id: ATR-2026-01605
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/context-exfiltration/ATR-2026-01605-ssrf-aws-metadata-endpoint.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1506--infrastructure-token-theft
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-01306-to-saf-t1704
+    technique_id: SAF-T1704
+    provider_id: atr
+    rule_id: ATR-2026-01306
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/tool-poisoning/ATR-2026-01306-mcp-oauth-command-injection.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1704--compromised-server-pivot
+    relationship: adjacent
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-01453-to-saf-t1902
+    technique_id: SAF-T1902
+    provider_id: atr
+    rule_id: ATR-2026-01453
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/context-exfiltration/ATR-2026-01453-markdown-image-base64-exfil-carrier.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t1902--response-borne-covert-channel
+    relationship: adjacent
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-01601-to-saf-t2101
+    technique_id: SAF-T2101
+    provider_id: atr
+    rule_id: ATR-2026-01601
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/privilege-escalation/ATR-2026-01601-sql-injection-destructive-ddl.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t2101--data-destruction
+    relationship: partial
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
+  - mapping_id: atr-2026-00708-to-saf-t2104
+    technique_id: SAF-T2104
+    provider_id: atr
+    rule_id: ATR-2026-00708
+    rule_version: "4.1.5"
+    rule_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/v4.1.5/rules/excessive-autonomy/ATR-2026-00708-ipi-financial-transfer-unauthorized.yaml
+    evidence_url: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/281708fc39b80215ebab1aee6cb697b90eab63ed/docs/SAFE-MCP-MAPPING.md#saf-t2104--fraudulent-transactions
+    relationship: adjacent
+    modalities: [content]
+    status: candidate
+    reviewed_on: 2026-10-16
