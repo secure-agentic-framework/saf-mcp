@@ -348,3 +348,48 @@ claims:
     conflicts: []
     inference: {is_inference: true, rationale: Response sequence synthesizes lifecycle reset, monitoring, and pinning guidance.}
     status: validated
+  - id: SAF-T1201-C021
+    statement: A public longitudinal record of MCP tool definitions observed that 4,926 of 10,929 remote MCP servers listed in the official MCP registry and observed from 2026-09-24 served a different tool definition set by 2026-10-20 (45.1%), across 23,821 recorded changes in that window.
+    class: research_finding
+    materiality: medium
+    evidence_status: research-derived
+    sources:
+      - source_id: SRC-histor-snapshot-2026-10-20
+        support: direct
+        exact_locators: [changes.jsonl.gz 23,821 rows; change_kinds.py output line "remote - 4,926 of 10,929 changed"]
+    corroboration: None independent; the record has a single observer.
+    limitations: [Single observer operated by the contributors; covers only servers that answer tools/list without credentials; a change is any difference in the digested definition and says nothing about intent; one four-week window.]
+    conflicts: []
+    inference: {is_inference: false, rationale: null}
+    status: validated
+  - id: SAF-T1201-C022
+    statement: In the same record, 6,317 of the 23,821 recorded changes (26.5%) altered nothing but tool descriptions, and 2,799 (11.8%) altered only digits or whitespace in descriptions or only $schema, title, or examples members.
+    class: research_finding
+    materiality: medium
+    evidence_status: research-derived
+    sources:
+      - source_id: SRC-histor-snapshot-2026-10-20
+        support: direct
+        exact_locators: [change_kinds.py output strict-count line "tool descriptions only"; kind line "only digits/whitespace in a description, or $schema/title/examples"]
+    corroboration: None independent; the record has a single observer.
+    limitations: [Kinds are assigned by field, not by meaning; the record does not classify whether a description edit was benign or malicious.]
+    conflicts: []
+    inference: {is_inference: false, rationale: null}
+    status: validated
+  - id: SAF-T1201-C023
+    statement: Because legitimate definition changes are frequent at registry scale and many alter only prose or notation, a hash-mismatch analytic over remote servers should be expected to match routinely on benign updates; routing matches to a reapproval queue and versioning the canonicalization of notation-only members bound that load without suppressing unapproved hashes.
+    class: framework_inference
+    materiality: medium
+    evidence_status: research-derived
+    sources:
+      - source_id: SRC-histor-snapshot-2026-10-20
+        support: context
+        exact_locators: [change_kinds.py output lines cited by SAF-T1201-C021 and SAF-T1201-C022]
+      - source_id: SRC-ms-azure-mcp-security-2026
+        support: corroborating
+        exact_locators: [Security guidance on stable endpoint trust and runtime monitoring]
+    corroboration: The analytic's match condition (SAF-T1201-C016) fires on any unapproved hash difference regardless of change content.
+    limitations: [Measures how often definitions change, not the false-positive rate of a deployed host; hosts that pin locally installed packages see fewer changes than registry remotes.]
+    conflicts: []
+    inference: {is_inference: true, rationale: Combines the measured change frequencies of SAF-T1201-C021 and SAF-T1201-C022 with the analytic's match condition.}
+    status: validated
