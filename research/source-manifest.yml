@@ -29898,3 +29898,38 @@ sources:
         access_method: Direct official publisher URL
         notes: The cited headings and surrounding normative text were opened and reviewed
           directly.
+  - id: SRC-histor-snapshot-2026-10-20
+    title: HISTOR monthly snapshot 2026-10-20 - MCP tool definitions and their recorded changes
+    publisher: Zenodo
+    authors:
+    - Aleksandr Artamokhov
+    version_or_date: '2026-10-20'
+    source_class: research
+    official_url: https://doi.org/10.5281/zenodo.23512760
+    access_status: public
+    accessed_on: '2026-10-25'
+    review_status: opened_reviewed
+    reviewed_on: '2026-10-25'
+    review_method: Counts recomputed from the published servers.jsonl.gz and changes.jsonl.gz
+      with scripts/change_kinds.py (standard library only) at
+      https://github.com/alexar76/histor/blob/5ede950072b03158997d949556b2040ee72b5335/scripts/change_kinds.py;
+      the per-host count with a DuckDB query grouping that cohort by endpoint host
+    locators:
+    - changes.jsonl.gz, 23,821 rows observed 2026-09-24T10:53:44Z to 2026-10-20T00:31:28Z
+    - change_kinds.py output, strict count line "tool descriptions only" (6,317, 26.5%)
+    - change_kinds.py output, kind line "only digits/whitespace in a description, or $schema/title/examples" (2,799, 11.8%)
+    - change_kinds.py output, line "remote - 4,926 of 10,929 changed"
+    - the same cohort grouped by endpoint host (servers.jsonl.gz endpoint), 2,489 of 6,822 hosts changed
+    - manifest.json signed tree head (treeSize 792295, 2026-10-20T13:59:42Z)
+    review_notes: Single-observer longitudinal record of tools/list responses from remote servers
+      in the official MCP registry and from MCP packages on npm and PyPI, published under CC BY 4.0.
+      Contributed by the operators of the record; the conflict of interest is disclosed. A recorded
+      change is any difference in the digested definition (name, description, inputSchema,
+      outputSchema) and carries no judgement of intent.
+    archive:
+      status: remote_reviewed_not_archived
+      reason: The 404 MB dataset is DOI-archived on Zenodo with SHA-256 file hashes in its signed
+        manifest; no copy was added to the publication bundle.
+      review_evidence:
+        access_method: Zenodo record files downloaded and recomputed with the published script
+        notes: All counts cited here reproduce from the published files with the pinned script commit.
