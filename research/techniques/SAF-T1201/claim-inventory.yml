@@ -349,16 +349,16 @@ claims:
     inference: {is_inference: true, rationale: Response sequence synthesizes lifecycle reset, monitoring, and pinning guidance.}
     status: validated
   - id: SAF-T1201-C021
-    statement: A public longitudinal record of MCP tool definitions observed that 4,926 of 10,929 remote MCP servers listed in the official MCP registry and observed from 2026-09-24 served a different tool definition set by 2026-10-20 (45.1%), across 23,821 recorded changes in that window.
+    statement: A public longitudinal record of MCP tool definitions observed that 4,926 of 10,929 remote MCP server entries listed in the official MCP registry and observed from 2026-09-24 served a different tool definition set by 2026-10-20 (45.1%), across 23,821 recorded changes in that window; counted by host, with each publisher's domain counted once, 2,489 of 6,822 (36.5%).
     class: research_finding
     materiality: medium
     evidence_status: research-derived
     sources:
       - source_id: SRC-histor-snapshot-2026-10-20
         support: direct
-        exact_locators: [changes.jsonl.gz 23,821 rows; change_kinds.py output line "remote - 4,926 of 10,929 changed"]
+        exact_locators: [changes.jsonl.gz 23,821 rows; change_kinds.py output line "remote - 4,926 of 10,929 changed"; the same cohort grouped by endpoint host (2489 of 6822 hosts changed)]
     corroboration: None independent; the record has a single observer.
-    limitations: [Single observer operated by the contributors; covers only servers that answer tools/list without credentials; a change is any difference in the digested definition and says nothing about intent; one four-week window.]
+    limitations: [Single observer operated by the contributors; covers only servers that answer tools/list without credentials; a change is any difference in the digested definition and says nothing about intent; one four-week window; registry entries are not independent servers since one publisher holds 2341 of the 10929 entries (near-identical) and 2317 of them changed on 2026-09-24; the per-host share is the rate to use.]
     conflicts: []
     inference: {is_inference: false, rationale: null}
     status: validated
@@ -372,7 +372,7 @@ claims:
         support: direct
         exact_locators: [change_kinds.py output strict-count line "tool descriptions only"; kind line "only digits/whitespace in a description, or $schema/title/examples"]
     corroboration: None independent; the record has a single observer.
-    limitations: [Kinds are assigned by field, not by meaning; the record does not classify whether a description edit was benign or malicious.]
+    limitations: [Kinds are assigned by field, not by meaning; the record does not classify whether a description edit was benign or malicious; 2493 of the 2799 digit-or-notation changes come from one publisher whose descriptions carry a live tool count.]
     conflicts: []
     inference: {is_inference: false, rationale: null}
     status: validated
