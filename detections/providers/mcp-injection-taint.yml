@@ -1,0 +1,8 @@
+version: 1
+provider_id: mcp-injection-taint
+name: MCP Injection Taint Rules
+repository: https://github.com/ericyunlinchiang/mcp-injection-taint
+maintainer: MCP Injection Taint Rules project
+license:
+  spdx: Apache-2.0
+  url: https://github.com/ericyunlinchiang/mcp-injection-taint/blob/main/LICENSE

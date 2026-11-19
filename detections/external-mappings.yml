@@ -1,2 +1,24 @@
 version: 1
-mappings: []
+mappings:
+  - mapping_id: mcp-injection-taint-cmdinjection-to-saf-t1101
+    technique_id: SAF-T1101
+    provider_id: mcp-injection-taint
+    rule_id: mcp-tool-input-command-injection
+    rule_version: 2.1.0
+    rule_url: https://github.com/ericyunlinchiang/mcp-injection-taint/blob/main/injection-taint-py.yml
+    evidence_url: https://github.com/ericyunlinchiang/mcp-injection-taint/blob/main/MAPPING.md
+    relationship: partial
+    modalities: [static]
+    status: candidate
+    reviewed_on: 2026-11-19
+  - mapping_id: mcp-injection-taint-pathtraversal-to-saf-t1105
+    technique_id: SAF-T1105
+    provider_id: mcp-injection-taint
+    rule_id: mcp-tool-input-path-traversal
+    rule_version: 2.1.0
+    rule_url: https://github.com/ericyunlinchiang/mcp-injection-taint/blob/main/injection-taint-py.yml
+    evidence_url: https://github.com/ericyunlinchiang/mcp-injection-taint/blob/main/MAPPING.md
+    relationship: partial
+    modalities: [static]
+    status: candidate
+    reviewed_on: 2026-11-19
